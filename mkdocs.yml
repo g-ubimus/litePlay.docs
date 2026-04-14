@@ -1,7 +1,13 @@
 site_name: litePlay.js
 site_url: https://g-ubimus.github.io/litePlay.docs/
+repo_url: https://github.com/g-ubimus/litePlay.js
+repo_name: g-ubimus/litePlay.js
 theme:
   name: material
+  features:
+    - navigation.sections
+    - navigation.expand
+
   palette:
 
     # Palette toggle for dark mode
