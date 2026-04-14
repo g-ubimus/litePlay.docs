@@ -6,7 +6,7 @@ Steps to build it:
 1. Clone the repo:
 
 ```
-git clone git@github.com:g-ubimus/litePlay_docs.git
+git clone git@github.com:g-ubimus/litePlay.docs.git
 ```
 
 2. Create a python virtual environment:
