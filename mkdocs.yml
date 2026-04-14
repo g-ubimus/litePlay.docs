@@ -37,4 +37,4 @@ nav:
   - play(): play.md
   - eventList class: eventList.md
   - instrument(): instruments.md
-  - generators: generators.md
+  - Generators: generators.md
