@@ -4,7 +4,7 @@ define its parameters. In general, these generators define a particular scope
 from which random values will be drawn.
 
 ## Pitch 
-Pitch can be randomised in three ranges:
+Pitch can be randomized in three ranges:
 
 ```
 lowPitch = pitch between C0 and C3
@@ -50,7 +50,7 @@ piano.play([Bb4, 0.5, later, 1])
 ```
 
 ## Durations
-Durations can be randomised with these three tokens:
+Durations can be randomized with these three tokens:
 
 ```
 shortDur = durations between 0.05 and 0.2 seconds
