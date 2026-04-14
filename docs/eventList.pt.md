@@ -17,40 +17,61 @@ lista.toque();
 O `toque()` pode receber dois parâmetros opcionais,
 
 ```javascript
-eventList.toque(when, events);
+eventList.toque(quanto, eventos);
 ```
 
-o primeiro é um _when_ (quando) para a lista completa, obtido a partir do
+o primeiro é um _quando_ para a lista completa, obtido a partir do
 momento da ação, para que possamos posicionar a performance no futuro. O
 segundo é uma lista de eventos, basicamente uma lista JS de listas, como:
 
-```javascript
+```
 [[C3, 0.1, 0, 1], [C4, 0.2, 1, 1], [C5, 0.4, 2, 1]]
 ```
 
-como pode ser visto, há uma lista externa que contém dois eventos, que são eles
+como pode ser visto, há uma lista externa que contém dois eventos, que são
+eles
 próprios listas (de atributos). Um aspecto fundamental é que a lista de eventos
 passada para `toque()` substitui os eventos existentes (se algum tiver sido
 adicionado) no objeto.
 
-## Adicionando, removendo e inserindo eventos à lista
-- `eventList.add(event, ...)` adiciona eventos ao final da lista. Isso pode receber qualquer número de eventos (como o `create()` fez).
+## eventList.add()
 
-- `eventList.remove(index)` remove um evento com um determinado índice (`index`) da lista, ou o último evento (se nenhum `index` for fornecido).
+```
+eventList.add(event, ...)
+```
 
-- `eventList.insert(pos, event, ...)` insere um ou mais eventos no objeto, após a posição `pos`.
+Adiciona eventos ao final da lista. Pode receber qualquer número de eventos (assim como o `create()`).
 
-```javascript
+## eventList.remove() 
+
+```
+eventList.remove(índice)
+```
+
+Remove um evento com um determinado índice da lista, ou o último evento (se
+nenhum `índice` for fornecido).
+
+## eventList.insert() 
+
+```
+eventList.insert(posição, event, ...)
+```
+
+insere um ou mais eventos no objeto, após o índice `posição`.
+
+```
 lista.add(event, [C4,0.9,3]);    
 lista.remove(0);    
 lista.insert(1, [D4, 0.8, 0.5]);
 ```
 
-## Repetindo todos os eventos 
-Também podemos repetir um `eventList` qualquer número de vezes (`times`), `when` (quando) segundos após a ação,
+## eventList.repeat()
 
-```javascript
-lista.repeat(times, when);
+Também podemos repetir um `eventList` qualquer número de `vezes`, em `quando`
+segundos após a ação,
+
+```
+lista.repeat(vezes, quando);
 ```
 
 Tanto `eventList.toque()` quanto `eventList.repeat()` retornam o tempo de
@@ -59,7 +80,7 @@ outros eventos. Por exemplo, este código toca uma lista de eventos, adiciona
 dois eventos a ela e, em seguida, agenda a repetição dessa sequência mais longa
 por três vezes após o término da primeira ação `toque()`,
 
-```javascript
+```
 let lista = eventList.create([C4, 0.1, 0, 1],
                               [E4, 0.2, 1, 1], 
                               [G4, 0.4, 2, 1]);
