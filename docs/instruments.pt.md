@@ -1,4 +1,4 @@
-# `instrumento( )`
+# `instrumento()`
 
 A geração de som é gerenciada por objetos de instrumento. Em geral, podemos
 acessá-los usando um dos nomes definidos no módulo JS, como `piano`, `órgão`,
