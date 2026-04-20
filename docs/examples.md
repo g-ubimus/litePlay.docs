@@ -52,6 +52,16 @@ function sequence(note, interval, duration, delta, repeats) {
 sequence(C4, 3, .5, 0.1, 10);
 ```
 
+### Inversion
+```JavaScript
+function invert(melody, axis) {
+  return melody.map(note => axis + (((axis - note) % 12) + 12) % 12);
+}
+let melody = [C4, D4, E4, F4];
+let inverted = invert(melody, C4);
+console.log(inverted); // returns [C4, Bb4, Ab4, G4]
+```
+
 ### Get note names
 ```JavaScript
 function midiToName(midiValue) {
@@ -123,16 +133,6 @@ function transpose(melody, semitones) {
 let melody = [C4, D4, E4, F4, G4];
 let transposed = transpose(melody, 2);
 console.log(transposed) // returns [D4, E4, Fs4, G4, A4]
-```
-
-### Inversion
-```JavaScript
-function invert(melody, axis) {
-  return melody.map(note => axis + (((axis - note) % 12) + 12) % 12);
-}
-let melody = [C4, D4, E4, F4];
-let inverted = invert(melody, C4);
-console.log(inverted); // returns [C4, Bb4, Ab4, G4]
 ```
 
 ### Retrograde
