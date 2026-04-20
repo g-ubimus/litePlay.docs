@@ -76,8 +76,8 @@ function tempoVariation(what, when, duration, steps, ratio) {
       tempoVariation(what, when + duration, nextDuration, steps - 1, ratio);
 }
 
-tempoVariation(membranofone, 0, 1, 20, .9); // accelerando
-//tempoVariation(idiophone, 0, .1, 20, 1.1); // rallentando
+tempoVariation(membranofone, .1, 1, 20, .9); // accelerando
+//tempoVariation(idiophone, 1, .1, 20, 1.1); // rallentando
 ```
 
 ### Set/get beats per minute
