@@ -12,6 +12,7 @@ nav = [
   {"eventList class" = "eventList.md"},
   {"instruments()" = "instruments.md"},
   {"Generators" = "generators.md"},
+  {"Examples" = "examples.md"},
   {"litePlay.js" = "https://g-ubimus.github.io/litePlay.js"}
 ]
 
