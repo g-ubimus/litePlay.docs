@@ -52,6 +52,20 @@ function sequence(note, interval, duration, delta, repeats) {
 sequence(C4, 3, .5, 0.1, 10);
 ```
 
+### Get note names
+```JavaScript
+function midiToName(midiValue) {
+    if (midiValue < 0 || midiValue > 127) return "Out of bounds";
+    const pitchClasses = ["C", "Cs", "D", "Ds/Eb", "E", "F", "Fs/Gb", "G", "Gs/Ab", "A", "As/Bb", "B"];
+    let pitch = pitchClasses[midiValue % 12];
+    let octave = Math.floor(midiValue / 12) - 1;
+    let octaveName = octave === -1 ? "-1" : octave;
+    return pitch + octaveName;
+}
+console.log(midiToName(60)); // returns "C4"
+console.log(midiToName(31)); // returns "G1"
+```
+
 ## Rhythm & timing
 ### Tempo variation (accelerando & rallentando)
 ```JavaScript
@@ -106,19 +120,19 @@ function transpose(melody, semitones) {
   return melody.map(note => note + semitones);
 }
 
-let melody = [C4, D4, E4, F4, G5];
+let melody = [C4, D4, E4, F4, G4];
 let transposed = transpose(melody, 2);
-console.log(transposed)
+console.log(transposed) // returns [D4, E4, Fs4, G4, A4]
 ```
 
 ### Inversion
 ```JavaScript
 function invert(melody, axis) {
-   return melody.map(note => axis - (note - axis));
+  return melody.map(note => axis + (((axis - note) % 12) + 12) % 12);
 }
 let melody = [C4, D4, E4, F4];
-let inverted = invert(melody, 60);
-console.log(inverted)
+let inverted = invert(melody, C4);
+console.log(inverted); // returns [C4, Bb4, Ab4, G4]
 ```
 
 ### Retrograde
@@ -128,9 +142,9 @@ function retrograde(list) {
     return arr[oppositeIndex];});
 }
 
-let list = [1, 2, 3, 4];
-let retro = retrograde(melody); 
-console.log(retro)
+let myList = [1, 2, 3, 4];
+let retro = retrograde(myList);
+console.log(retro) // returns [4, 3, 2, 1]
 ```
 
 ### Rotation
@@ -145,7 +159,7 @@ function rotate(list, steps) {
 
 let melody = [1, 2, 3, 4];
 let rotated = rotate(melody, 1);
-console.log(rotated)
+console.log(rotated) // returns [2, 3, 4, 1]
 ```
 
 ### Tangle
@@ -162,6 +176,6 @@ function tangle(listA, listB) {
 
 let listA = [1,2,3];
 let listB = [4,5,6,7,8];
-console.log(tangle(listA,listB)); // returns [1,4,2,5,3,6,1,7,2,8]
+console.log(tangle(listA,listB)); // returns [1, 4, 2, 5, 3, 6, 1, 7, 2, 8]
 ```
 
