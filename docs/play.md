@@ -142,11 +142,11 @@ with an exact time.
 
 ## Silent events
 
-For any instrument, we get a silent event by passing a zero (0) to the _what_
+For any instrument, we get a silent event by passing a capital O to the _what_
 parameter:
 
 ```javascript
-trumpet.play([0, 1, 0, 1])
+trumpet.play([O, 1, 0, 1])
 ```
 
 !!! note 
