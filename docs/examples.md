@@ -3,6 +3,32 @@
 This page lists useful musical examples to give a grasp of how litePlay.js works.
 
 ## Pitch & harmony
+### Tunnings
+We can have microtonal pitches in different formats. The simplest one would be
+to add fractional parts to a midi value:
+
+```JavaScript
+play(60.25);
+```
+
+However, for it to work, we should now the note values! One way to do it is to
+print it to the console:
+
+```JavaScript
+console.log(C4); // returns 60
+```
+
+A different way, which doesn't require specific midi knowledge, is to take the
+advantage of some constants:
+
+```JavaScript
+play(C4+quarterTone); // equivalent to 60.5
+play(C4+thirdTone); // equivalent to 60.33
+play(C4+eightTone); // equivalent to 60.33
+play(C4+tenCent); // equivalent to 60.1
+play(C4+oneCent); // equivalent to 60.01
+```
+
 ### Arpeggiator
 ```JavaScript
 function arpeggiate(chord, stepTime, repeats, l = eventList.create(), time = 0) {
@@ -64,16 +90,8 @@ console.log(inverted); // returns [C4, Bb4, Ab4, G4]
 
 ### Get note names
 ```JavaScript
-function midiToName(midiValue) {
-    if (midiValue < 0 || midiValue > 127) return "Out of bounds";
-    const pitchClasses = ["C", "Cs", "D", "Ds/Eb", "E", "F", "Fs/Gb", "G", "Gs/Ab", "A", "As/Bb", "B"];
-    let pitch = pitchClasses[midiValue % 12];
-    let octave = Math.floor(midiValue / 12) - 1;
-    let octaveName = octave === -1 ? "-1" : octave;
-    return pitch + octaveName;
-}
-console.log(midiToName(60)); // returns "C4"
-console.log(midiToName(31)); // returns "G1"
+midiToName(60)); // returns "C4"
+midiToName(31)); // returns "G1"
 ```
 
 ## Rhythm & timing
