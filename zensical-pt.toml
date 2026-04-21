@@ -1,0 +1,51 @@
+[project]
+site_name = "litePlay.js docs"
+site_url = "https://g-ubimus.github.io/litePlay.docs/pt/"
+repo_url = "https://github.com/g-ubimus/litePlay.js"
+site_description = "Documentação para a biblioteca de lite coding litePlay.js."
+site_author = "g-ubimus"
+docs_dir = "docs/pt" # Aponta para a pasta onde estão os arquivos .md traduzidos
+site_dir = "site/pt" # Força o build a gerar a saída dentro da subpasta pt
+nav = [
+  {"Início" = "index.md"},
+  {"play()" = "play.md"},
+  {"eventList" = "eventList.md"},
+  {"Instrumentos" = "instruments.md"},
+  {"Sequenciador" = "sequencer.md"},
+  {"Geradores" = "generators.md"},
+  {"Exemplos" = "examples.md"},
+  {"Editor litePlay.js" = "https://g-ubimus.github.io/litePlay.js"}
+]
+
+[project.theme]
+variant = "modern"
+language = "pt"
+features = [
+    "navigation.expand",
+    "toc.follow",
+    "toc.integrate",
+    "content.code.copy"
+]
+
+# Palette toggle for light mode
+[[project.theme.palette]]
+primary = "green"
+accent = "light green"
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Mudar para o modo escuro"
+
+[[project.theme.palette]]
+primary = "green"
+accent = "light green"
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Mudar para o modo claro"
+
+[project.extra]
+alternate = [
+    { name = "English", link = "/litePlay.docs/", lang = "en" },
+    { name = "Português", link = "/litePlay.docs/pt/", lang = "pt" }
+]
