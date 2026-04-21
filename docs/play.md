@@ -57,7 +57,7 @@ play(60.5); // between C4 and C#4
 play(60.55); // a bit higher than that!
 ```
 
-See more details in [here](./examples.md/#tuning).
+See more details in [here](./examples/#tuning).
 
 ## Events
 
@@ -146,7 +146,7 @@ For any instrument, we get a silent event by passing a zero (0) to the _what_
 parameter:
 
 ```javascript
-
+trumpet.play([0, 1, 0, 1])
 ```
 
 !!! note 
