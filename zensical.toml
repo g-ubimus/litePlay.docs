@@ -9,11 +9,12 @@ site_dir = "site"
 nav = [
   {"Getting started" = "index.md"},
   {"play()" = "play.md"},
-  {"eventList class" = "eventList.md"},
-  {"instruments()" = "instruments.md"},
+  {"eventList" = "eventList.md"},
+  {"Instruments" = "instruments.md"},
+  {"Sequencer" = "sequencer.md"},
   {"Generators" = "generators.md"},
   {"Examples" = "examples.md"},
-  {"litePlay.js" = "https://g-ubimus.github.io/litePlay.js"}
+  {"litePlay.js editor" = "https://g-ubimus.github.io/litePlay.js"}
 ]
 
 [project.theme]
@@ -52,6 +53,9 @@ alternate = [
 permalink = true
 toc_depth = 2
 
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.pymdownx.details]
 [project.markdown_extensions.pymdownx.highlight]
 anchor_linenums = true
 [project.markdown_extensions.pymdownx.superfences]
+
