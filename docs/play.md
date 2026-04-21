@@ -57,7 +57,7 @@ play(60.5); // between C4 and C#4
 play(60.55); // a bit higher than that!
 ```
 
-See more details in [here](./examples.md#tunings).
+See more details in [here](./examples.md/#tuning).
 
 ## Events
 

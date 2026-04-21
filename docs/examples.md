@@ -3,7 +3,7 @@
 This page lists useful musical examples to give a grasp of how litePlay.js works.
 
 ## Pitch & harmony
-### Tunnings
+### Tunning
 We can have microtonal pitches in different formats. The simplest one would be
 to add fractional parts to a midi value:
 
