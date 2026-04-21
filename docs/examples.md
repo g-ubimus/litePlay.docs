@@ -24,7 +24,7 @@ advantage of some constants:
 ```JavaScript
 play(C4+quarterTone); // equivalent to 60.5
 play(C4+thirdTone); // equivalent to 60.33
-play(C4+eightTone); // equivalent to 60.33
+play(C4+eightTone); // equivalent to 60.25
 play(C4+tenCent); // equivalent to 60.1
 play(C4+oneCent); // equivalent to 60.01
 ```
