@@ -8,7 +8,7 @@ docs_dir = "docs/pt" # Aponta para a pasta onde estão os arquivos .md traduzido
 site_dir = "site/pt" # Força o build a gerar a saída dentro da subpasta pt
 nav = [
   {"Início" = "index.md"},
-  {"play()" = "play.md"},
+  {"toque()" = "play.md"},
   {"eventList" = "eventList.md"},
   {"Instrumentos" = "instruments.md"},
   {"Sequenciador" = "sequencer.md"},
@@ -49,3 +49,13 @@ alternate = [
     { name = "English", link = "/litePlay.docs/", lang = "en" },
     { name = "Português", link = "/litePlay.docs/pt/", lang = "pt" }
 ]
+
+[project.markdown_extensions.toc]
+permalink = true
+toc_depth = 2
+
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.pymdownx.details]
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+[project.markdown_extensions.pymdownx.superfences]
