@@ -152,7 +152,7 @@ variacaoAmp(1, .1, 10, 0.2, 0.5); // decrescendo
 ```
 
 ## Manipulação de listas
-## Transposição
+### Transposição
 ```javascript
 function transpor(melodia, semitons) {
   return melodia.map(nota => nota + semitons);
