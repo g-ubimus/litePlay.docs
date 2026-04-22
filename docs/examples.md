@@ -108,6 +108,30 @@ tempoVariation(membranofone, .1, 1, 20, .9); // accelerando
 //tempoVariation(idiophone, 1, .1, 20, 1.1); // rallentando
 ```
 
+### Amen Break
+```javascript
+function amenBreak() {
+  sequencer.clear();
+  setBpm(260);
+  let grid = .5;
+
+  let hhPat = [[openHiHat, .3]];
+  let kkPat = [kick, kick, O, O, O, sub(kick, kick), O, O, kick, kick, O, O, O, sub(kick, kick), O, O, kick, kick, O, O, O, kick, O, O, O, sub(kick, kick), O, O, O, [kick, 1], O, O];
+  let snPat = [O, O, [snare, 1], sub(O, [snare, .5]), sub(O, [snare, .5]), O, [snare, 1], sub(O, [snare, .5]), 
+               O, O, [snare, 1], sub(O, [snare, .5]), sub(O, [snare, .5]), O, [snare, 1], sub(O, [snare, .5]),
+               O, O, [snare, 1], sub(O, [snare, .5]), sub(O, [snare, .5]), O, O, [snare, .5],
+               sub(O, [snare, .5]), O, [snare, 1], sub(O, [snare, .5]), sub(O,  [snare, .5]), O, O, [snare, .5]];
+
+  sequencer.add(drums, hhPat, grid);
+  sequencer.add(drums, kkPat, grid);
+  sequencer.add(drums, snPat, grid);
+
+  sequencer.play();
+}
+
+amenBreak()
+```
+
 ### Set/get beats per minute
 ```JavaScript
 setBpm(value);

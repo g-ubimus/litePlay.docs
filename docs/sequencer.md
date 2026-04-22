@@ -50,10 +50,11 @@ let chordPat = [
 ```
 
 !!! note
-	Notice that we are using the capital O for silent events in the bass.
+	We are using the capital O for silent events in the bass.
 
-    Also notice that to get notes to play at same part in the chord pattern,
-    we use nested brackets.
+    Also, to get notes to play at same part in the chord pattern, we use nested
+    brackets. The chord should go on for almost 4 beats (3.75), "overriding" the 
+    moments of silence, which are counted anyway.
 
 ### Local subdivisions
 The special `sub()` method allows us to have subdivisions in a pattern without
@@ -67,13 +68,13 @@ Will give an eighth note for the last two snares, occupying the last beat.
 Any number of subdivisions are possible, as well as silences (`O`) inside a
 subdivision.
 
-!!! warning
-    Nested subdivisions (e.g. `sub(snare, sub(snare, snare), snare)`) are not
-    implemented yet and will return a silent event. For this case, we recommend to 
-    go lower in the subdivision grid to have more control of each beat.
+Nested divisions work just as expected:
+
+```javascript
+lat nestedPat = [kick, snare, kick, sub(snare, sub(snare, snare))];
+```
 
 ## Tracks
-
 The sequencer can have multiple tracks playing at the same time, each one of
 different lengths and playing at different subdivisions, but all syncronized to
 the same BPM setting.
