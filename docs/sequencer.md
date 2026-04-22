@@ -27,7 +27,7 @@ Considering this, let's define some different subdivisions:
 ```JavaScript
 const grid4 = 1;     // Quarter notes
 const grid8 = 0.5;   // 8th notes
-const grid46 = 0.25; // 16th notes
+const grid16 = 0.25; // 16th notes
 ```
 
 ## Patterns
@@ -87,8 +87,8 @@ sequencer.add(instrument, pattern, amplitude, grid);
 Thus, we can go on and add our instruments:
 
 ```javascript
-let backbeatTrack = sequencer.add(drums, kckPat, 0.8, grid46);
-let hatTrack = sequencer.add(drums, hatPat, 0.3, grid46);
+let backbeatTrack = sequencer.add(drums, kckPat, 0.8, grid16);
+let hatTrack = sequencer.add(drums, hatPat, 0.3, grid16);
 let bassTrack = sequencer.add(synthBass1, bassPat, 0.6, grid8);
 let padTrack = sequencer.add(pad1, chordPat, 0.4, grid4);
 ```
@@ -103,7 +103,7 @@ function synthWave() {
 
   const grid4 = 1;     
   const grid8 = 0.5;   
-  const grid46 = 0.25; 
+  const grid16 = 0.25; 
 
   let backbeatPat = [kick, snare, kick, snare];
   let bassPat = [[C3, 1, 0, 0.2], [C3, 1, 0, 0.2], [C4, 1, 0, 0.2], O, [Eb3, 1, 0, 0.2], O, [G3, 1, 0, 0.2], O];
@@ -115,7 +115,7 @@ function synthWave() {
         O, O, O,
     ];
   let backbeatTrack = sequencer.add(drums, backbeatPat, 0.8, grid4);
-  let hatTrack = sequencer.add(drums, hatPat, 0.3, grid46);
+  let hatTrack = sequencer.add(drums, hatPat, 0.3, grid16);
   let bassTrack = sequencer.add(synthBass1, bassPat, 0.6, grid8);
   let padTrack = sequencer.add(pad1, chordPat, 0.4, grid4);
 
