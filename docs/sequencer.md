@@ -55,6 +55,23 @@ let chordPat = [
     Also notice that to get notes to play at same part in the chord pattern,
     we use nested brackets.
 
+### Local subdivisions
+The special `sub()` method allows us to have subdivisions in a pattern without
+having to rewrite it in for new grid. For example:
+
+```javascript
+let backbeatPat = [kick, snare, kick, sub(snare, snare)];
+```
+
+Will give an eighth note for the last two snares, occupying the last beat.
+Any number of subdivisions are possible, as well as silences (`O`) inside a
+subdivision.
+
+!!! warning
+    Nested subdivisions (e.g. `sub(snare, sub(snare, snare), snare)`) are not
+    implemented yet and will return a silent event. For this case, we recommend to 
+    go lower in the subdivision grid to have more control of each beat.
+
 ## Tracks
 
 The sequencer can have multiple tracks playing at the same time, each one of
