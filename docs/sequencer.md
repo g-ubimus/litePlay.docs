@@ -42,9 +42,9 @@ let backbeatPat = [kick, snare, kick, snare];
 let bassPat = [[C3, 1, 0, 0.2], [C3, 1, 0, 0.2], [C4, 1, 0, 0.2], O, [Eb3, 1, 0, 0.2], O, [G3, 1, 0, 0.2], O];
 let hatPat = [[closedHiHat, .2], [closedHiHat, 0.5], [openHiHat, .2], [closedHiHat, 0.5]];
 let chordPat = [
-      [[C4, 1, 0, 3.75], [Eb4, 1, 0, 3.75], [G4, 1, 0, 3.75], [Bb4, 1, 0, 3.75]], // Cm7
+      [[C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]], // Cm7
       O, O, O,
-      [[Ab3, 1, 0, 3.75], [C4, 1, 0, 3.75], [Eb4, 1, 0, 3.75], [G4, 1, 0, 3.75]], // Abmaj7
+      [[Ab3, 1, 0, 4], [C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4]], // Abmaj7
       O, O, O,
   ];
 ```
@@ -53,7 +53,7 @@ let chordPat = [
 	We are using the capital O for silent events in the bass.
 
     Also, to get notes to play at same part in the chord pattern, we use nested
-    brackets. The chord should go on for almost 4 beats (3.75), "overriding" the 
+    brackets. The chord should go on for almost 4 beats (4), "overriding" the 
     moments of silence, which are counted anyway.
 
 ### Local subdivisions
@@ -110,9 +110,9 @@ function synthWave() {
   let bassPat = [[C3, 1, 0, 0.2], [C3, 1, 0, 0.2], [C4, 1, 0, 0.2], O, [Eb3, 1, 0, 0.2], O, [G3, 1, 0, 0.2], O];
   let hatPat = [[closedHiHat, .2], [closedHiHat, 0.5], [openHiHat, .2], [closedHiHat, 0.5]];
   let chordPat = [
-        [[C4, 1, 0, 3.75], [Eb4, 1, 0, 3.75], [G4, 1, 0, 3.75], [Bb4, 1, 0, 3.75]], // Cm7
+        [[C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]], // Cm7
         O, O, O,
-        [[Ab3, 1, 0, 3.75], [C4, 1, 0, 3.75], [Eb4, 1, 0, 3.75], [G4, 1, 0, 3.75]], // Abmaj7
+        [[Ab3, 1, 0, 4], [C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4]], // Abmaj7
         O, O, O,
     ];
   let backbeatTrack = sequencer.add(drums, backbeatPat, 0.8, grid4);
@@ -137,10 +137,10 @@ To fix this, we can wrap a `choose()` function inside a pattern, making it
 choose between some options each time.
 
 ```javascript
-let Cm7 = [[C4, 1, 0, 3.75], [Eb4, 1, 0, 3.75], [G4, 1, 0, 3.75], [Bb4, 1, 0, 3.75]];
-let Abmaj7 = [[Ab3, 1, 0, 3.75], [C4, 1, 0, 3.75], [Eb4, 1, 0, 3.75], [G4, 1, 0, 3.75]];
-let Ebmaj7 = [[Eb3, 1, 0, 3.75], [D4, 1, 0, 3.75], [G4, 1, 0, 3.75], [Bb4, 1, 0, 3.75]];
-let Fm7 = [[F3, 1, 0, 3.75], [Eb3, 1, 0, 3.75], [C4, 1, 0, 3.75], [Ab4, 1, 0, 3.75]];
+let Cm7 = [[C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]];
+let Abmaj7 = [[Ab3, 1, 0, 4], [C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4]];
+let Ebmaj7 = [[Eb3, 1, 0, 4], [D4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]];
+let Fm7 = [[F3, 1, 0, 4], [Eb3, 1, 0, 4], [C4, 1, 0, 4], [Ab4, 1, 0, 4]];
 
 let chordPat = [
   () => choose(Cm7, Ebmaj7), O, O, O, 
