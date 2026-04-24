@@ -28,6 +28,6 @@ For example:
 
 ```javascript
 strings.reverb(1);
-strings.ampEnvelope(10,10,10,10);
+strings.ampEnvelope(1,2,3,4);
 strings.play([C2, 1, 0], [Bb2, .9, .5], [Ab3, .8, 1], [Gb4, .7, 1.5], [E5, .6, 2], [D6, .5, 2.5]); // Alien sound
 ```
