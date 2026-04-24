@@ -112,7 +112,7 @@ tempoVariation(membranofone, .1, 1, 20, .9); // accelerando
 ```javascript
 function amenBreak() {
   sequencer.clear();
-  setBpm(260);
+  setBpm(130);
   let grid = .5;
 
   let hhPat = [[openHiHat, .3]];
@@ -122,9 +122,9 @@ function amenBreak() {
                O, O, [snare, 1], sub(O, [snare, .5]), sub(O, [snare, .5]), O, O, [snare, .5],
                sub(O, [snare, .5]), O, [snare, 1], sub(O, [snare, .5]), sub(O,  [snare, .5]), O, O, [snare, .5]];
 
-  sequencer.add(drums, hhPat, grid);
-  sequencer.add(drums, kkPat, grid);
-  sequencer.add(drums, snPat, grid);
+  sequencer.add(drums, hhPat, 1, grid);
+  sequencer.add(drums, kkPat, 1, grid);
+  sequencer.add(drums, snPat, 1, grid);
 
   sequencer.play();
 }

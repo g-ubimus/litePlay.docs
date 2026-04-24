@@ -107,7 +107,7 @@ function synthWave() {
   const grid16 = 0.25; 
 
   let backbeatPat = [kick, snare, kick, snare];
-  let bassPat = [[C3, 1, 0, 0.2], [C3, 1, 0, 0.2], [C4, 1, 0, 0.2], O, [Eb3, 1, 0, 0.2], O, [G3, 1, 0, 0.2], O];
+  let bassPat = [[C2, 1, 0, 0.2], [C2, 1, 0, 0.2], [C3, 1, 0, 0.2], O, [Eb2, 1, 0, 0.2], O, [G2, 1, 0, 0.2], O];
   let hatPat = [[closedHiHat, .2], [closedHiHat, 0.5], [openHiHat, .2], [closedHiHat, 0.5]];
   let chordPat = [
         [[C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]], // Cm7
