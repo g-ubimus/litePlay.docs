@@ -165,6 +165,50 @@ ampVariation(.1, 1, 10, 0.2, 0.5); // crescendo
 // ampVariation(1, .1, 10, 0.2, 0.5); // invert values to get a decrescendo
 ```
 
+## Manipulating audio effects
+### Auto-panning
+```javascript
+function autoPan(instrument, cycleInSeconds) {
+  if (instrument.panInterval) {
+    clearInterval(instrument.panInterval);
+  }
+  
+  instrument.panInterval = setInterval(() => {
+    let timeInSeconds = Date.now() / 1000;    
+    let panValue = Math.sin((timeInSeconds / cycleInSeconds) * Math.PI * 2);    
+    instrument.pan(panValue);
+  }, 30); 
+}
+```
+
+We can use it with a sequencer:
+
+```javascript
+function autechreMontreal() {
+  sequencer.clear();
+  setBpm(90);
+
+  let grid16 = .5;
+  let grid4 = 1;
+
+  let hhPat = [pedalHiHat, sub(pedalHiHat, pedalHiHat), pedalHiHat, sub(pedalHiHat, pedalHiHat), sub(pedalHiHat, pedalHiHat), pedalHiHat];  
+  let bassPat = [O, sub(O, [Gb2, 1, 0, 1]), sub(O, [Gb2, 1, 0, 2]), O,
+                 [A2, 1, 0, 2], sub(O, [A2, 1, 0, 2]), O, O];
+  let kkPat = [kick, sub(O, kick), sub(O, kick), sub(O, [kick, 1, 0, 3], O, O)];
+  
+  autoPan(drums1, .1);
+  synthBass1.reverb(.4);
+
+  sequencer.add(drums1, hhPat, .4, grid16);
+  sequencer.add(synthBass1, bassPat, .3, grid4);
+  sequencer.add(drums2, kkPat, .9, grid4);
+
+  sequencer.play();
+}
+
+autechreMontreal()
+```
+
 ## List manipulation
 ### Transposition
 ```JavaScript
@@ -220,4 +264,3 @@ let listA = [1,2,3];
 let listB = [4,5,6,7,8];
 console.log(tangle(listA,listB)); // returns [1, 4, 2, 5, 3, 6, 1, 7, 2, 8]
 ```
-
