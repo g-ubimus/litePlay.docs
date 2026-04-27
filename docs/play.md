@@ -1,4 +1,4 @@
-# `play()`
+# Play`
 
 At the core of litePlay.js we have `play()`. This can be simply run as
 
