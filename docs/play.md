@@ -1,4 +1,4 @@
-# Play`
+# Play
 
 At the core of litePlay.js we have `play()`. This can be simply run as
 
@@ -17,8 +17,6 @@ play();
 
 the default was set to piano at the start, but we now changed it to
 organ. You can see all instruments available [here](./instruments.md).
-
-Now let's pause the organ and select another instrument:
 
 ```javascript
 stop();
