@@ -1,4 +1,4 @@
-# Instruments`
+# Instruments
 
 Sound generation is managed by instrument objects. In general, we can access
 these by using one of the names defined in the JS module, like `piano`,
