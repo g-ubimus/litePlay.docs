@@ -11,7 +11,7 @@ to add fractional parts to a midi value:
 play(60.25);
 ```
 
-However, for it to work, we should now the note values! One way to do it is to
+However, for it to work, we should know the pitch values! One way to do it is to
 print it to the console:
 
 ```JavaScript
