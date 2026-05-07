@@ -29,6 +29,17 @@ toque(C4+dezCents); // equivalente a 60.1
 toque(C4+umCent); // equivalente a 60.01
 ```
 
+### Transposição
+```javascript
+function transpor(melodia, semitons) {
+  return melodia.map(nota => nota + semitons);
+}
+
+let melodia = [C4, D4, E4, F4, G4];
+let transposta = transpor(melodia, 2);
+console.log(transposta) // retorna [D4, E4, Fs4, G4, A4]
+```
+
 ### Arpejador
 ```javascript
 function arpejar(acorde, intervaloTempo, repeticoes, l = eventList.create(), tempo = 0) {
@@ -152,16 +163,6 @@ variacaoAmp(1, .1, 10, 0.2, 0.5); // decrescendo
 ```
 
 ## Manipulação de listas
-### Transposição
-```javascript
-function transpor(melodia, semitons) {
-  return melodia.map(nota => nota + semitons);
-}
-
-let melodia = [C4, D4, E4, F4, G4];
-let transposta = transpor(melodia, 2);
-console.log(transposta) // retorna [D4, E4, Fs4, G4, A4]
-```
 
 ### Retrogradação
 ```javascript

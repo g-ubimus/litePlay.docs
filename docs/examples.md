@@ -29,6 +29,18 @@ play(C4+tenCent); // equivalent to 60.1
 play(C4+oneCent); // equivalent to 60.01
 ```
 
+### Transposition
+```JavaScript
+function transpose(melody, semitones) {
+  return melody.map(note => note + semitones);
+}
+
+let melody = [C4, D4, E4, F4, G4];
+let transposed = transpose(melody, 2);
+console.log(transposed) // returns [D4, E4, Fs4, G4, A4]
+```
+
+
 ### Arpeggiator
 ```JavaScript
 function arpeggiate(chord, stepTime, repeats, l = eventList.create(), time = 0) {
@@ -210,17 +222,6 @@ autechreMontreal()
 ```
 
 ## List manipulation
-### Transposition
-```JavaScript
-function transpose(melody, semitones) {
-  return melody.map(note => note + semitones);
-}
-
-let melody = [C4, D4, E4, F4, G4];
-let transposed = transpose(melody, 2);
-console.log(transposed) // returns [D4, E4, Fs4, G4, A4]
-```
-
 ### Retrograde
 ```JavaScript
 function retrograde(list) {
