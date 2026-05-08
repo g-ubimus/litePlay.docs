@@ -26,6 +26,10 @@ features = [
     "toc.integrate",
     "content.code.copy"
 ]
+favicon = "images/favicon.png"
+
+[project.theme.icon]
+logo = "lucide/book-headphones"
 
 # Palette toggle for light mode
 [[project.theme.palette]]
