@@ -1,6 +1,7 @@
 # Examples
  
-This page lists useful musical examples to give a grasp of how litePlay.js works.
+This page lists useful musical examples and extra functions available in the
+system to give a grasp of how litePlay.js works.
 
 ## Pitch & harmony
 ### Tunning
@@ -30,74 +31,150 @@ play(C4+oneCent); // equivalent to 60.01
 ```
 
 ### Transposition
-```JavaScript
-function transpose(melody, semitones) {
-  return melody.map(note => note + semitones);
-}
-
-let melody = [C4, D4, E4, F4, G4];
-let transposed = transpose(melody, 2);
-console.log(transposed) // returns [D4, E4, Fs4, G4, A4]
+```javascript
+transposition(melody, semitones);
 ```
 
+Transpose an array of notes by a number of semitones:
+
+```JavaScript
+let m = [C4, D4, E4, F4, G4];
+let s = 2;
+let transposed = transpose(m, s);
+
+console.log(transposed) // returns [D4, E4, Fs4/Gb4, G4, A4]
+```
+
+### Random chord
+```javascript
+randomChord(size, range, microtonal = false);
+```
+
+Generates a chord (4 notes by default, in `midPitch` range) with random
+pitches:
+```javascript
+let a = randomChord();
+console.log(a);
+```
+
+Change the size of the chord with the first parameter:
+```javascript
+let fiveNoteChord = randomChord(5);
+console.log(fiveNoteChord);
+```
+
+Change the range with the second parameter, using litePlay's pitch generators:
+```javascript
+let highPitchChord = randomChord(4, highPitch);
+let lowPitchChord = randomChord(4, lowPitch);
+console.log(highPitchChord);
+console.log(lowPitchChord);
+```
+
+Make microtonal chords:
+```javascript
+let microtonalChord = randomChord(4, midPitch, true);
+console.log(microtonalChord);
+```
 
 ### Arpeggiator
+```javascript
+arpeggio(chord, repetitions, speed, direction, amp, instrument)
+```
+By default, the `arpeggio` function plays a _fast_ "upAndDown" arpeggio of a
+_random chord_, one time:
 ```JavaScript
-function arpeggiate(chord, stepTime, repeats, l = eventList.create(), time = 0) {
- if (repeats <= 0) {
-   l.play();
- } else {
-   for (let i = 0; i < chord.length; i++) {
-     l.add([chord[i], 1, time, stepTime, xylophone]);
-     time += stepTime; 
-   }
-   arpeggiate(chord, stepTime, repeats - 1, l, time);
- }
-}
-let Cmaj7 = [C4, E4, G4, B4];
-arpeggiate(Cmaj7, 0.15, 5);
+arpeggio();
 ```
 
-#### Up-and-down arpeggio
-```JavaScript
-function upAndDown(chord, stepTime, repeats, l = eventList.create(), time = 0) {
-  if (!repeats) {
-    l.play(); 
-  } else {    
-    for (let i = 0; i < chord.length; i++) {
-      l.add([chord[i], 1, time, stepTime, xylophone]);
-      time += stepTime; 
-    }    
-    for (let i = chord.length - 2; i > 0; i--) {
-      l.add([chord[i], 1, time, stepTime, xylophone]);
-      time += stepTime; 
-    }    
-    upAndDown(chord, stepTime, repeats - 1, l, time);
-  }
-}
-let Cmaj7 = [C4, E4, G4, B4];
-upAndDown(Cmaj7, 0.15, 10);
+You can pass a chord to the first parameter:
+```javascript
+let cmaj7 = [C3, B3, E4, G4];
+arpeggio(cmaj7);
+```
+
+Define a different number of repetitions:
+```javascript
+let cmaj7 = [C3, B3, E4, G4];
+arpeggio(cmaj7, 10);
+```
+
+Change the speed (`0.25` seconds per note by default):
+```javascript
+let cmaj7 = [C3, B3, E4, G4];
+arpeggio(cmaj7, 5, .1);
+```
+
+Change the direction (`"upAndDown"` by default):
+```javascript
+let cmaj7 = [C3, B3, E4, G4];
+arpeggio(cmaj7, 5, .1, "up");
+```
+
+```javascript
+let g7 = [G3, D4, F4, B4];
+arpeggio(g7, 5, .1, "down");
+```
+
+Change the amplitude (`1` by default):
+```javascript
+let cmaj7 = [C3, B3, E4, G4];
+arpeggio(cmaj7, 5, .1, "upAndDown", .5);
+```
+
+And, of course, change the instrument (`piano` by default):
+```javascript
+let cmaj7 = [C3, B3, E4, G4];
+arpeggio(cmaj7, 5, .1, "upAndDown", .5, xylophone);
 ```
 
 ### Interval sequence
 ```JavaScript
-function sequence(note, interval, duration, delta, repeats) {
-      if (!repeats) return;
-      play([note, 1, delta, duration, vibraphone]);
-      sequence(note + interval, interval, duration, delta + duration, repeats - 1);
-}
+intervalSequence([event], interval, repetitions, up = true)
+```
 
-sequence(C4, 3, .5, 0.1, 10);
+A different type of arpeggio can be constructed using an interval sequence.
+
+By default, it starts on a random note and goes up four notes, following a
+random interval:
+```javascript
+intervalSequence();
+```
+
+Create an event and use it as the basis for the function:
+```javascript
+let e = [E2, .8, 0, .5, guitar];
+intervalSequence(e);
+```
+
+Select an specific interval for the sequence:
+```javascript
+let e = [E2, .8, 0, .5, guitar];
+intervalSequence(e, 3);
+```
+
+Change the number of times it will transpose:
+```javascript
+let e = [E2, .8, 0, .5, guitar];
+intervalSequence(e, 3, 10);
+```
+
+Go down by changing the last parameter to false:
+```javascript
+let p = [E6, .8, 0, .1, piano];
+intervalSequence(e, 3, 10, false);
 ```
 
 ### Inversion
 ```JavaScript
-function invert(melody, axis) {
-  return melody.map(note => axis + (((axis - note) % 12) + 12) % 12);
-}
+invert(melody, axis)
+```
+
+Invert an array of pitches around an axis:
+```javascript
 let melody = [C4, D4, E4, F4];
 let inverted = invert(melody, C4);
-console.log(inverted); // returns [C4, Bb4, Ab4, G4]
+console.log(inverted); // returns ["C4","As/Bb4","Gs/Ab4","G4"]
 ```
 
 ### Get note names
