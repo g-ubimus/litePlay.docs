@@ -273,17 +273,7 @@ ampVariation(a, .1, 10).play();
 ## Manipulating audio effects
 ### Auto-panning
 ```javascript
-function autoPan(instrument, cycleInSeconds) {
-  if (instrument.panInterval) {
-    clearInterval(instrument.panInterval);
-  }
-  
-  instrument.panInterval = setInterval(() => {
-    let timeInSeconds = Date.now() / 1000;    
-    let panValue = Math.sin((timeInSeconds / cycleInSeconds) * Math.PI * 2);    
-    instrument.pan(panValue);
-  }, 30); 
-}
+autoPan(instrument, hertz)
 ```
 
 We can use it with a sequencer:
@@ -291,7 +281,7 @@ We can use it with a sequencer:
 ```javascript
 function autechreMontreal() {
   sequencer.clear();
-  setBpm(90);
+  setBpm(100);
 
   let grid16 = .5;
   let grid4 = 1;
