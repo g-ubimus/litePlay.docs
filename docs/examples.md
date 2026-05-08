@@ -84,85 +84,91 @@ arpeggio(chord, repetitions, speed, direction, amp, instrument)
 By default, the `arpeggio` function plays a _fast_ "upAndDown" arpeggio of a
 _random chord_, one time:
 ```JavaScript
-arpeggio();
+arpeggio().play();
 ```
 
 You can pass a chord to the first parameter:
 ```javascript
 let cmaj7 = [C3, B3, E4, G4];
-arpeggio(cmaj7);
+arpeggio(cmaj7).play();
 ```
 
 Define a different number of repetitions:
 ```javascript
 let cmaj7 = [C3, B3, E4, G4];
-arpeggio(cmaj7, 10);
+arpeggio(cmaj7, 10).play();
 ```
 
 Change the speed (`0.25` seconds per note by default):
 ```javascript
 let cmaj7 = [C3, B3, E4, G4];
-arpeggio(cmaj7, 5, .1);
+arpeggio(cmaj7, 5, .1).play();
 ```
 
 Change the direction (`"upAndDown"` by default):
 ```javascript
 let cmaj7 = [C3, B3, E4, G4];
-arpeggio(cmaj7, 5, .1, "up");
+arpeggio(cmaj7, 5, .1, "up").play();
 ```
 
 ```javascript
 let g7 = [G3, D4, F4, B4];
-arpeggio(g7, 5, .1, "down");
+arpeggio(g7, 5, .1, "down").play();
 ```
 
 Change the amplitude (`1` by default):
 ```javascript
 let cmaj7 = [C3, B3, E4, G4];
-arpeggio(cmaj7, 5, .1, "upAndDown", .5);
+arpeggio(cmaj7, 5, .1, "upAndDown", .5).play();
 ```
 
 And, of course, change the instrument (`piano` by default):
 ```javascript
 let cmaj7 = [C3, B3, E4, G4];
-arpeggio(cmaj7, 5, .1, "upAndDown", .5, xylophone);
+arpeggio(cmaj7, 5, .1, "upAndDown", .5, xylophone).play();
 ```
 
 ### Interval sequence
 ```JavaScript
-intervalSequence([event], interval, repetitions, up = true)
+intervalSequence([event], interval, repetitions, up?)
 ```
 
 A different type of arpeggio can be constructed using an interval sequence.
 
-By default, it starts on a random note and goes up four notes, following a
-random interval:
+By default, it starts on a random note and goes up or down four notes,
+following a random interval:
 ```javascript
-intervalSequence();
+intervalSequence().play();
 ```
 
 Create an event and use it as the basis for the function:
 ```javascript
 let e = [E2, .8, 0, .5, guitar];
-intervalSequence(e);
+intervalSequence(e).play();
 ```
 
 Select an specific interval for the sequence:
 ```javascript
 let e = [E2, .8, 0, .5, guitar];
-intervalSequence(e, 3);
+intervalSequence(e, 3).play();
 ```
 
 Change the number of times it will transpose:
 ```javascript
 let e = [E2, .8, 0, .5, guitar];
-intervalSequence(e, 3, 10);
+intervalSequence(e, 3, 10).play();
 ```
 
-Go down by changing the last parameter to false:
+Make it only go up:
 ```javascript
-let p = [E6, .8, 0, .1, piano];
-intervalSequence(e, 3, 10, false);
+let e = [E2, .8, 0, .1, piano];
+intervalSequence(e, 3, 10, true).play();
+```
+
+Force it to go down by changing the last parameter to false:
+```javascript
+let e = [E6, .8, 0, .1, piano];
+intervalSequence(e, 3, 10, false).play();
 ```
 
 ### Inversion
@@ -186,15 +192,19 @@ midiToName(31)); // returns "G1"
 ## Rhythm & timing
 ### Tempo variation (accelerando & rallentando)
 ```JavaScript
-function tempoVariation(what, when, duration, steps, ratio) {
-      if (steps <= 0) return;
-      play([what, .9, when, duration, drums6]);
-      let nextDuration = duration * ratio;
-      tempoVariation(what, when + duration, nextDuration, steps - 1, ratio);
-}
+tempoVariation([event], steps, ratio)
+```
 
-tempoVariation(membranofone, .1, 1, 20, .9); // accelerando
-//tempoVariation(idiophone, 1, .1, 20, 1.1); // rallentando
+Generates an accelerando when the `ratio` < 1:
+```javascript
+let e = [membranophone, .1, 0, 1, drums2];
+tempoVariation(e, 20, .9).play();
+```
+
+Or a rallentando when `ratio` > 1:
+```javascript
+let e = [idiophone, .1, 0, .1, drums4];
+tempoVariation(e, 20, 1.1).play();
 ```
 
 ### Amen Break
@@ -242,16 +252,22 @@ console.log(audioClock())
 ```
 
 ## Dynamics
+### Crescendo and decrescendo
 ```JavaScript
-function ampVariation(first, last, steps, duration, delta) {
-  if (!steps) return;  
-  let ampStep = (last - first) / steps; 
-  play([midPitch, first, delta, duration]);
-  ampVariation(first + ampStep, last, steps - 1, duration, delta + duration);
-}
+ampVariation([event], lastAmp, steps)
+```
+Similar to the accelerando/rallentando method.
 
-ampVariation(.1, 1, 10, 0.2, 0.5); // crescendo
-// ampVariation(1, .1, 10, 0.2, 0.5); // invert values to get a decrescendo
+Do a crescendo with a soft event going, for example, to maximum amplitude (1):
+```javascript
+let a = [C4, .1, 0, 1, piano];
+ampVariation(a, 1, 10).play();
+```
+
+Do a decrescendo with the opposite:
+```javascript
+let a = [C4, 1, 0, 1, piano];
+ampVariation(a, .1, 10).play();
 ```
 
 ## Manipulating audio effects
@@ -301,11 +317,10 @@ autechreMontreal()
 ## List manipulation
 ### Retrograde
 ```JavaScript
-function retrograde(list) {
-  return list.map((item, index, arr) => {let oppositeIndex = arr.length - 1 - index;    
-    return arr[oppositeIndex];});
-}
+retrograde(list)
+```
 
+```JavaScript
 let myList = [1, 2, 3, 4];
 let retro = retrograde(myList);
 console.log(retro) // returns [4, 3, 2, 1]
@@ -313,31 +328,21 @@ console.log(retro) // returns [4, 3, 2, 1]
 
 ### Rotation
 ```JavaScript
-function rotate(list, steps) {
-  return list.map((note, index, arr) => {
-    let newIndex = (index + steps) % arr.length;
-    if (newIndex < 0) newIndex += arr.length;
-    return arr[newIndex];
-  });
-}
+rotate(list, steps)
+```
 
+```JavaScript
 let melody = [1, 2, 3, 4];
-let rotated = rotate(melody, 1);
-console.log(rotated) // returns [2, 3, 4, 1]
+let rotated = rotate(melody, 2);
+console.log(rotated) // returns [3,4,1,2]
 ```
 
 ### Tangle
 ```JavaScript
-function tangle(listA, listB) {
-  let listC = [];
-  let size = Math.max(listA.length, listB.length);
-  for (let i = 0; i < size; i++) {
-    listC.push(listA[i % listA.length]);
-    listC.push(listB[i % listB.length]);
-  }
-  return listC;
-}
+tangle(listA, listB)
+```
 
+```javascript
 let listA = [1,2,3];
 let listB = [4,5,6,7,8];
 console.log(tangle(listA,listB)); // returns [1, 4, 2, 5, 3, 6, 1, 7, 2, 8]
