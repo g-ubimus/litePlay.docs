@@ -115,6 +115,14 @@ let cmaj7 = [C4, E4, G4, B4];
 arpeggio(e, cmaj7, 10, "up").play();
 ```
 
+Concatenate arpeggios!
+```javascript
+let a = arpeggio([C4, .8, 0, .2, harpsichord], [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play();
+let b = arpeggio([D4, .8, a, .2, harpsichord], [C4, D4, A4, D5, F5, A4, D5, F5], 2, "up").play();
+let c = arpeggio([G4, .8, b, .2, harpsichord], [B4, D4, G4, D5, F5, G4, D5, F5], 2, "up").play();
+let d = arpeggio([C4, .8, c, .2, harpsichord], [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play();
+```
+
 ### Interval sequence
 ```JavaScript
 intervalSequence([event], interval, repetitions, up?)
