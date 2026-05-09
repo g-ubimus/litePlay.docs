@@ -4,6 +4,12 @@ This page lists useful musical examples and extra functions available in the
 system to give a grasp of how litePlay.js works.
 
 ## Pitch & harmony
+### Get note names
+```JavaScript
+midiToName(60)); // returns "C4"
+midiToName(31)); // returns "G1"
+```
+
 ### Tunning
 We can have microtonal pitches in different formats. The simplest one would be
 to add fractional parts to a midi value:
@@ -176,12 +182,6 @@ Invert an array of pitches around an axis:
 let melody = [C4, D4, E4, F4];
 let inverted = invert(melody, C4);
 console.log(inverted); // returns ["C4","As/Bb4","Gs/Ab4","G4"]
-```
-
-### Get note names
-```JavaScript
-midiToName(60)); // returns "C4"
-midiToName(31)); // returns "G1"
 ```
 
 ## Rhythm & timing
