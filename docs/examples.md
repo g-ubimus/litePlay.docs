@@ -32,7 +32,7 @@ play(C4+oneCent); // equivalent to 60.01
 
 ### Transposition
 ```javascript
-transposition(melody, semitones);
+transpose(melody, semitones);
 ```
 
 Transpose an array of notes by a number of semitones:
