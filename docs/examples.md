@@ -79,53 +79,40 @@ console.log(microtonalChord);
 
 ### Arpeggiator
 ```javascript
-arpeggio(chord, repetitions, speed, direction, amp, instrument)
+arpeggio([event], [chord], repeats, direction = "upAndDown")
 ```
-By default, the `arpeggio` function plays a _fast_ "upAndDown" arpeggio of a
+By default, the `arpeggio` function plays an "upAndDown" arpeggio of a
 _random chord_, one time:
 ```JavaScript
 arpeggio().play();
 ```
 
-You can pass a chord to the first parameter:
+You can pass an event to define note parameters, but it still plays a random
+chord:
 ```javascript
-let cmaj7 = [C3, B3, E4, G4];
-arpeggio(cmaj7).play();
+let e = [C3, .5, 0, .1, xylophone];
+arpeggio(e).play();
+```
+
+Define the chord by passing it as the second parameter:
+```javascript
+let e = [C3, .5, 0, .1, xylophone];
+let cmaj7 = [C4, E4, G4, B4];
+arpeggio(e, cmaj7).play();
 ```
 
 Define a different number of repetitions:
 ```javascript
-let cmaj7 = [C3, B3, E4, G4];
-arpeggio(cmaj7, 10).play();
+let e = [C3, .5, 0, .1, xylophone];
+let cmaj7 = [C4, E4, G4, B4];
+arpeggio(e, cmaj7, 10).play();
 ```
 
-Change the speed (`0.25` seconds per note by default):
+Change the direction ("up", "down", or "upAndDown"):
 ```javascript
-let cmaj7 = [C3, B3, E4, G4];
-arpeggio(cmaj7, 5, .1).play();
-```
-
-Change the direction (`"upAndDown"` by default):
-```javascript
-let cmaj7 = [C3, B3, E4, G4];
-arpeggio(cmaj7, 5, .1, "up").play();
-```
-
-```javascript
-let g7 = [G3, D4, F4, B4];
-arpeggio(g7, 5, .1, "down").play();
-```
-
-Change the amplitude (`1` by default):
-```javascript
-let cmaj7 = [C3, B3, E4, G4];
-arpeggio(cmaj7, 5, .1, "upAndDown", .5).play();
-```
-
-And, of course, change the instrument (`piano` by default):
-```javascript
-let cmaj7 = [C3, B3, E4, G4];
-arpeggio(cmaj7, 5, .1, "upAndDown", .5, xylophone).play();
+let e = [C3, .5, 0, .1, xylophone];
+let cmaj7 = [C4, E4, G4, B4];
+arpeggio(e, cmaj7, 10, "up").play();
 ```
 
 ### Interval sequence
@@ -147,7 +134,7 @@ let e = [E2, .8, 0, .5, guitar];
 intervalSequence(e).play();
 ```
 
-Select an specific interval for the sequence:
+Select a specific interval for the sequence:
 ```javascript
 let e = [E2, .8, 0, .5, guitar];
 intervalSequence(e, 3).play();
