@@ -185,6 +185,26 @@ console.log(inverted); // returns ["C4","As/Bb4","Gs/Ab4","G4"]
 ```
 
 ## Rhythm & timing
+### Set/get beats per minute
+```JavaScript
+setBpm(value);
+console.log(getBpm());
+```
+
+### Convertions
+```JavaScript
+secs(beats);
+// return duration of a beat in seconds
+
+beats(seconds)
+// return number of beats from an interval in seconds
+```
+
+### Get current audio clock time
+```JavaScript
+console.log(audioClock())
+```
+
 ### Tempo variation (accelerando & rallentando)
 ```JavaScript
 tempoVariation([event], steps, ratio)
@@ -224,26 +244,6 @@ function amenBreak() {
 }
 
 amenBreak()
-```
-
-### Set/get beats per minute
-```JavaScript
-setBpm(value);
-console.log(getBpm());
-```
-
-### Convertions
-```JavaScript
-secs(beats);
-// return duration of a beat in seconds
-
-beats(seconds)
-// return number of beats from an interval in seconds
-```
-
-### Get current audio clock time
-```JavaScript
-console.log(audioClock())
 ```
 
 ## Dynamics
