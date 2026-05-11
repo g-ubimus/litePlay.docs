@@ -181,7 +181,7 @@ Invert an array of pitches around an axis:
 ```javascript
 let melody = [C4, D4, E4, F4];
 let inverted = invert(melody, C4);
-console.log(inverted); // returns ["C4","As/Bb4","Gs/Ab4","G4"]
+console.log(inverted); // returns ["D4", "E4", "Bb4","Ab4","G4"]
 ```
 
 ## Rhythm & timing
