@@ -48,7 +48,7 @@ let m = [C4, D4, E4, F4, G4];
 let s = 2;
 let transposed = transpose(m, s);
 
-console.log(transposed) // returns [D4, E4, Fs4/Gb4, G4, A4]
+console.log(midiToName(transposed)) // returns [D4, E4, Fs4/Gb4, G4, A4]
 ```
 
 ### Random chord
