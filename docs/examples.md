@@ -38,7 +38,7 @@ play(C4+oneCent); // equivalent to 60.01
 
 ### Transposition
 ```javascript
-transpose(melody, semitones);
+transpose([melody], semitones);
 ```
 
 Transpose an array of notes by a number of semitones:
@@ -85,7 +85,7 @@ console.log(microtonalChord);
 
 ### Arpeggiator
 ```javascript
-arpeggio([event], [chord], repeats, direction = "upAndDown")
+arpeggio([event], [chord], repetitions, direction = "upAndDown")
 ```
 By default, the `arpeggio` function plays an "upAndDown" arpeggio of a
 _random chord_, one time:
@@ -174,7 +174,7 @@ intervalSequence(e, 3, 10, false).play();
 
 ### Inversion
 ```JavaScript
-invert(melody, axis)
+invert([melody], axis)
 ```
 
 Invert an array of pitches around an axis:
@@ -224,7 +224,7 @@ tempoVariation(e, 20, 1.1).play();
 
 ### Ostinato
 ```javascript
-ostinato([event], repetitions, rhythm)
+ostinato([event], repetitions, [rhythm])
 ```
 
 To quickly create an ostinato from an event, pass it to the `ostinato` method:
@@ -317,7 +317,7 @@ autechreMontreal()
 ## List manipulation
 ### Retrograde
 ```JavaScript
-retrograde(list)
+retrograde([list])
 ```
 
 ```JavaScript
@@ -328,7 +328,7 @@ console.log(retro) // returns [4, 3, 2, 1]
 
 ### Rotation
 ```JavaScript
-rotate(list, steps)
+rotate([list], steps)
 ```
 
 ```JavaScript
@@ -339,7 +339,7 @@ console.log(rotated) // returns [3,4,1,2]
 
 ### Tangle
 ```JavaScript
-tangle(listA, listB)
+tangle([listA], [listB])
 ```
 
 ```javascript
