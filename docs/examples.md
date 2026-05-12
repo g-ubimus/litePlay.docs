@@ -222,6 +222,21 @@ let e = [idiophone, .1, 0, .1, drums4];
 tempoVariation(e, 20, 1.1).play();
 ```
 
+### Ostinato
+```javascript
+ostinato([event], repetitions, rhythm)
+```
+
+To quickly create an ostinato from an event, pass it to the `ostinato` method:
+```javascript
+ostinato([snare, loud, 0, 1, drums4], 10).play();
+```
+
+Alternatively, repeat more complex rhythms by passing an array of durations to the third parameter:
+```javascript
+ostinato([snare, loud, 0, 1, drums4], 10, [1, .5, .5, .25, .25, .25, .25]).play();
+```
+
 ### Amen Break
 ```javascript
 function amenBreak() {
