@@ -337,13 +337,13 @@ let rotated = rotate(melody, 2);
 console.log(rotated) // returns [3,4,1,2]
 ```
 
-### Tangle
+### Blend 
 ```JavaScript
-tangle([listA], [listB])
+blend([listA], [listB])
 ```
 
 ```javascript
 let listA = [1,2,3];
 let listB = [4,5,6,7,8];
-console.log(tangle(listA,listB)); // returns [1, 4, 2, 5, 3, 6, 1, 7, 2, 8]
+console.log(blend(listA,listB)); // returns [1, 4, 2, 5, 3, 6, 1, 7, 2, 8]
 ```
