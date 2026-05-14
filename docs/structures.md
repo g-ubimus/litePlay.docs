@@ -1,8 +1,8 @@
 ## Pitch & harmony
 ### Get note names
 ```JavaScript
-midiToName(60)) // returns "C4"
-midiToName(31)) // returns "G1"
+console.log(midiToName(60)) // returns "C4"
+console.log(midiToName(31)) // returns "G1"
 ```
 
 ### Tunning
