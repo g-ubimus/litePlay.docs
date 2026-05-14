@@ -41,7 +41,7 @@ play(C4+oneCent) // equivalent to 60.01
 monotone(initial pitch)
 ```
 
-Get _mostly_ the same pitch, that can varies in a range of one semitone up or down.
+Get _mostly_ the same pitch, that can vary in a range of one semitone up or down.
 
 For example, try:
 ```javascript
@@ -98,9 +98,9 @@ console.log(microtonalChord)
 
 ### Arpeggiator
 ```javascript
-arpeggio([event], [chord], repetitions, direction = "upAndDown")
+arpeggio([event], [chord], repetitions, direction = "backAndForth")
 ```
-By default, the `arpeggio` function plays an "upAndDown" arpeggio of a
+By default, the `arpeggio` function plays an "backAndForth" arpeggio of a
 _random chord_, one time:
 ```JavaScript
 arpeggio().play()
@@ -127,7 +127,7 @@ let cmaj7 = [C4, E4, G4, B4]
 arpeggio(e, cmaj7, 10).play()
 ```
 
-Change the direction ("up", "down", or "upAndDown"):
+Change the direction ("forward", "backward", or "backAndForth"):
 ```javascript
 let e = [C3, .5, 0, .1, xylophone]
 let cmaj7 = [C4, E4, G4, B4]
@@ -138,7 +138,7 @@ Concatenate arpeggios!
 ```javascript
 let a = arpeggio([C4, .8, 0, .2, harpsichord], [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play()
 let b = arpeggio([D4, .8, a, .2, harpsichord], [C4, D4, A4, D5, F5, A4, D5, F5], 2, "up").play()
-let c = arpeggio([G4, .8, b, .2, harpsichord], [B4, D4, G4, D5, F5, G4, D5, F5], 2, "up").play()
+let c = arpeggio([G4, .8, b, .2, harpsichord], [B3, D4, G4, D5, F5, G4, D5, F5], 2, "up").play()
 let d = arpeggio([C4, .8, c, .2, harpsichord], [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play()
 ```
 
