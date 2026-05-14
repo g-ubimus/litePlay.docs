@@ -1,11 +1,11 @@
-# Pitch & harmony
-## Get note names
+## Pitch & harmony
+### Get note names
 ```JavaScript
 midiToName(60)) // returns "C4"
 midiToName(31)) // returns "G1"
 ```
 
-## Tunning
+### Tunning
 We can have microtonal pitches in different formats. The simplest one would be
 to add fractional parts to a midi value:
 
@@ -31,7 +31,7 @@ play(C4+tenCent) // equivalent to 60.1
 play(C4+oneCent) // equivalent to 60.01
 ```
 
-## Monotone
+### Monotone
 ```javascript
 monotone(initial pitch)
 ```
@@ -44,7 +44,7 @@ let e = [()=>monotone(C4), loud, 0, .1, clarinet]
 ostinato(e, 100).play()
 ```
 
-## Transposition
+### Transposition
 ```javascript
 transpose([melody], semitones)
 ```
@@ -59,7 +59,7 @@ let transposed = transpose(m, s)
 console.log(midiToName(transposed)) // returns [D4, E4, Fs4/Gb4, G4, A4]
 ```
 
-## Random chord
+### Random chord
 ```javascript
 randomChord(size, range, microtonal = false)
 ```
@@ -91,7 +91,7 @@ let microtonalChord = randomChord(4, midPitch, true)
 console.log(microtonalChord)
 ```
 
-## Arpeggiator
+### Arpeggiator
 ```javascript
 arpeggio([event], [chord], repetitions, direction = "backAndForth")
 ```
@@ -129,7 +129,7 @@ let cmaj7 = [C4, E4, G4, B4]
 arpeggio(e, cmaj7, 10, "up").play()
 ```
 
-## Interval sequence
+### Interval sequence
 ```JavaScript
 intervalSequence([event], interval, repetitions, up?)
 ```
@@ -172,7 +172,7 @@ let e = [E6, .8, 0, .1, piano]
 intervalSequence(e, 3, 10, false).play()
 ```
 
-## Pitch inversion
+### Pitch inversion
 ```JavaScript
 invert([melody], axis)
 ```
