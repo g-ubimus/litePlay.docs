@@ -11,9 +11,10 @@ nav = [
   {"play()" = "play.md"},
   {"eventList" = "eventList.md"},
   {"Generators" = "generators.md"},
-  {"Sequencer" = "sequencer.md"},
+  {"sequencer" = "sequencer.md"},
   {"Instruments" = "instruments.md"},
   {"Effects" = "effects.md"},
+  {"Musical structures" = "structures.md"},
   {"Examples" = "examples.md"},
   {"litePlay.js editor" = "https://g-ubimus.github.io/litePlay.js"}
 ]
