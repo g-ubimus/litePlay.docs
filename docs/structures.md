@@ -1,3 +1,4 @@
+# Musical structures
 ## Pitch & harmony
 ### Get note names
 ```JavaScript

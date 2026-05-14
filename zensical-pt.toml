@@ -9,10 +9,11 @@ site_dir = "site/pt" # Força o build a gerar a saída dentro da subpasta pt
 nav = [
   {"Início" = "index.md"},
   {"toque()" = "play.md"},
-  {"eventList" = "eventList.md"},
+  {"listaEventos" = "eventList.md"},
   {"Instrumentos" = "instruments.md"},
-  {"Sequenciador" = "sequencer.md"},
+  {"sequenciador" = "sequencer.md"},
   {"Geradores" = "generators.md"},
+  {"Estruturas musicais" = "structures.md"},
   {"Exemplos" = "examples.md"},
   {"Editor litePlay.js" = "https://g-ubimus.github.io/litePlay.js"}
 ]
