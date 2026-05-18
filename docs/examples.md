@@ -69,10 +69,10 @@ function clappingMusic() {
   drums1.pan(-1)
   drums2.pan(1)
   let grid = .5
-  let pattern = [[handClap, loud, 0, .25], [handClap, loud, 0, .25], [handClap, loud, 0, .25], 
-                 O, [handClap, loud, 0, .25], [handClap, loud, 0, .25], 
-                 O, [handClap, loud, 0, .25], O,
-                [handClap, loud, 0, .25], [handClap, loud, 0, .25], O];
+  let pattern = [[clap, loud, 0, .25], [clap, loud, 0, .25], [clap, loud, 0, .25], 
+                 O, [clap, loud, 0, .25], [clap, loud, 0, .25], 
+                 O, [clap, loud, 0, .25], O,
+                [clap, loud, 0, .25], [clap, loud, 0, .25], O];
   pattern = pattern.concat(pattern)
   let pattern2 = pattern
   for (let i = 1; i < 12; i++) {
