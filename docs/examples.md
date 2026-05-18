@@ -60,3 +60,28 @@ function montreal() {
 
 montreal()
 ```
+
+## Clapping music
+```javascript
+function clappingMusic() {
+  setBpm(120);
+  sequencer.clear()
+  drums1.pan(-1)
+  drums2.pan(1)
+  let grid = .5
+  let pattern = [[handClap, 1, 0, .25], [handClap, 1, 0, .25], [handClap, 1, 0, .25], 
+                 O, [handClap, 1, 0, .25], [handClap, 1, 0, .25], 
+                 O, [handClap, 1, 0, .25], O,
+                [handClap, 1, 0, .25], [handClap, 1, 0, .25], O];
+  pattern = pattern.concat(pattern)
+  let pattern2 = pattern
+  for (let i = 1; i < 12; i++) {
+    pattern2 = pattern2.concat(rotate(pattern,i))
+  }
+  sequencer.add(drums, pattern, .5, grid)
+  sequencer.add(drums2, pattern2, .5, grid)
+  sequencer.play()
+}
+
+clappingMusic()
+```
