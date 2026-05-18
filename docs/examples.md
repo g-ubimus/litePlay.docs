@@ -66,8 +66,10 @@ montreal()
 function clappingMusic() {
   setBpm(180);
   sequencer.clear()
-  drums1.pan(-1)
-  drums2.pan(1)
+  drums1.pan(-.5)
+  drums2.pan(5)
+  drums1.reverb(.5)
+  drums2.reverb(5)
   let grid = .5
   let pattern = [[clap, loud, 0, .25], [clap, loud, 0, .25], [clap, loud, 0, .25], 
                  O, [clap, loud, 0, .25], [clap, loud, 0, .25], 
