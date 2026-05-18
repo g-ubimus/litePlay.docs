@@ -89,7 +89,9 @@ clappingMusic()
 ## Piano phase
 ```javascript
 piano.reverb(.9)
+piano.pan(-.5)
+brightPiano.pan(.5)
 brightPiano.reverb(.9)
 arpeggio({howLoud: loud, when: 0, howLong:.125, onSomething:piano}, [E4, Fs4, B4, Cs5, D5, Fs4, E4, Cs5, B4, Fs4, D5, Cs5], 300, "forward").play()
-arpeggio({howLoud: loud, when: 0, howLong:.124, onSomething:brightPiano}, [E4, Fs4, B4, Cs5, D5, Fs4, E4, Cs5, B4, Fs4, D5, Cs5], 300, "forward").play()
+arpeggio({howLoud: loud, when: 0, howLong:.1245, onSomething:brightPiano}, [E4, Fs4, B4, Cs5, D5, Fs4, E4, Cs5, B4, Fs4, D5, Cs5], 300, "forward").play()
 ```
