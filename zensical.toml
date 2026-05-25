@@ -12,6 +12,7 @@ nav = [
   {"eventList" = "eventList.md"},
   {"Generators" = "generators.md"},
   {"sequencer" = "sequencer.md"},
+  {"Sampling" = "sampling.md"},
   {"Instruments" = "instruments.md"},
   {"Effects" = "effects.md"},
   {"Musical structures" = "structures.md"},
