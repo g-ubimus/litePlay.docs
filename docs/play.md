@@ -97,6 +97,17 @@ For example,
 play([C4, 0.5, 0, 2, violin])
 ```
 
+## Unordered parameters 
+Instead of using an array, events can also be defined by using an object, in
+which ordering of parameters do not matter, for example:
+
+```javascript
+play({when: 0, what: C4, howLoud: 0.5, onSomething: violin, howLong: 2})
+```
+
+Is the same as the previous example.
+
+## More than one event
 The top-level `play()` action can take several events as arguments, such
 as
 
