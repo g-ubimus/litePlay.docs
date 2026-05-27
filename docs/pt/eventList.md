@@ -1,5 +1,5 @@
 # eventList 
-Listas de eventos podem ser transformadas em um objeto JS que pode ser manipulado. 
+Listas de eventos podem ser transformadas em um objeto que pode ser manipulado. 
 
 ## eventList.create()
 É usado para criar um evento, geralmente atribuído a uma variável:

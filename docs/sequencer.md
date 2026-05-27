@@ -1,9 +1,8 @@
 # Sequencer
 
-The `sequencer` class acts as an automatic looping grid, reading data from
-arrays passed on to it and scheduling them in time according to a _beats per
-minute_ function, which tells the sequencer how much time each item in the
-array takes up.
+The `sequencer` object acts as a looper, reading data from arrays passed on to
+it and scheduling them in time according to a _beats per minute_ function,
+which tells the sequencer how much time each item in the array takes up.
 
 ## Timing
 Before starting a sequencer, we need to set a BPM running:

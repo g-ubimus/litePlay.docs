@@ -1,9 +1,8 @@
 # Sequenciador
 
-A classe `sequencer` atua como uma grade de loop automático, lendo dados de
-arrays passados para ela e agendando-os no tempo de acordo com uma função de _batidas por
-minuto_ (BPM), que diz ao sequenciador quanto tempo cada item no
-array ocupa.
+O objeto `sequencer` atua como um looper, lendo dados de arrays passados a ele
+e agendando-os no tempo de acordo com uma função de _batidas por minuto_ (BPM),
+que diz ao sequenciador quanto tempo cada item no array ocupa.
 
 ## Tempo
 Antes de iniciar um sequenciador, precisamos definir um BPM para rodar:
