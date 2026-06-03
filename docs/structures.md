@@ -237,7 +237,7 @@ ostinato([snare, loud, 0, 1, drums4], 10).play()
 
 Alternatively, repeat more complex rhythms by passing an array of durations to the third parameter:
 ```javascript
-ostinato([snare, loud, 0, 1, drums4], 10, [1, .5, .5, .25, .25, .25, .25]).play()
+ostinato([snare, loud, 0, 1, drums5], 10, [1, .5, .5, .25, .25, .25, .25]).play()
 ```
 
 ## Dynamics
