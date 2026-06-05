@@ -3,10 +3,10 @@ This page explores musical examples using litePlay.
 
 ## Prelude, BWV 846
 ```javascript
-let a = arpeggio([C4, .8, 0, .2, harpsichord], [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play()
-let b = arpeggio([D4, .8, a, .2, harpsichord], [C4, D4, A4, D5, F5, A4, D5, F5], 2, "up").play()
-let c = arpeggio([G4, .8, b, .2, harpsichord], [B3, D4, G4, D5, F5, G4, D5, F5], 2, "up").play()
-let d = arpeggio([C4, .8, c, .2, harpsichord], [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play()
+let a = arpeggio({howLoud: .8, when: 0, howLong: .2, onSomething: harpsichord}, [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play()
+let b = arpeggio({howLoud: .8, when: a, howLong: .2, onSomething: harpsichord}, [C4, D4, A4, D5, F5, A4, D5, F5], 2, "up").play()
+let c = arpeggio({howLoud: .8, when: b, howLong: .2, onSomething: harpsichord}, [B3, D4, G4, D5, F5, G4, D5, F5], 2, "up").play()
+let d = arpeggio({howLoud: .8, when: c, howLong: .2, onSomething: harpsichord}, [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play()
 //etc.
 ```
 
@@ -90,6 +90,7 @@ clappingMusic()
 
 ## Piano phase
 ```javascript
+setBpm(60)
 piano.reverb(.9)
 piano.pan(-.5)
 brightPiano.pan(.5)

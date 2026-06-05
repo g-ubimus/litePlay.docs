@@ -3,10 +3,10 @@ Essa página explora exemplos musicais utilizando o litePlay.
 
 ## Prelúdio, BWV 846
 ```javascript
-let a = arpeggio([C4, .8, 0, .2, harpsichord], [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play()
-let b = arpeggio([D4, .8, a, .2, harpsichord], [C4, D4, A4, D5, F5, A4, D5, F5], 2, "up").play()
-let c = arpeggio([G4, .8, b, .2, harpsichord], [B3, D4, G4, D5, F5, G4, D5, F5], 2, "up").play()
-let d = arpeggio([C4, .8, c, .2, harpsichord], [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play()
+let a = arpeggio({howLoud:.8,when:0,howLong:.2,onSomething:harpischord}, [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play()
+let b = arpeggio({howLoud:.8,when:a,howLong:.2,onSomething:harpischord}, [C4, D4, A4, D5, F5, A4, D5, F5], 2, "up").play()
+let c = arpeggio({howLoud:.8,when:b,howLong:.2,onSomething:harpischord}, [B3, D4, G4, D5, F5, G4, D5, F5], 2, "up").play()
+let d = arpeggio({howLoud:.8,when:c,howLong:.2,onSomething:harpischord}, [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play()
 //etc.
 ```
 
@@ -59,4 +59,42 @@ function autechreMontreal() {
 }
 
 autechreMontreal()
+```
+
+## Clapping music
+```javascript
+function clappingMusic() {
+  setBpm(180);
+  sequencer.clear()
+  drums1.pan(-.5)
+  drums2.pan(5)
+  drums1.reverb(.15)
+  drums2.reverb(.15)
+  let grid = .5
+  let pattern = [[clap, loud, 0, .25], [clap, loud, 0, .25], [clap, loud, 0, .25], 
+                 O, [clap, loud, 0, .25], [clap, loud, 0, .25], 
+                 O, [clap, loud, 0, .25], O,
+                [clap, loud, 0, .25], [clap, loud, 0, .25], O];
+  pattern = pattern.concat(pattern)
+  let pattern2 = pattern
+  for (let i = 1; i < 12; i++) {
+    pattern2 = pattern2.concat(rotate(pattern,i))
+  }
+  sequencer.add(drums, pattern, .5, grid)
+  sequencer.add(drums2, pattern2, .5, grid)
+  sequencer.play()
+}
+
+clappingMusic()
+```
+
+## Piano phase
+```javascript
+setBpm(60)
+piano.reverb(.9)
+piano.pan(-.5)
+brightPiano.pan(.5)
+brightPiano.reverb(.9)
+arpeggio({howLoud: loud, when: 0, howLong:.125, onSomething:piano}, [E4, Fs4, B4, Cs5, D5, Fs4, E4, Cs5, B4, Fs4, D5, Cs5], 300, "forward").play()
+arpeggio({howLoud: loud, when: 0, howLong:.1245, onSomething:brightPiano}, [E4, Fs4, B4, Cs5, D5, Fs4, E4, Cs5, B4, Fs4, D5, Cs5], 300, "forward").play()
 ```
