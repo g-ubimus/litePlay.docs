@@ -134,15 +134,79 @@ One problem with the example above is that it will always repeat in the same
 way, without variations, which doesn't sound very musical...
 To fix this, we can wrap a `choose()` function inside a pattern, making it 
 choose between some options each time.
+Replace the previous code for `chordPat` with the following:
 
 ```javascript
-let Cm7 = [[C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]];
-let Abmaj7 = [[Ab3, 1, 0, 4], [C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4]];
-let Ebmaj7 = [[Eb3, 1, 0, 4], [D4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]];
-let Fm7 = [[F3, 1, 0, 4], [Eb3, 1, 0, 4], [C4, 1, 0, 4], [Ab4, 1, 0, 4]];
+  let Cm7 = [[C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]];
+  let Abmaj7 = [[Ab3, 1, 0, 4], [C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4]];
+  let Ebmaj7 = [[Eb3, 1, 0, 4], [D4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]];
+  let Fm7 = [[F3, 1, 0, 4], [Eb3, 1, 0, 4], [C4, 1, 0, 4], [Ab4, 1, 0, 4]];
+  
+  let chordPat = [
+    () => choose(Cm7, Ebmaj7), O, O, O, 
+    () => choose(Abmaj7, Fm7), O, O, O
+  ];
+```
 
-let chordPat = [
-  () => choose(Cm7, Ebmaj7), O, O, O, 
-  () => choose(Abmaj7, Fm7), O, O, O
-];
+## Another sequencer example
+```javascript
+// sequencer patterns
+let riff, melody, shuf, kck, snr;
+// sequencer tracks
+let cymbals, kicks, snares, bassline, topline;
+const MSECS = 1000;
+
+// sequencer setup
+function sequence() {
+  sequencer.clear();
+  // set beat division
+  const beatDiv = 1 / 3; 
+  // set the BPM
+  setBpm(100);
+  
+  // eventLists for sequencer
+  riff = [Eb2, [G2, 1, 0, 1], Bb2, [Db2, 2, 0.75, 0.2]];
+  melody = [
+    [[Eb4, 3, 0, 2, organ], [Bb4, 3, 0, 2, organ], [G5, 1, 0, 2]],
+    [[F4, 3, 0, 2, organ], [Ab4, 3, 0, 2, organ], [Db5, 1, 0, 3.5]],
+    O,
+    [Bb4, 1, 0.5, 0.5],
+    [[Eb4, 3, 0, 1, organ], [G4, 3, 0, 1, organ], [C5]],
+    O,
+    Bb4,
+    Ab4,
+  ];
+  shuf = [[cymbal, 1, 0, 1 / 3], O, [cymbal, 0.9], [cymbal, 0.9]];
+  kck = [[kick, 0.5], O, [kick, 1]];
+  snr = [snare, O];
+
+  // set up sequencer tracks
+  // sequencer.add(instrument, events, amplitude, beatDiv)
+  cymbals = sequencer.add(drums, shuf, 0.5, beatDiv);
+  kicks = sequencer.add(drums, kck, 0.1, beatDiv);
+  snares = sequencer.add(drums, snr, 0.1);
+  bassline = sequencer.add(piano, riff, 0.5);
+  topline = sequencer.add(synth, melody, 0.1);
+  
+  // run sequencer
+  sequencer.play();
+}
+
+// arpeggio 
+function arp() {
+  // create an eventList with four events, each defined by
+  // instrument.event(what, howLoud, when, howLong)
+  const eList = eventList.create(
+     piano.event(Eb7, 0.1, 0, 1),
+     piano.event(Bb6, 0.1, 0.25, 1),
+     piano.event(G6, 0.1, 0.75, 1),
+     piano.event(Eb6, 0.1, 1, 1)
+  );
+  // set a function to play this in the litePlay sequencer
+  sequencer.addCallback((t) => {
+    eList.play(t);
+  });
+}
+sequence();
+arp();
 ```
