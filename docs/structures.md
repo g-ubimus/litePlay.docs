@@ -245,7 +245,28 @@ ostinato([snare, loud, 0, 1, drums5], 10, [1, .5, .5, .25, .25, .25, .25]).play(
 euclidean([event], repetitions, steps, hits)
 ```
 
+It is possible to generate _euclidean rhythms_ with this dedicated function,
+which balances a set number of active musical hits across a total number of
+pulses _as evenly as possible_. This distribution creates rhythmic patterns
+common in traditional music across the globe ([more
+info](https://archive.bridgesmathart.org/2005/bridges2005-47.pdf)).
 
+For example, to generate a Tresillo rhythm (3 hits over 8 pulses), that repeats
+4 times:
+```javascript
+euclidean({what: snare, howLong: .2, onSomething: drums}, 4, 8, 3).play()
+// the output is [1, 0, 0, 1, 0, 0, 1, 0], or 3+3+2
+```
+
+This rhythm can be rotated with the (optional) last parameter:
+```javascript
+euclidean({what: snare, howLong: .2, onSomething: drums}, 4, 8, 3, 1).play()
+// now the output is [0, 0, 1, 0, 0, 1, 0, 1]
+```
+
+!!! warning
+    The number of hits (fourth parameter) has to be less than the number of pulses
+    (third parameter). If it isn't, it will throw an error on the console!
 
 ## Dynamics
 ### Crescendo and decrescendo
