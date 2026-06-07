@@ -261,7 +261,7 @@ euclidean({what: snare, howLong: .2, onSomething: drums}, 4, 8, 3).play()
 This rhythm can be rotated with the (optional) last parameter:
 ```javascript
 euclidean({what: snare, howLong: .2, onSomething: drums}, 4, 8, 3, 1).play()
-// now the output is [0, 0, 1, 0, 0, 1, 0, 1]
+// now the output is [0, 1, 0, 0, 1, 0, 0, 1]
 ```
 
 !!! warning
