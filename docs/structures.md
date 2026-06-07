@@ -240,6 +240,13 @@ Alternatively, repeat more complex rhythms by passing an array of durations to t
 ostinato([snare, loud, 0, 1, drums5], 10, [1, .5, .5, .25, .25, .25, .25]).play()
 ```
 
+### Euclidean rhythms
+```javascript
+euclidean([event], repetitions, steps, hits)
+```
+
+
+
 ## Dynamics
 ### Crescendo and decrescendo
 ```JavaScript
