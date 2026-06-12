@@ -6,7 +6,7 @@ console.log(midiToName(60)) // returns "C4"
 console.log(midiToName(31)) // returns "G1"
 ```
 
-### Tunning
+### Tuning
 We can have microtonal pitches in different formats. The simplest one would be
 to add fractional parts to a midi value:
 
@@ -32,25 +32,12 @@ play(C4+tenCent) // equivalent to 60.1
 play(C4+oneCent) // equivalent to 60.01
 ```
 
-### Monotone
-```javascript
-monotone(initial pitch)
-```
-
-Get _mostly_ the same pitch, that can vary in a range of one semitone up or down.
-
-For example, try:
-```javascript
-let e = [()=>monotone(C4), loud, 0, .1, clarinet]
-ostinato(e, 100).play()
-```
-
 ### Transposition
 ```javascript
-transpose([melody], semitones)
+transpose([melody], interval)
 ```
 
-Transpose an array of notes by a number of semitones:
+Transpose an array of notes by an interval:
 
 ```JavaScript
 let m = [C4, D4, E4, F4, G4]
@@ -58,6 +45,60 @@ let s = 2
 let transposed = transpose(m, s)
 
 console.log(midiToName(transposed)) // returns [D4, E4, Fs4/Gb4, G4, A4]
+```
+
+### EDO tunings
+```javascript
+edo(number of divisions)
+```
+
+Creates a scale with a number of _equal divisions of an octave_, informed to
+its input parameter.
+
+As the output ranges from 0 to 12 (in midi values), the user has to transpose
+it to desired range:
+
+```javascript
+let scale = edo(19)
+let transposedScale = transpose(scale, A4) //19 note scale starting on A4
+```
+
+### Just intonation
+```javascript
+justIntonation(base pitch, number of harmonics)
+```
+
+In a similar fashion, the `justIntonation()` function creates a scale by
+fitting the pitch classes found on the harmonic series of a pitch inside an
+octave.
+
+By default, it returns the scale constructed from the first thirteen harmonics
+on C3, resembling the [acoustic scale](https://en.wikipedia.org/wiki/Acoustic_scale'),
+or the same as:
+
+```javascript
+justIntonation(C3, 13)
+```
+
+### Monotone
+```javascript
+monotone(initial pitch, interval)
+```
+
+Get _mostly_ the same pitch (50% chance), but also pitches that can vary in the
+range passed to the second parameter, which is, by default, one semitone up or
+down:
+
+For example:
+```javascript
+let e = [()=>monotone(C4), loud, 0, .1, clarinet]
+ostinato(e, 100).play()
+```
+
+If the interval has decimals, microtones would be included:
+```javascript
+let m = [()=>monotone(C4, 2.1), loud, 0, .1, clarinet]
+ostinato(m, 100).play()
 ```
 
 ### Random chord
@@ -132,7 +173,7 @@ arpeggio(e, cmaj7, 10, "up").play()
 
 ### Interval sequence
 ```JavaScript
-intervalSequence([event], interval, repetitions, up?)
+intervalSequence([event], interval, repetitions, direction)
 ```
 
 A different type of arpeggio can be constructed using an interval sequence.
@@ -164,13 +205,13 @@ intervalSequence(e, 3, 10).play()
 Make it only go up:
 ```javascript
 let e = [E2, .8, 0, .1, piano]
-intervalSequence(e, 3, 10, true).play()
+intervalSequence(e, 3, 10, "up").play()
 ```
 
-Force it to go down by changing the last parameter to false:
+Force it to go down:
 ```javascript
 let e = [E6, .8, 0, .1, piano]
-intervalSequence(e, 3, 10, false).play()
+intervalSequence(e, 3, 10, "down").play()
 ```
 
 ### Pitch inversion
@@ -185,27 +226,25 @@ let inverted = invert(melody, C4)
 console.log(inverted) // returns ["D4", "E4", "Bb4","Ab4","G4"]
 ```
 
+## Clock & timing
+### Get current audio clock time
+```JavaScript
+console.log(audioClock())
+```
 
-
-## Rhythm & timing
 ### Set/get beats per minute
 ```JavaScript
 setBpm(value)
 console.log(getBpm())
 ```
 
-### Convertions
+### Timing 
 ```JavaScript
 secs(beats)
 // return duration of a beat in seconds
 
 beats(seconds)
 // return number of beats from an interval in seconds
-```
-
-### Get current audio clock time
-```JavaScript
-console.log(audioClock())
 ```
 
 ### Tempo variation (accelerando & rallentando)
