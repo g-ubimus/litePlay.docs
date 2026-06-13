@@ -73,7 +73,7 @@ fitting the pitch classes found on the harmonic series of a pitch inside an
 octave.
 
 By default, it returns the scale constructed from the first thirteen harmonics
-on C3, resembling the [acoustic scale](https://en.wikipedia.org/wiki/Acoustic_scale'),
+on C3, resembling the [acoustic scale](https://en.wikipedia.org/wiki/Acoustic_scale),
 or the same as:
 
 ```javascript
