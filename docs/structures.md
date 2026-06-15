@@ -249,19 +249,20 @@ beats(seconds)
 
 ### Tempo variation (accelerando & rallentando)
 ```JavaScript
-tempoVariation([event], steps, ratio)
+faster([event], steps, ratio)
+slower([event], steps, ratio)
 ```
 
-Generates an accelerando when the `ratio` < 1:
+Generate an accelerando with `faster` with the `ratio` set to less than 1:
 ```javascript
 let e = [membranophone, .1, 0, 1, drums2]
-tempoVariation(e, 20, .9).play()
+faster(e, 20, .9).play()
 ```
 
-Or a rallentando when `ratio` > 1:
+Generate a rallentando with the `ratio` set to more than 1:
 ```javascript
 let e = [idiophone, .1, 0, .1, drums4]
-tempoVariation(e, 20, 1.1).play()
+slower(e, 20, 1.1).play()
 ```
 
 ### Ostinato
@@ -310,20 +311,21 @@ euclidean({what: snare, howLong: .2, onSomething: drums}, 4, 8, 3, 1).play()
 ## Dynamics
 ### Crescendo and decrescendo
 ```JavaScript
-ampVariation([event], lastAmp, steps)
+louder([event], lastAmp, steps)
+softer([event], lastAmp, steps)
 ```
-Similar to the accelerando/rallentando method.
+Similar to the accelerando/rallentando functions.
 
 Do a crescendo with a soft event going, for example, to maximum amplitude (1):
 ```javascript
 let a = [C4, .1, 0, 1, piano]
-ampVariation(a, 1, 10).play()
+louder(a, 1, 10).play()
 ```
 
 Do a decrescendo with the opposite:
 ```javascript
 let a = [C4, 1, 0, 1, piano]
-ampVariation(a, .1, 10).play()
+softer(a, .1, 10).play()
 ```
 
 ## Manipulating audio effects
