@@ -1,5 +1,4 @@
 # Audio effects
-
 Some useful audio effects to manipulate each instrument are available.
 
 ## Reverb
@@ -16,6 +15,14 @@ Panning values go from -1 (totally on the left) to 1 (totally on the right).
 drums2.pan(-1);
 drums2.play([snare, .5, 0]);
 ```
+
+### Auto-panning
+```javascript
+autoPan(instrument, times per seconds)
+```
+
+This function moves a sound around the stereo filed from left to right and
+back, in _n_ times per seconds. 
 
 ## Amplitude Envelope 
 We can define an amplitude envelope by setting the duration for a ADSR function:
