@@ -52,7 +52,7 @@ Para carregar o módulo litePlay.js em seu site, basta adicionar a seguinte tag
 de script ao cabeçalho da página HTML principal:
 
 ```html
-<script  src="https://g-ubimus.github.io/litePlay.js/litePlay.constants.js"></script>
+<script  src="https://g-ubimus.github.io/litePlay.js/src/core/litePlay.constants.js"></script>
 ```
 
 Quando a página for carregada, você terá acesso a várias constantes do sistema,

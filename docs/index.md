@@ -53,7 +53,7 @@ To load the litePlay.js module into your website, simply add the following
 script tag to the main HTML page header:
 
 ```html
-<script  src="https://g-ubimus.github.io/litePlay.js/litePlay.constants.js"></script>
+<script  src="https://g-ubimus.github.io/litePlay.js/src/core/litePlay.constants.js"></script>
 ```
 
 When the page is loaded, you will have access to various system constants, as

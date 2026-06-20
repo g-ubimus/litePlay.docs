@@ -328,12 +328,6 @@ let a = [C4, 1, 0, 1, piano]
 softer(a, .1, 10).play()
 ```
 
-## Manipulating audio effects
-### Auto-panning
-```javascript
-autoPan(instrument, hertz)
-```
-
 ## List manipulation
 ### Retrograde
 ```JavaScript
