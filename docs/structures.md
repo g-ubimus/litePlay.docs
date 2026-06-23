@@ -133,6 +133,21 @@ let microtonalChord = randomChord(4, midPitch, true)
 console.log(microtonalChord)
 ```
 
+### Block chord
+```javascript
+blockChord([event], [chord])
+```
+
+Generates an event list playing all notes of a chord simultaneously.
+
+```javascript
+let e = [C4, loud, 0, 1, piano]
+let cmaj7 = [C4, E4, G4, B4]
+blockChord(e, cmaj7).play()
+```
+
+If no chord is passed, it outputs a _random chord_.
+
 ### Arpeggiator
 ```javascript
 arpeggio([event], [chord], repetitions, direction = "backAndForth")
@@ -214,6 +229,19 @@ let e = [E6, .8, 0, .1, piano]
 intervalSequence(e, 3, 10, "down").play()
 ```
 
+### Rotation sequence
+```javascript
+rotationSequence([event], [rhythm])
+```
+
+Generates an event list by repeating a rhythmic pattern while rotating its elements each iteration.
+
+```javascript
+let e = [C4, loud, 0, 1, synth]
+let rhythm = [0.5, 0.25, 0.25]
+rotationSequence(e, rhythm).play()
+```
+
 ### Pitch inversion
 ```JavaScript
 invert([melody], axis)
@@ -224,6 +252,18 @@ Invert an array of pitches around an axis:
 let melody = [C4, D4, E4, F4]
 let inverted = invert(melody, C4)
 console.log(inverted) // returns ["D4", "E4", "Bb4","Ab4","G4"]
+```
+
+### Glissando
+```javascript
+glissando([event], targetPitch)
+```
+
+Generates a smooth pitch bend from the initial event's pitch to the `targetPitch` over the duration of the event.
+
+```javascript
+let e = [C4, loud, 0, 2, fx2]
+glissando(e, C5)
 ```
 
 ## Clock & timing
@@ -360,5 +400,18 @@ blend([listA], [listB])
 let listA = [1,2,3]
 let listB = [4,5,6,7,8]
 console.log(blend(listA,listB)) // returns [1, 4, 2, 5, 3, 6, 1, 7, 2, 8]
+```
+
+### Shuffle
+```JavaScript
+shuffle([list])
+```
+
+Randomizes the order of elements in an array.
+
+```JavaScript
+let melody = [1, 2, 3, 4]
+let shuffled = shuffle(melody)
+console.log(shuffled)
 ```
 

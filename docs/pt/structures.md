@@ -95,6 +95,19 @@ let acordeMicrotonal = acordeAleatório(4, médio, true);
 console.log(acordeMicrotonal);
 ```
 
+### Acorde em bloco
+```javascript
+blockChord([evento], [acorde])
+```
+
+Gera uma lista de eventos tocando todas as notas de um acorde simultaneamente.
+
+```javascript
+let e = [C4, forte, 0, 1, piano]
+let cmaj7 = [C4, E4, G4, B4]
+blockChord(e, cmaj7).toque()
+```
+
 ### Arpejador
 ```javascript
 arpejo([evento], [acorde], repetições, direção = "vaiVolta")
@@ -176,6 +189,19 @@ let e = [E6, .8, 0, .1, piano];
 sequênciaIntervalar(e, 3, 10, false).toque();
 ```
 
+### Sequência de rotação
+```javascript
+sequenciaRotacao([evento], [ritmo])
+```
+
+Gera uma lista de eventos repetindo um padrão rítmico enquanto rotaciona seus elementos a cada iteração.
+
+```javascript
+let e = [C4, forte, 0, 1, noSintetizador]
+let ritmo = [0.5, 0.25, 0.25]
+sequenciaRotacao(e, ritmo).toque()
+```
+
 ### Inversão
 ```JavaScript
 inverter([melodia], eixo)
@@ -186,6 +212,18 @@ Inverte um array de alturas em torno de um eixo:
 let melodia = [C4, D4, E4, F4];
 let invertida = invert(melodia, C4);
 console.log(invertida); // retorna ["C4","Bb4","Ab4","G4"]
+```
+
+### Glissando
+```javascript
+glissando([evento], alturaAlvo)
+```
+
+Gera um _pitch bend_ suave a partir da altura do evento inicial até a `alturaAlvo` durante a duração do evento.
+
+```javascript
+let e = [C4, forte, 0, 2, noSintetizador]
+glissando(e, C5)
 ```
 
 ## Ritmo & tempo
@@ -282,4 +320,17 @@ misturar([listaA], [listaB])
 let listaA = [1,2,3];
 let listaB = [4,5,6,7,8];
 console.log(misturar(listaA,listaB)); // retorna [1, 4, 2, 5, 3, 6, 1, 7, 2, 8]
+```
+
+### Embaralhar
+```JavaScript
+embaralhar([lista])
+```
+
+Randomiza a ordem dos elementos em um array.
+
+```JavaScript
+let melodia = [1, 2, 3, 4]
+let embaralhada = embaralhar(melodia)
+console.log(embaralhada)
 ```
