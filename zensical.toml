@@ -6,6 +6,7 @@ site_description = "Documentation for the litePlay.js lite coding library."
 site_author = "g-ubimus"
 docs_dir = "docs"
 site_dir = "site"
+extra_css = ["stylesheets/extra.css"]
 nav = [
   {"Getting started" = "index.md"},
   {"play()" = "play.md"},

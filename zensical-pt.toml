@@ -6,6 +6,7 @@ site_description = "Documentação para a biblioteca de lite coding litePlay.js.
 site_author = "g-ubimus"
 docs_dir = "docs/pt" # Aponta para a pasta onde estão os arquivos .md traduzidos
 site_dir = "site/pt" # Força o build a gerar a saída dentro da subpasta pt
+extra_css = ["stylesheets/extra.css"]
 nav = [
   {"Início" = "index.md"},
   {"toque()" = "play.md"},
