@@ -73,11 +73,11 @@ fitting the pitch classes found on the harmonic series of a pitch inside an
 octave.
 
 By default, it returns the scale constructed from the first thirteen harmonics
-on C3, resembling the [acoustic scale](https://en.wikipedia.org/wiki/Acoustic_scale),
+on C4, resembling the [acoustic scale](https://en.wikipedia.org/wiki/Acoustic_scale),
 or the same as:
 
 ```javascript
-justIntonation(C3, 13)
+justIntonation(C4, 13)
 ```
 
 ### Monotone
