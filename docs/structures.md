@@ -249,20 +249,20 @@ beats(seconds)
 
 ### Tempo variation (accelerando & rallentando)
 ```JavaScript
-faster([event], steps, ratio)
-slower([event], steps, ratio)
+faster([event], lastDuration, steps)
+slower([event], lastDuration, steps)
 ```
 
-Generate an accelerando with `faster` with the `ratio` set to less than 1:
+Generate an accelerando with `faster` by setting the last duration shorter than the first:
 ```javascript
-let e = [membranophone, .1, 0, 1, drums2]
-faster(e, 20, .9).play()
+let e = [membranophone, loud, 0, 1, drums2]
+faster(e, .1, 9).play()
 ```
 
-Generate a rallentando with the `ratio` set to more than 1:
+Generate a rallentando with the last duration faster than the first:
 ```javascript
 let e = [idiophone, .1, 0, .1, drums4]
-slower(e, 20, 1.1).play()
+slower(e, 2, 20).play()
 ```
 
 ### Ostinato
