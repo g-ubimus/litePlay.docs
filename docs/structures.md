@@ -263,7 +263,7 @@ Generates a smooth pitch bend from the initial event's pitch to the `targetPitch
 
 ```javascript
 let e = [C4, loud, 0, 2, fx2]
-glissando(e, C5)
+glissando(e, C5).play()
 ```
 
 ## Clock & timing

@@ -223,7 +223,7 @@ Gera um _pitch bend_ suave a partir da altura do evento inicial até a `alturaAl
 
 ```javascript
 let e = [C4, forte, 0, 2, noSintetizador]
-glissando(e, C5)
+glissando(e, C5).play()
 ```
 
 ## Ritmo & tempo
