@@ -21,7 +21,7 @@ drums2.play([snare, .5, 0]);
 autoPan(instrument, times per seconds)
 ```
 
-This function moves a sound around the stereo filed from left to right and
+This function moves a sound around the stereo field from left to right and
 back, in _n_ times per seconds. 
 
 ## Amplitude Envelope 
