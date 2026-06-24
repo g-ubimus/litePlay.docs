@@ -296,6 +296,8 @@ espacializador(instrumento, hertz)
 retrogradar([lista])
 ```
 
+Inverte a ordem dos elementos de uma lista.
+
 ```JavaScript
 let minhaLista = [1, 2, 3, 4];
 let retro = retrogradar(minhaLista);
@@ -304,8 +306,10 @@ console.log(retro) // retorna [4, 3, 2, 1]
 
 ### Rotação
 ```JavaScript
-rotacionar([lista], índices)
+rotacionar([lista], passos)
 ```
+
+Rotaciona os elementos de uma lista de acordo com o número de passos.
 
 ```JavaScript
 let minhaLista = [1, 2, 3, 4];
@@ -318,6 +322,9 @@ console.log(rotacionada) // retorna [3,4,1,2]
 misturar([listaA], [listaB])
 ```
 
+Mistura duas listas, elemento por elemento. Caso uma das listas seja maior do
+que a outra, elementos da lista menor passam a se repetir.
+
 ```javascript
 let listaA = [1,2,3];
 let listaB = [4,5,6,7,8];
@@ -329,7 +336,7 @@ console.log(misturar(listaA,listaB)); // retorna [1, 4, 2, 5, 3, 6, 1, 7, 2, 8]
 embaralhar([lista])
 ```
 
-Randomiza a ordem dos elementos em um array.
+Embaralha a ordem dos elementos em um array.
 
 ```JavaScript
 let melodia = [1, 2, 3, 4]
