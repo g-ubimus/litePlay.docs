@@ -18,7 +18,7 @@ There are several ways to use litePlay.js, choose what you want to try first:
 [litePlay online editor](https://g-ubimus.github.io/litePlay.js/): a simple
 editor designed to test experimental features with REPL, where litePlay's
 functions can be called without the prefix. It is able to save code and 
-record audio. Uploading media files is currently not supported.
+record audio. Uploading audio files is also supported.
 
 If you're choosing this, go ahead and [play()](./play.md).
 

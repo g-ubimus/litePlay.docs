@@ -19,7 +19,7 @@ primeiro:
 [Editor online do litePlay](https://g-ubimus.github.io/litePlay.js/): um editor
 simples projetado para testar recursos experimentais com REPL, onde as funções
 do litePlay podem ser chamadas sem o prefixo. Ele é capaz de salvar código e
-gravar áudio. O upload de arquivos de mídia não é suportado no momento.
+gravar áudio. O upload de arquivos de áudio também é suportado.
 
 Caso escolha esta opção, vá em frente e [toque()](./play.md).
 
