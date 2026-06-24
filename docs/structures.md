@@ -374,6 +374,8 @@ softer(a, .1, 10).play()
 retrograde([list])
 ```
 
+Return the elements of a list in inverse order.
+
 ```JavaScript
 let myList = [1, 2, 3, 4]
 let retro = retrograde(myList)
@@ -385,6 +387,8 @@ console.log(retro) // returns [4, 3, 2, 1]
 rotate([list], steps)
 ```
 
+Rotate the elements of a list according to a number of steps.
+
 ```JavaScript
 let melody = [1, 2, 3, 4]
 let rotated = rotate(melody, 2)
@@ -395,6 +399,9 @@ console.log(rotated) // returns [3,4,1,2]
 ```JavaScript
 blend([listA], [listB])
 ```
+
+Mix elements of a list into one, element by element. If one of the lists is
+longer than the other, it starts to repeat elements of the shorter.
 
 ```javascript
 let listA = [1,2,3]
