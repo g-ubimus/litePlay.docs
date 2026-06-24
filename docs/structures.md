@@ -346,7 +346,7 @@ euclidean({what: snare, howLong: .2, onSomething: drums}, 4, 8, 3, 1).play()
 
 !!! warning
     The number of hits (fourth parameter) has to be less than the number of pulses
-    (third parameter). If it isn't, it will throw an error on the console!
+    (third parameter). If it isn't, it throws a `RangeError`.
 
 ## Dynamics
 ### Crescendo and decrescendo

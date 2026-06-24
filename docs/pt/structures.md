@@ -247,39 +247,41 @@ console.log(audioClock())
 
 ### Variação de andamento (accelerando & rallentando)
 ```JavaScript
-variarTempo([evento], passos, razão)
+maisRápido([evento], últimaDuração, passos)
+maisLento([evento], últimaDuração, passos)
 ```
 
-Gera um _accelerando_ em um determinado número de passos, quando a `razão` < 1:
+Gera um _accelerando_ com `maisRápido` definindo a última duração mais curta que a primeira:
 ```javascript
-let e = [membranofone, .1, 0, 1, bateria2];
-variarTempo(e, 20, .9).toque();
+let e = [membranofone, forte, 0, 1, bateria2];
+maisRápido(e, .1, 9).toque();
 ```
 
-Ou um _rallentando_ quando a `razão` > 1:
+Gera um _rallentando_ com a última duração mais longa que a primeira:
 ```javascript
 let e = [idiofone, .1, 0, .1, bateria4];
-variarTempo(e, 20, 1.1).toque();
+maisLento(e, 2, 20).toque();
 ```
 
 ## Dinâmica
 ### Crescendo e decrescendo
 ```JavaScript
-variarAmplitude([evento], última amplitude, passos)
+maisForte([evento], últimaAmplitude, passos)
+maisSuave([evento], últimaAmplitude, passos)
 ```
 
-Semelhante ao método de _accelerando/rallentando_.
+Semelhante às funções de accelerando/rallentando.
 
 Faça um crescendo com um evento suave indo, por exemplo, até a amplitude máxima (1):
 ```javascript
 let a = [C4, .1, 0, 1, violino];
-variarAmplitude(a, 1, 10).toque();
+maisForte(a, 1, 10).toque();
 ```
 
 Faça um decrescendo com o oposto:
 ```javascript
 let a = [C4, 1, 0, 1, violoncelo];
-variarAmplitude(a, .1, 10).toque();
+maisSuave(a, .1, 10).toque();
 ```
 
 ## Manipulando efeitos de áudio
