@@ -229,17 +229,16 @@ let e = [E6, .8, 0, .1, piano]
 intervalSequence(e, 3, 10, "down").play()
 ```
 
-### Rotation sequence
+### Glissando
 ```javascript
-rotationSequence([event], [rhythm])
+glissando([event], targetPitch)
 ```
 
-Generates an event list by repeating a rhythmic pattern while rotating its elements each iteration.
+Generates a smooth pitch bend from the initial event's pitch to the `targetPitch` over the duration of the event.
 
 ```javascript
-let e = [C4, loud, 0, 1, synth]
-let rhythm = [0.5, 0.25, 0.25]
-rotationSequence(e, rhythm).play()
+let e = [C4, loud, 0, 2, fx2]
+glissando(e, C5).play()
 ```
 
 ### Pitch inversion
@@ -254,17 +253,6 @@ let inverted = invert(melody, C4)
 console.log(inverted) // returns ["D4", "E4", "Bb4","Ab4","G4"]
 ```
 
-### Glissando
-```javascript
-glissando([event], targetPitch)
-```
-
-Generates a smooth pitch bend from the initial event's pitch to the `targetPitch` over the duration of the event.
-
-```javascript
-let e = [C4, loud, 0, 2, fx2]
-glissando(e, C5).play()
-```
 
 ## Clock & timing
 ### Get current audio clock time
@@ -347,6 +335,20 @@ euclidean({what: snare, howLong: .2, onSomething: drums}, 4, 8, 3, 1).play()
 !!! warning
     The number of hits (fourth parameter) has to be less than the number of pulses
     (third parameter). If it isn't, it throws a `RangeError`.
+
+### Rotation sequence
+```javascript
+rotationSequence([event], [rhythm])
+```
+
+Generates an event list by repeating a rhythmic pattern while rotating its elements each iteration.
+
+```javascript
+let e = [C4, loud, 0, 1, synth]
+let rhythm = [0.5, 0.25, 0.25]
+rotationSequence(e, rhythm).play()
+```
+
 
 ## Dynamics
 ### Crescendo and decrescendo

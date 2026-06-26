@@ -189,19 +189,6 @@ let e = [E6, .8, 0, .1, piano];
 sequênciaIntervalar(e, 3, 10, false).toque();
 ```
 
-### Sequência de rotação
-```javascript
-sequenciaRotacao([evento], [ritmo])
-```
-
-Gera uma lista de eventos repetindo um padrão rítmico enquanto rotaciona seus elementos a cada iteração.
-
-```javascript
-let e = [C4, forte, 0, 1, noSintetizador]
-let ritmo = [0.5, 0.25, 0.25]
-sequenciaRotacao(e, ritmo).toque()
-```
-
 ### Inversão
 ```JavaScript
 inverter([melodia], eixo)
@@ -262,6 +249,20 @@ Gera um _rallentando_ com a última duração mais longa que a primeira:
 let e = [idiofone, .1, 0, .1, bateria4];
 maisLento(e, 2, 20).toque();
 ```
+
+### Sequência de rotação
+```javascript
+sequenciaRotacao([evento], [ritmo])
+```
+
+Gera uma lista de eventos repetindo um padrão rítmico enquanto rotaciona seus elementos a cada iteração.
+
+```javascript
+let e = [C4, forte, 0, 1, noSintetizador]
+let ritmo = [0.5, 0.25, 0.25]
+sequenciaRotacao(e, ritmo).toque()
+```
+
 
 ## Dinâmica
 ### Crescendo e decrescendo
