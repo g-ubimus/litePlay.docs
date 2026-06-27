@@ -3,10 +3,10 @@ This page explores musical examples using litePlay.
 
 ## Prelude, BWV 846
 ```javascript
-let a = arpeggio({howLoud: .8, when: 0, howLong: .4, onSomething: harpsichord}, [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play()
-let b = arpeggio({howLoud: .8, when: a, howLong: .4, onSomething: harpsichord}, [C4, D4, A4, D5, F5, A4, D5, F5], 2, "up").play()
-let c = arpeggio({howLoud: .8, when: b, howLong: .4, onSomething: harpsichord}, [B3, D4, G4, D5, F5, G4, D5, F5], 2, "up").play()
-let d = arpeggio({howLoud: .8, when: c, howLong: .4, onSomething: harpsichord}, [C4, E4, G4, C5, E5, G4, C5, E5], 2, "up").play()
+let a = arpeggio({howLoud: .8, when: 0, howLong: .4, onSomething: harpsichord}, [C4, E4, G4, C5, E5, G4, C5, E5], 2, "forward").play()
+let b = arpeggio({howLoud: .8, when: a, howLong: .4, onSomething: harpsichord}, [C4, D4, A4, D5, F5, A4, D5, F5], 2, "forward").play()
+let c = arpeggio({howLoud: .8, when: b, howLong: .4, onSomething: harpsichord}, [B3, D4, G4, D5, F5, G4, D5, F5], 2, "forward").play()
+let d = arpeggio({howLoud: .8, when: c, howLong: .4, onSomething: harpsichord}, [C4, E4, G4, C5, E5, G4, C5, E5], 2, "forward").play()
 //etc.
 ```
 
