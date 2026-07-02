@@ -40,11 +40,22 @@ transpose([melody], interval)
 Transpose an array of notes by an interval:
 
 ```JavaScript
-let m = [C4, D4, E4, F4, G4]
-let s = 2
-let transposed = transpose(m, s)
+let notes = [C4, D4, E4, F4, G4]
+let original = eventList.create()
+let when = 0
+for (let i = 0; i < notes.length; i++) {
+  original.add([notes[i], midLevel, i])
+  when = i
+}
+original.play()
 
-console.log(midiToName(transposed)) // returns [D4, E4, Fs4/Gb4, G4, A4]
+let semitones = 6
+let transposedNotes = transpose(notes, semitones)
+let transposed = eventList.create()
+for (let i = 0; i < transposedNotes.length; i++) {
+  transposed.add([transposedNotes[i], midLevel, i+when+1])
+}
+transposed.play()
 ```
 
 ### EDO tunings
@@ -60,7 +71,12 @@ it to desired range:
 
 ```javascript
 let scale = edo(19)
-let transposedScale = transpose(scale, A4) //19 note scale starting on A4
+let transposedScale = transpose(scale, A4)
+let list = eventList.create()
+for (let i = 0; i < transposedScale.length; i++) {
+  list.add([transposedScale[i], loud, i*.2, .2, guitar])
+}
+list.play()
 ```
 
 ### Just intonation
@@ -77,7 +93,12 @@ on C4, resembling the [acoustic scale](https://en.wikipedia.org/wiki/Acoustic_sc
 or the same as:
 
 ```javascript
-justIntonation(C4, 13)
+let inTune = justIntonation(C4, 13)
+let list = eventList.create()
+for (let i = 0; i < inTune.length; i++) {
+  list.add([inTune[i], loud, i*.3, .3, clarinet])
+}
+list.play()
 ```
 
 ### Monotone
@@ -109,28 +130,39 @@ randomChord(size, range, microtonal = false)
 Generates a chord (4 notes by default, in `midPitch` range) with random
 pitches:
 ```javascript
-let a = randomChord()
-console.log(a)
+let r = randomChord()
+console.log(r)
+let list = eventList.create()
+for (let i = 0; i < r.length; i++) {
+  list.add([r[i], loud, i*.1, .1, piano])
+}
+list.play()
 ```
 
 Change the size of the chord with the first parameter:
 ```javascript
 let fiveNoteChord = randomChord(5)
-console.log(fiveNoteChord)
+let list = eventList.create()
+for (let i = 0; i < fiveNoteChord.length; i++) {
+  list.add([r[i], loud, i*.1, .1, piano])
+}
+list.play()
 ```
 
 Change the range with the second parameter, using litePlay's pitch generators:
 ```javascript
 let highPitchChord = randomChord(4, highPitch)
 let lowPitchChord = randomChord(4, lowPitch)
-console.log(highPitchChord)
-console.log(lowPitchChord)
 ```
 
 Make microtonal chords:
 ```javascript
 let microtonalChord = randomChord(4, midPitch, true)
-console.log(microtonalChord)
+let list = eventList.create()
+for (let i = 0; i < microtonalChord.length; i++) {
+  list.add([microtonalChord[i], loud, i*.1, .1, piano])
+}
+list.play()
 ```
 
 ### Block chord
@@ -146,7 +178,17 @@ let cmaj7 = [C4, E4, G4, B4]
 blockChord(e, cmaj7).play()
 ```
 
-If no chord is passed, it outputs a _random chord_.
+If no chord is passed, it outputs a _random chord_ with four pitches:
+
+```javascript
+blockChord().play()
+```
+
+You can make this chord microtonal with:
+
+```javascript
+blockChord(any, randomChord({microtonal:true})).play()
+```
 
 ### Arpeggiator
 ```javascript
@@ -248,11 +290,11 @@ invert([melody], axis)
 
 Invert an array of pitches around an axis:
 ```javascript
-let melody = [C4, D4, E4, F4]
-let inverted = invert(melody, C4)
-console.log(inverted) // returns ["D4", "E4", "Bb4","Ab4","G4"]
+let original = [C4, D4, E4, F4]
+arpeggio(any, {chord: original, direction:"forward"}).play()
+let inverted = invert(original, C4)
+arpeggio(any, {chord: inverted, direction:"forward"}).play()
 ```
-
 
 ## Clock & timing
 ### Get current audio clock time
@@ -381,7 +423,6 @@ Return the elements of a list in inverse order.
 ```JavaScript
 let myList = [1, 2, 3, 4]
 let retro = retrograde(myList)
-console.log(retro) // returns [4, 3, 2, 1]
 ```
 
 ### Rotation
