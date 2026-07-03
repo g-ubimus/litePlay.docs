@@ -33,8 +33,11 @@ jobs:
         run: zensical build --config-file zensical-pt.toml
         
       - uses: actions/upload-pages-artifact@v4
+        id: upload
         with:
           path: site
           
       - uses: actions/deploy-pages@v4
         id: deployment
+        with:
+          artifact_id: ${{ steps.upload.outputs.artifact_id }}
