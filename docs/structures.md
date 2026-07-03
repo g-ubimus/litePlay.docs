@@ -144,7 +144,7 @@ Change the size of the chord with the first parameter:
 let fiveNoteChord = randomChord(5)
 let list = eventList.create()
 for (let i = 0; i < fiveNoteChord.length; i++) {
-  list.add([r[i], loud, i*.1, .1, piano])
+  list.add([fiveNoteChord[i], loud, i*.1, .1, piano])
 }
 list.play()
 ```
