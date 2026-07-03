@@ -314,7 +314,7 @@ glissando([evento], alturaAlvo)
 Gera um _pitch bend_ suave a partir da altura do evento inicial até a `alturaAlvo` durante a duração do evento.
 
 ```javascript
-let e = [C4, forte, 0, 2, noSintetizador]
+let e = [C4, forte, 0, 2, efeito2]
 glissando(e, C5).toque()
 ```
 
@@ -362,12 +362,12 @@ ostinato([evento], repetições, [ritmo])
 
 Para criar rapidamente um ostinato a partir de um evento, passe-o ao método `ostinato`:
 ```javascript
-ostinato([caixa, forte, 0, 1, bateria5], 10).toque()
+ostinato([snare, forte, 0, 1, bateria5], 10).toque()
 ```
 
 Alternativamente, repita ritmos mais complexos passando um array de durações ao terceiro parâmetro:
 ```javascript
-ostinato([caixa, forte, 0, 1, bateria5], 10, [1, .5, .5, .25, .25, .25, .25]).toque()
+ostinato([snare, forte, 0, 1, bateria5], 10, [1, .5, .5, .25, .25, .25, .25]).toque()
 ```
 
 ### Ritmos euclidianos
@@ -406,9 +406,9 @@ sequenciaRotacao([evento], [ritmo])
 Gera uma lista de eventos repetindo um padrão rítmico enquanto rotaciona seus elementos a cada iteração.
 
 ```javascript
-let e = [C4, forte, 0, 1, noSintetizador]
+let e = [C4, forte, 0, 1, piano]
 let ritmo = [0.5, 0.25, 0.25]
-sequenciaRotacao(e, ritmo).toque()
+sequenciaRotacao(e, ritmo).play()
 ```
 
 
