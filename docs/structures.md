@@ -425,6 +425,18 @@ let myList = [1, 2, 3, 4]
 let retro = retrograde(myList)
 ```
 
+A musical example playing a melody in reverse:
+
+```javascript
+let melody = [C4, D4, E4, F4, G4]
+let retro = retrograde(melody)
+let list = eventList.create()
+for (let i = 0; i < retro.length; i++) {
+  list.add([retro[i], loud, i * 0.5, 0.5, piano])
+}
+list.play()
+```
+
 ### Rotation
 ```JavaScript
 rotate([list], steps)
@@ -436,6 +448,18 @@ Rotate the elements of a list according to a number of steps.
 let melody = [1, 2, 3, 4]
 let rotated = rotate(melody, 2)
 console.log(rotated) // returns [3,4,1,2]
+```
+
+A musical example playing a rotated melody:
+
+```javascript
+let melody = [C4, D4, E4, F4, G4]
+let rotated = rotate(melody, 2)
+let list = eventList.create()
+for (let i = 0; i < rotated.length; i++) {
+  list.add([rotated[i], loud, i * 0.5, 0.5, piano])
+}
+list.play()
 ```
 
 ### Blend 
@@ -452,6 +476,19 @@ let listB = [4,5,6,7,8]
 console.log(blend(listA,listB)) // returns [1, 4, 2, 5, 3, 6, 1, 7, 2, 8]
 ```
 
+A musical example interleaving bass notes with a melody:
+
+```javascript
+let bassNotes = [C2, G2, D2]
+let melodyNotes = [C4, E4, G4, B4, D5]
+let blended = blend(bassNotes, melodyNotes)
+let list = eventList.create()
+for (let i = 0; i < blended.length; i++) {
+  list.add([blended[i], loud, i * 0.5, 0.5, piano])
+}
+list.play()
+```
+
 ### Shuffle
 ```JavaScript
 shuffle([list])
@@ -463,5 +500,17 @@ Randomizes the order of elements in an array.
 let melody = [1, 2, 3, 4]
 let shuffled = shuffle(melody)
 console.log(shuffled)
+```
+
+A musical example playing a shuffled scale:
+
+```javascript
+let melody = [C4, D4, E4, F4, G4, A4, B4]
+let shuffled = shuffle(melody)
+let list = eventList.create()
+for (let i = 0; i < shuffled.length; i++) {
+  list.add([shuffled[i], loud, i * 0.5, 0.5, piano])
+}
+list.play()
 ```
 
