@@ -5,7 +5,7 @@ on:
       - main
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 permissions:
   contents: read
   pages: write
@@ -39,5 +39,3 @@ jobs:
           
       - uses: actions/deploy-pages@v4
         id: deployment
-        with:
-          artifact_id: ${{ steps.upload.outputs.artifact_id }}
