@@ -27,3 +27,28 @@ And, of course, use the other parameters:
 ```javascript
 a.play([highPitch, loud, soon, longDur])
 ```
+
+## Changing playback speed
+To change playback speed, we can do:
+```javascript
+a.instr.speed(10)
+a.play()
+```
+
+Values above 1 will play it faster, while values below 1 will play it slowly. 
+Combining it with other methods we can create interesting textures:
+
+```javascript
+for (let i = 0; i < 1000; i++) {
+  a.instr.speed(.1)
+  a.instr.ampEnvelope(2,0,0,1)
+  a.play([hiPitch, loud, i*.1])  
+}
+```
+
+## Looping samples
+We can loop a sound sample in defined boundaries in seconds:
+```javascript
+a.loop(1,2)
+a.play()
+```
