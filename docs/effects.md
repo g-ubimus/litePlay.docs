@@ -23,6 +23,19 @@ We can bend the pitch of an instrument using the `bend` method. The amount is gi
 synth.bend(1); // Bends up by a semitone
 ```
 
+### Glissando
+```javascript
+glissando([event], targetPitch)
+```
+
+Generates a smooth pitch bend from the initial event's pitch to the `targetPitch` over the duration of the event.
+
+```javascript
+let e = [C4, loud, 0, 2, fx2]
+glissando(e, C5).play()
+```
+
+
 ## Cutoff
 We control the filter cutoff amount with a 0 to 1 argument.
 
@@ -31,11 +44,11 @@ synth.cutoff(0.5);
 ```
 
 ## Delay
-A delay line can be added to an instrument with:
 ```javascript
 delay(delay time, feedback amount)
 ```
 
+A delay line can be added to an instrument with:
 For example:
 ```javascript
 xylophone.delay(.1, .9)

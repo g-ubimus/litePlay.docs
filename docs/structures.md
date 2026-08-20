@@ -271,18 +271,6 @@ let e = [E6, .8, 0, .1, piano]
 intervalSequence(e, 3, 10, "down").play()
 ```
 
-### Glissando
-```javascript
-glissando([event], targetPitch)
-```
-
-Generates a smooth pitch bend from the initial event's pitch to the `targetPitch` over the duration of the event.
-
-```javascript
-let e = [C4, loud, 0, 2, fx2]
-glissando(e, C5).play()
-```
-
 ### Pitch inversion
 ```JavaScript
 invert([melody], axis)
