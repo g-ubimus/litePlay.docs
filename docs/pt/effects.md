@@ -68,11 +68,16 @@ bateria2.toque([snare, .5, 0]);
 
 ### Espacialização automática (Auto-panning)
 ```javascript
-panAutomático(instrumento, hertz)
+panAutomático(hertz)
 ```
 
 Essa função move um som ao redor do campo estéreo da esquerda para a direita e
 de volta, em uma taxa de _hertz_. 
+Por exemplo:
+```javascript
+flauta.panAutomático(1)
+flauta.toque()
+```
 
 ## Ressonância
 Controlamos a ressonância do filtro com um argumento de 0 a 1.

@@ -65,6 +65,12 @@ We can define a filter envelope by setting the amount and the duration for an AD
 filterEnvelope(amount, attack, decay, sustain, release)
 ```
 
+For example:
+
+```javascript
+synth.filterEnvelope(0.8, 1, 2, 3, 4);
+```
+
 ## Frequency shift
 Inharmonic sounds can be created from harmonic sounds by shifting frequencies
 up or down:
@@ -80,25 +86,25 @@ pianoc2.play()
 ```
 
 ## Pan 
-Panning values go from -1 (totally on the left) to 1 (totally on the right).
+Panning values go from 0 (totally on the left) to 1 (totally on the right).
 
 ```javascript
-drums2.pan(-1);
+drums2.pan(0);
 drums2.play([snare, .5, 0]);
 ```
 
 ### Auto-panning
 ```javascript
-autoPan(instrument, times per seconds)
+autoPan(hertz)
 ```
 
 This function moves a sound around the stereo field from left to right and
 back, in _n_ times per seconds. 
 
 For example:
-
 ```javascript
-synth.filterEnvelope(0.8, 1, 2, 3, 4);
+flute.autoPan(1)
+flute.play()
 ```
 
 ## Resonance
