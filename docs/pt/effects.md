@@ -19,14 +19,14 @@ sintetizador.cutoff(0.5);
 Podemos definir um envelope de amplitude ajustando a duração para uma função ADSR:
 
 ```javascript
-ampEnvelope(ataque, decaimento, sustentação, repouso)
+ampEnvelope(duração ataque, duração decaimento, nível sustentação, duração repouso)
 ```
 
 Por exemplo:
 
 ```javascript
 cordas.reverb(1);
-cordas.ampEnvelope(1,2,3,4);
+cordas.ampEnvelope(.5,1,1,10);
 cordas.toque([C2, 1, 0], [Bb2, .9, .5], [Ab3, .8, 1], [Gb4, .7, 1.5], [E5, .6, 2], [D6, .5, 2.5]); // Som alienígena
 ```
 
@@ -41,7 +41,7 @@ filterEnvelope(quantidade, ataque, decaimento, sustentação, repouso)
 Por exemplo:
 
 ```javascript
-sintetizador.filterEnvelope(0.8, 1, 2, 3, 4);
+sintetizador.filterEnvelope(0.8, 1, 1, 1, 4);
 ```
 
 ## Deslocamento de frequência

@@ -5,14 +5,14 @@ Some useful audio effects to manipulate each instrument are available.
 We can define an amplitude envelope by setting the duration for a ADSR function:
 
 ```javascript
-ampEnvelope(attack , decay , sustain, release)
+ampEnvelope(attack time, decay time, sustain level, release time)
 ```
 
 For example:
 
 ```javascript
 strings.reverb(1);
-strings.ampEnvelope(1,2,3,4);
+strings.ampEnvelope(.5,1,1,10);
 strings.play([C2, 1, 0], [Bb2, .9, .5], [Ab3, .8, 1], [Gb4, .7, 1.5], [E5, .6, 2], [D6, .5, 2.5]); // Alien sound
 ```
 
@@ -40,6 +40,10 @@ For example:
 ```javascript
 xylophone.delay(.1, .9)
 ```
+
+!!! note 
+    Notice that the delay time is set in seconds and has a limit of 2 seconds.
+    The feedback amount is a number from 0 to .99.
 
 ## Filter Envelope
 We can define a filter envelope by setting the amount and the duration for an ADSR function:
