@@ -30,6 +30,17 @@ We control the filter cutoff amount with a 0 to 1 argument.
 synth.cutoff(0.5);
 ```
 
+## Delay
+A delay line can be added to an instrument with:
+```javascript
+delay(delay time, feedback amount)
+```
+
+For example:
+```javascript
+xylophone.delay(.1, .9)
+```
+
 ## Filter Envelope
 We can define a filter envelope by setting the amount and the duration for an ADSR function:
 
