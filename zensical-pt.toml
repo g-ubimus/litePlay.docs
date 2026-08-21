@@ -17,6 +17,7 @@ nav = [
   {"Geradores" = "generators.md"},
   {"Estruturas musicais" = "structures.md"},
   {"Exemplos" = "examples.md"},
+  {"Contribuindo" = "contributing.md"},
   {"Editor litePlay.js" = "https://g-ubimus.github.io/litePlay.js"}
 ]
 
