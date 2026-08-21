@@ -46,7 +46,7 @@ Most of the module is found in `src/core/`:
   MIDI SoundFont and sound effects (reverb, envelopes, delay, etc.).
 * `editor.js`: the online editor interface.
 
-Machine listening utilities live in `src/listener/`. These are a WIP and could
+Machine listening utilities live in `src/listener/`. These are a WIP and can  
 change at any time.
 
 ## Conventions
@@ -200,8 +200,8 @@ then called identically in instrs 10 and 12.
   per-channel instance of `instr 105` on demand
   (`csound.inputMessage("i105." + this.chn + " 0 -1 " + this.chn)`), keeps
   track of active channels in a JS `Set`, and `noDelay()` turns the instance
-  off by scheduling it with a negative p1 (csound.inputMessage("i-105." +
-  this.chn + " 0 0.1 " + this.chn)). If you add something similar, remember to
+  off by scheduling it with a negative p1 (`csound.inputMessage("i-105." +
+  this.chn + " 0 0.1 " + this.chn)`). If you add something similar, remember to
   register your instrument numbers in `instr 200` and `instr 300`, so that
   `reset()` stops and restarts everything correctly.
 * **Clamping conventions.** Amounts from 0 to 1 are clamped with the idiom
@@ -227,7 +227,7 @@ music by returning an **eventList**, so callers can chain a `.play()` directly:
 euclidean({what: snare, howLong: .2, onSomething: drums}, 4, 8, 3).play()
 ```
 
-To walk through the conventions, we look at how `arpeggio()` was implemented.
+To walk through the conventions, we look at how `ostinato()` was implemented.
 
 ### Accepting events: [event] or {event}
 Functions that generate music take an event as their first argument, either as
@@ -244,9 +244,9 @@ const [what, howLoud, when, howLong, onSomething] = resolveEvent(eventInput);
 All three call styles below end up in the same place:
 
 ```javascript
-arpeggio(C4)                                        // bare pitch
-arpeggio([C4, .8, 0, 1, piano])                     // event as array
-arpeggio({what: C4, howLong: 1, onSomething: piano}) // event as object
+ostinato(C4,10).play                                             // bare pitch
+ostinato([C4, .8, 0, 1, piano]).play()                           // event as array
+ostinato({what: C4, howLong: 1, onSomething: piano}, 10).play()  // event as object
 ```
 
 Attributes may hold generator tokens like `midPitch` or `loud`. Each attribute
@@ -260,63 +260,77 @@ object branch reads named keys with `??` fallbacks, and the positional branch
 only overwrites what was provided:
 
 ```javascript
-export function arpeggio(eventInput, arg2, arg3, arg4) {
-  let noteList = randomChord();
+export function ostinato(eventInput, arg2, arg3) {
   let repetitions = 1;
-  let direction = "backAndForth";
+  let rhythm;
+  const [what, howLoud, when, howLong, onSomething] = resolveEvent(eventInput);
+  const resolvedWhen = typeof when === "function" ? when() : when;
+  const resolvedHowLong = typeof howLong === "function" ? howLong() : howLong;
 
   if (typeof arg2 === "object" && arg2 !== null && !Array.isArray(arg2)) {
-    noteList = arg2.noteList ?? noteList;
     repetitions = arg2.repetitions ?? repetitions;
-    direction = arg2.direction ?? direction;
+    rhythm = arg2.rhythm ?? rhythm;
   } else {
-    if (arg2 !== undefined) noteList = arg2;
-    if (arg3 !== undefined) repetitions = arg3;
-    if (arg4 !== undefined) direction = arg4;
+    if (arg2 !== undefined) repetitions = arg2;
+    if (arg3 !== undefined) rhythm = arg3;
   }
 ```
 
 Both styles below are therefore valid:
 
 ```javascript
-arpeggio(any, chord, 2, "forward");
-arpeggio(any, {noteList: chord, repetitions: 2, direction: "forward"});
+ostinato(any, 10).play()
+ostinato(any, {repetitions: 10}).play()
+```
+
+Another example using `arpeggio()`:
+
+```javascript
+arpeggio(any, any, 10).play()
+arpeggio(any, {repetitions: 10}).play()
 ```
 
 Notice how defaults can be musical rather than neutral: `randomChord()`
 generates a random pitch set, so `arpeggio().play()` already plays something
 interesting. `randomRhythm()` is another already available function that 
-could be used for the same end.
+can be used for the same end.
 
 ### Return an eventList
 Build the result with `eventList.create()`, adding one event at a time while
 tracking time manually, and return the list:
 
 ```javascript
-const resolvedWhen = typeof when === "function" ? when() : when;
-const resolvedHowLong = typeof howLong === "function" ? howLong() : howLong;
-let l = eventList.create();
-let currentTime = resolvedWhen;
+let l = eventList.create([
+    what,
+    howLoud,
+    resolvedWhen,
+    resolvedHowLong,
+    onSomething,
+  ]);
 
-for (let i = 0; i < repetitions; i++) {
-  for (let note of notesToPlay) {
-    l.add([note, howLoud, currentTime, resolvedHowLong, onSomething]);
-    currentTime += resolvedHowLong;
+let initialTime = resolvedWhen;
+
+for (let i = 0, len = repetitions; i < len; i++) {
+  for (let j of durations) {
+    initialTime += j;
+    const currentPitch = resolvePitch(what);
+    l.add([currentPitch, howLoud, initialTime, resolvedHowLong, onSomething]);
   }
 }
 return l;
 ```
 
-Resolve `when` and `howLong` once, before the loops, so that events are
-scheduled sequentially instead of drawing a new random duration per note.
-Re-resolve inside the loop only when per-note variation is intended, as
-`ostinato()` does with its pitch. The returned list supports the usual
-methods, so users can write `arpeggio(e).play()` or `arpeggio(e).repeat(3)`.
+Usually, we would resolve `when` and `howLong` generators once, before the
+loops, so that events are scheduled sequentially instead of drawing a new
+random duration per note. Re-resolve inside the loop only when per-note
+variation is intended, as `ostinato()` does with its pitch. The returned list
+supports the usual methods, so users can write `ostinato().play()` or
+`ostinato().repeat(3)`.
 
 ### When not to return an eventList
-Pure transformations take lists in and return plain arrays. Copy the input
-instead of mutating it, and throw a `TypeError` when the argument is not an
-array:
+List manipulation functions take lists in and return plain arrays. Copy the
+input instead of mutating it, and throw a `TypeError` when the argument is not
+an array:
 
 ```javascript
 export function retrograde(list) {
