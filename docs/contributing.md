@@ -145,7 +145,7 @@ endop
 ```
 
 The types after the name declare its output and input arguments: here two
-audio signals in (`aa`), a k-rate control, and two audio signals out (`aak`).
+audio signals out (`aa`), a k-rate control, and two audio signals in (`aak`).
 The opcode is then called identically in instrs 10 and 12.
 
 ### Notes
