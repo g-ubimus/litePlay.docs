@@ -323,5 +323,3 @@ expressed as scheduled events.
   for variation
 * Inputs validated, errors prefixed with the function name
 * Portuguese alias exported at the bottom of the file
-* Unit tests added to `tests/extra.test.js`
-* Documented under `structures.md` (+ pt)
