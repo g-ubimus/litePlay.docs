@@ -9,11 +9,10 @@ to help out:
 
 ## Before you code
 If you want to add new functionality, please open an issue first so it can be
-discussed. This helps to keep litePlay.js simple and beginner-friendly. It is 
-desirable that new features adapt to already established event model (`[what,
-howLoud, when, howLong, onSomething]`), follow design patterns already in
-place, and if possible, rely on already existing classes, objects and functions
-(like Instrument, Sample, eventList and play).
+discussed. It is desirable that new features adapt to already established event
+model (`[what, howLoud, when, howLong, onSomething]`), follow design patterns
+already in place, and if possible, rely on already existing classes, objects
+and functions (like Instrument, Sample, eventList, sequencer and play).
 
 ## Setting up a development environment
 Clone the repository and install its dependencies:
@@ -38,79 +37,39 @@ Most of the module is found in `src/core/`:
 
 * `litePlay.js`: the audio engine, `play()`, `stop()`, `Instrument` and
   `Sampler` class, eventList and sequencer.
-* `extra.js`: generators and musical structures (chords, arpeggios, euclidean
-  rhythms, etc.).
+* `extra.js`: generators and musical structures (ostinato, arpeggio, euclidean
+  rhythm, etc.).
 * `litePlay.constants.js`: note constants, drum sounds and the loader that
   makes everything global.
-* `litePlay.csd`: the Csound instrument definitions driven by the General
-  MIDI SoundFont and sound effects (reverb, envelopes, delay, etc.).
+* `litePlay.csd`: the Csound engine, driven by the General MIDI SoundFont, a
+  sampler and sound effects (reverb, envelopes, delay, etc.).
 * `editor.js`: the online editor interface.
 
 Machine listening utilities live in `src/listener/`. These are a WIP and can  
 change at any time.
 
-## Conventions
-When implementing new functionality:
-
-* Add per-instrument behaviour as an `Instrument` class method, as done for `pan`,
-  `delay`, `shift` and `autoPan`. This class is extended by the Sampler class,
-  so everything implemented to it is available for audio samples with no need
-  to duplicate the code.
-* Provide Portuguese aliases for user-facing names (like `toque` for `play`
-  and `pare` for `stop`). If you're not able to do it, ask for it in the PR.
-* Follow the existing code style. The repository uses ESLint and Prettier;
-  run them before submitting.
-
-## Testing
-Run the test suite with:
-
-```
-npm test
-```
-
-Tests use vitest and import the module with `globalThis.window = {}` stubbed,
-asserting on pure helpers such as `secs`, `beats`, the generators and
-eventList operations. If your contribution adds logic that can be tested
-without audio, please add tests for it too.
-
 ## Submitting your work
-1. Create a feature branch with a short descriptive name (as in previous
-   contributions such as `amp`, `delay`, `melody` and `panning`).
+1. Create a feature branch with a short descriptive name .
 2. Make your changes and add tests.
 3. Run `npm test` and make sure everything passes.
 4. Open a pull request against `main`, linking the issue or describing the
    functionality. Include a small runnable example if necessary.
 
-## Documenting your contribution
-New functionality is only considered complete when it is documented. Please
-update this documentation site:
-
-1. Clone `g-ubimus/litePlay.docs` and set up the environment (see its README):
-   create a virtualenv, install the requirements and run `zensical serve`.
-2. Edit the relevant page under `docs/`, following the house style: a short
-   introduction, the function signature, a runnable example and a `!!! note`
-   block for caveats.
-3. Write the Portuguese version under `docs/pt/`. Again, you can ask for help.
-4. If a new page was created, add it to the navigation lists of both
-   `zensical.toml` and `zensical-pt.toml`.
-5. Check the result locally before opening a pull request.
-
-!!! note
-    Documentation pull requests are deployed automatically to
-    [g-ubimus.github.io/litePlay.docs](https://g-ubimus.github.io/litePlay.docs/)
-    once merged into `main`.
-
 ## Adding an audio effect to Instrument class
 Per-instrument parameters (volume, pan, reverb, delay, etc.) live in Csound
-function tables, indexed by the instrument's channel number. The JS side
-writes values into these tables with `csound.tableSet()`, and every note is
-scheduled as a Csound score event carrying the channel as its seventh
-parameter (p7). The sound itself is produced by two instruments in
-`src/core/litePlay.csd`: `instr 10` plays General MIDI presets from the
-soundfont, and `instr 12` plays audio samples. Both read the parameter tables
-using p7 as the index, so adding a new functionality usually takes three
-things: a table, a class method and some signal processing in instrs 10 and
-12.
+[function
+tables](https://flossmanual.csound.com/csound-language/function-tables),
+indexed by the instrument's channel number. The JS side writes values into
+these tables with `csound.tableSet()`, and every note is scheduled as a Csound
+score event carrying the channel as its seventh parameter (p7). The sound
+itself is produced by two instruments in `src/core/litePlay.csd`: `instr 10`
+plays General MIDI presets from the soundfont, and `instr 12` plays audio
+samples. Both read the parameter tables using p7 as the index, so adding a new
+functionality usually takes three things:
+
+* a table,
+* a class method 
+* some signal processing inside instruments 10 and 12
 
 To make this concrete, we walk through how the frequency shifter (`shift`)
 was implemented.
@@ -132,31 +91,29 @@ was implemented.
 ### Step 1: declare a table
 Tables are declared in the `<CsScore>` section of `litePlay.csd`. Parameter
 tables hold 1024 points, one per possible channel, and are initialised with a
-GEN routine (usually `7`, a straight line). Pick the next free number (at the
-time of writing, tables up to f33 are in use):
+[GEN routine](https://csound.com/manual/score/genroutines/) (usually `7`, a
+straight line). Pick the next free number (at the time of writing, tables up to
+f33 are in use):
 
 ```
 f34 0 1024 7 0 1024 0  /* my parameter table */
 ```
 
-The initial value matters: it is what every instrument will use before the
-user sets anything (0 for amounts, 1 for neutral multipliers).
-
 ### Step 2: add the class method
 Add a method to the `Instrument` class in `src/core/litePlay.js`. Clamp the
 input so that out-of-range values cannot reach the engine, as the existing
-methods do. This is how `shift` was implemented:
+methods do. This is how `resonance` was implemented:
 
 ```javascript
-shift(val) {
-  csound.tableSet(28, this.chn, val);
+resonance(amount) {
+  csound.tableSet(18, this.chn, amount < 1 ? (amount > 0 ? amount : 0) : 1);
 }
 ```
 
 Because `Sampler` extends `Instrument`, audio samples get the new
 functionality for free.
 
-### Step 3: apply the effect in instr 10 and instr 12
+### Step 3: apply the effect in instruments 10 and 12
 Read the table inside both instruments and process the audio. In `instr 10`:
 
 ```
@@ -169,9 +126,10 @@ the processing before the panning, delay and reverb sends, unless the effect
 is meant to bypass them.
 
 ### When you need a custom opcode
-If the processing does not fit in a couple of lines, define a user-defined
-opcode (UDO) before its first use, near the top of `<CsInstruments>`. This is
-the `Shift` opcode, which shifts the spectrum with a Hilbert transform:
+If the processing does not fit in a couple of lines, define a [user-defined
+opcode (UDO)](https://csound.com/docs/manual/OrchUDO.html) before its first use,
+near the top of `<CsInstruments>`. This is the `Shift` opcode, which shifts the
+spectrum with a Hilbert transform:
 
 ```
 opcode Shift, aa, aak
@@ -187,10 +145,10 @@ endop
 ```
 
 The types after the name declare its output and input arguments: here two
-audio signals in, a k-rate control, and two audio signals out. The opcode is
-then called identically in instrs 10 and 12.
+audio signals in (`aa`), a k-rate control, and two audio signals out (`aak`).
+The opcode is then called identically in instrs 10 and 12.
 
-### Advanced notes
+### Notes
 * **i-rate vs k-rate reads.** Values that shape the note once (envelope
   times, filter envelope amount) are read at i-time, like
   `iatt table p7,23`. Continuous controls are read every control cycle at
@@ -207,8 +165,6 @@ then called identically in instrs 10 and 12.
 * **Clamping conventions.** Amounts from 0 to 1 are clamped with the idiom
   `amount < 1 ? (amount > 0 ? amount : 0) : 1`; pans and volumes are
   multiplied by 127 to match MIDI controller ranges.
-* **Testing.** The vitest suite cannot exercise the audio path, so verify new
-  sounds by ear in the editor, with both a GM instrument and a sample. 
 
 ### Checklist
 * Table declared in `<CsScore>`, with an initial value and a comment
@@ -292,23 +248,24 @@ arpeggio(any, {repetitions: 10}).play()
 
 Notice how defaults can be musical rather than neutral: `randomChord()`
 generates a random pitch set, so `arpeggio().play()` already plays something
-interesting. `randomRhythm()` is another already available function that 
-can be used for the same end.
+interesting. `randomRhythm()` is another already available function that can be
+used for the same end.
 
 ### Return an eventList
 Build the result with `eventList.create()`, adding one event at a time while
 tracking time manually, and return the list:
 
 ```javascript
+const durations = rhythm || [resolvedHowLong];
+const resolvePitch = (val) => (typeof val === "function" ? val() : val);
+const firstPitch = resolvePitch(what);
 let l = eventList.create([
     what,
     howLoud,
     resolvedWhen,
     resolvedHowLong,
     onSomething,
-  ]);
-
-let initialTime = resolvedWhen;
+]);
 
 for (let i = 0, len = repetitions; i < len; i++) {
   for (let j of durations) {
@@ -347,22 +304,14 @@ instead of an eventList. Avoid this pattern unless the effect cannot be
 expressed as scheduled events.
 
 ### Conventions
-* Validate inputs and prefix error messages with the function name:
-  ```javascript
-  throw new RangeError(
-    `arpeggio(): repetitions (${repetitions}) must be at least 1.`,
-  );
-  ```
 * Random defaults through generators are welcome, as in
   `euclidean()`: `let steps = rndInt(4, 12);`.
 * Keep internal helpers private (`resolveEvent`, `changeTempo`,
   `changeLoudness` have no `export`).
 * Export a Portuguese alias at the bottom of the file
   (`export const arpejo = arpeggio;`), and accept Portuguese values where it
-  makes sense (as `direction: "inversa"` does).
-* Add unit tests to `tests/extra.test.js`: these functions are pure logic and
-  must stay importable without a live browser, which keeps them covered by
-  `npm test`.
+  makes sense (as `direction: "inversa"` does). Again, ask for it in the PR if
+  you can't do it.
 
 ### Checklist
 * Event parsed with `resolveEvent()` — accepts `[event]`, `{event}` and bare
