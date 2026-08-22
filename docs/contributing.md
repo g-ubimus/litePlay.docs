@@ -321,5 +321,4 @@ expressed as scheduled events.
   exception)
 * Generators resolved once for `when` / `howLong`; re-resolved per note only
   for variation
-* Inputs validated, errors prefixed with the function name
 * Portuguese alias exported at the bottom of the file
