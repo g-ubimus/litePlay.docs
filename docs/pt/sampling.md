@@ -32,7 +32,7 @@ a.toque([agudo, forte, logo, longa])
 ## Mudando a velocidade de reprodução
 Para mudar a velocidade de reprodução, podemos fazer:
 ```javascript
-a.instr.speed(10)
+a.velocidade(10)
 a.toque()
 ```
 
@@ -42,7 +42,7 @@ interessantes:
 
 ```javascript
 for (let i = 0; i < 1000; i++) {
-  a.instr.speed(.1)
+  a.velocidade(.1)
   a.instr.ampEnvelope(2,0,0,1)
   a.toque([agudo, forte, i*.1])
 }
@@ -52,6 +52,6 @@ for (let i = 0; i < 1000; i++) {
 Podemos repetir uma amostra de som em loop dentro de limites definidos em
 segundos:
 ```javascript
-a.loop(1,2)
+a.repetir(1,2)
 a.toque()
 ```

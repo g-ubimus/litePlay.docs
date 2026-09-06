@@ -31,7 +31,7 @@ a.play([highPitch, loud, soon, longDur])
 ## Changing playback speed
 To change playback speed, we can do:
 ```javascript
-a.instr.speed(10)
+a.speed(10)
 a.play()
 ```
 
@@ -40,7 +40,7 @@ Combining it with other methods we can create interesting textures:
 
 ```javascript
 for (let i = 0; i < 1000; i++) {
-  a.instr.speed(.1)
+  a.speed(.1)
   a.instr.ampEnvelope(2,0,0,1)
   a.play([hiPitch, loud, i*.1])  
 }
