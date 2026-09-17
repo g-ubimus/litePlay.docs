@@ -37,16 +37,16 @@ logo = "lucide/book-headphones"
 
 # Palette toggle for light mode
 [[project.theme.palette]]
-primary = "green"
-accent = "light green"
+primary = "blue"
+accent = "light blue"
 media = "(prefers-color-scheme: light)"
 scheme = "default"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to dark mode"
 
 [[project.theme.palette]]
-primary = "green"
-accent = "light green"
+primary = "blue"
+accent = "light blue"
 media = "(prefers-color-scheme: dark)"
 scheme = "slate"
 toggle.icon = "lucide/moon"
