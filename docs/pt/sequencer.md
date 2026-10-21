@@ -66,10 +66,11 @@ Dará uma colcheia para as duas últimas caixas (snares), ocupando o último tem
 Qualquer número de subdivisões é possível, assim como silêncios (`O`) dentro de uma
 subdivisão.
 
-!!! warning "Aviso"
-    Subdivisões aninhadas (ex. `sub(snare, sub(snare, snare), snare)`) ainda não estão
-    implementadas e retornarão um evento silencioso. Para este caso, recomendamos 
-    descer mais na grade de subdivisão para ter mais controle de cada batida.
+Subdivisões aninhadas funcionam como esperado:
+
+```javascript
+let nestedPat = [kick, snare, kick, sub(snare, sub(snare, snare))];
+```
 
 ## Faixas
 
@@ -83,10 +84,17 @@ Os parâmetros para uma nova faixa do sequenciador são os seguintes:
 sequencer.add(instrumento, padrao, amplitude, grade);
 ```
 
+`add()` retorna um id numérico da faixa, que pode ser usado depois com
+`remove()`, `toggleMute()` e `toggleSolo()`. Os valores de grade são em batidas;
+valores acima de 1 são limitados a 1.
+
+O quinto elemento de um evento de padrão pode substituir o instrumento daquela
+faixa, como em `[C4, 1, 0, 1, piano]`; um objeto de sample também funciona.
+
 Assim, podemos continuar e adicionar nossos instrumentos:
 
 ```javascript
-let backbeatTrack = sequencer.add(bateria, kckPat, 0.8, grid16);
+let backbeatTrack = sequencer.add(bateria, backbeatPat, 0.8, grid16);
 let hatTrack = sequencer.add(bateria, hatPat, 0.3, grid16);
 let bassTrack = sequencer.add(baixoSintetizado1, bassPat, 0.6, grid8);
 let padTrack = sequencer.add(pad1, chordPat, 0.4, grid4);
@@ -127,6 +135,38 @@ synthWave();
 !!! note "Nota"
     Usamos `sequencer.clear()` no início da nossa função para podermos
     modificar seus padrões e chamá-la instantaneamente de novo!
+
+## Controle de faixas
+
+Depois de adicionar faixas, o sequenciador pode pausar, silenciar, isolar e
+remover faixas. Os ids são os valores retornados por `add()`.
+
+```javascript
+sequenciador.ativarPausa();      // pausa/retoma a reprodução
+sequenciador.ativarMudo(id);     // silencia/reativa uma faixa
+sequenciador.ativarMudo();       // silencia/reativa todas as faixas
+sequenciador.ativarSolo(id);     // alterna o mudo das outras faixas
+sequenciador.remover(id);        // remove uma faixa
+sequencer.isRunning();           // true enquanto o sequenciador está rodando
+sequencer.clock();               // tempo atual do sequenciador
+```
+
+`sequenciador.pare()` para a reprodução e volta todas as faixas ao início;
+`sequenciador.limpar()` remove todas as faixas.
+
+## Callbacks
+
+`addCallback(fn)` agenda `fn` para o próximo passo do sequenciador. O callback
+recebe o tempo atual em batidas, para poder iniciar uma `listaEventos` em sincronia:
+
+```javascript
+sequencer.addCallback((t) => {
+  frase.toque(t);
+});
+```
+
+Callbacks são de uso único: são removidos depois de chamados. Use
+`clearCallbacks()` para descartar callbacks pendentes.
 
 ## Padrões dinâmicos
 Um problema com o exemplo acima é que ele sempre se repetirá da mesma

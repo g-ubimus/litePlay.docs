@@ -22,9 +22,9 @@ piano.toque([agudo, 1, 0, 1])
 Geradores para o volume podem ser acessados a partir de três tokens:
 
 ```javascript
-fraco = amplitude entre 0.01 e 0.1
-mezzo = amplitude entre 0.1 e 0.4
-forte = amplitude entre 0.4 e 0.9
+fraco = amplitude entre 0.1 e 0.5
+mezzo = amplitude entre 0.5 e 0.8
+forte = amplitude entre 0.8 e 0.9
 ```
 
 Um exemplo, no contexto:
@@ -38,9 +38,9 @@ Geradores para agendar o tempo de início no futuro podem ser acessados a partir
 de três tokens:
 
 ```javascript
-agora = início entre 0.01 e 0.5 segundos
-logo = início entre 0.5 e 4 segundos
-depois = início entre 4 e 8 segundos
+agora = início entre 0.01 e 0.5 batidas
+logo = início entre 0.5 e 4 batidas
+depois = início entre 4 e 8 batidas
 ```
 
 Por exemplo:
@@ -49,13 +49,18 @@ Por exemplo:
 trompete.toque([Bb4, 0.5, depois, 1])
 ```
 
+!!! note
+    Os tempos dos eventos são medidos em batidas. No BPM padrão de 60, uma
+    batida equivale a um segundo; a 120 BPM, uma batida equivale a meio
+    segundo. Use `secs()` e `beats()` para converter.
+
 ## Durações
 As durações podem ser randomizadas com estes três tokens:
 
 ```javascript
-curta = durações entre 0.05 e 0.2 segundos
-média = durações entre 0.2 e 2 segundos
-longa = durações entre 2 e 5 segundos
+curta = durações entre 0.05 e 0.2 batidas
+média = durações entre 0.2 e 2 batidas
+longa = durações entre 2 e 5 batidas
 ```
 
 Por exemplo:
@@ -97,6 +102,8 @@ noSintetizador
 nosEfeitos
 naPercussão
 naVoz
+onEnsemble
+onLead
 ```
 
 Para contextualizar, um exemplo combinando tudo o que aprendemos aqui:
@@ -110,4 +117,25 @@ sustentados tocarão para sempre. Isso pode ocorrer, por exemplo em:
 
 ```javascript
 toque(emAlgo)
+```
+
+## Geradores utilitários
+Estes auxiliares retornam valores aleatórios ou opções para usar dentro de
+eventos:
+
+```javascript
+númeroAleatório(min, max)       // float aleatório, max exclusivo
+rnd(min, max)                   // equivalente em inglês
+inteiroAleatório(min, max)      // inteiro aleatório, max exclusivo
+rndInt(min, max)                // equivalente em inglês
+escolha(opção1, opção2, ...)    // uma opção ao acaso
+choose(...)                     // equivalente em inglês
+quieto(ms)                      // promise resolvida após ms milissegundos
+```
+
+`escolha()` também aceita um único array:
+
+```javascript
+toque(escolha(C4, E4, G4));
+toque(escolha([C4, E4, G4]));
 ```

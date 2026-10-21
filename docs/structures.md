@@ -1,4 +1,11 @@
 # Musical structures
+
+Most functions on this page accept their optional parameters either
+positionally or as a single options object. For example,
+`arpeggio(any, [C4, E4, G4], 10)` and
+`arpeggio(any, {noteList: [C4, E4, G4], repetitions: 10})` are equivalent.
+The examples below use both forms.
+
 ## Pitch & harmony
 ### Get note names
 ```JavaScript
@@ -30,6 +37,14 @@ play(C4+thirdTone) // equivalent to 60.33
 play(C4+eighthTone) // equivalent to 60.25
 play(C4+tenCent) // equivalent to 60.1
 play(C4+oneCent) // equivalent to 60.01
+```
+
+Use `midiToFrequency()` and `frequencyToMidi()` to convert between MIDI note
+numbers and frequencies in hertz:
+
+```javascript
+console.log(midiToFrequency(A4)) // 440
+console.log(frequencyToMidi(440)) // 69
 ```
 
 ### Transposition
@@ -88,12 +103,12 @@ In a similar fashion, the `justIntonation()` function creates a scale by
 fitting the pitch classes found on the harmonic series of a pitch inside an
 octave.
 
-By default, it returns the scale constructed from the first thirteen harmonics
+By default, it returns the scale constructed from the first fourteen harmonics
 on C4, resembling the [acoustic scale](https://en.wikipedia.org/wiki/Acoustic_scale),
 or the same as:
 
 ```javascript
-let inTune = justIntonation(C4, 13)
+let inTune = justIntonation(C4, 14)
 let list = eventList.create()
 for (let i = 0; i < inTune.length; i++) {
   list.add([inTune[i], loud, i*.3, .3, clarinet])
@@ -168,6 +183,7 @@ list.play()
 ### Block chord
 ```javascript
 blockChord([event], [chord])
+blockChord([event], {chord})
 ```
 
 Generates an event list playing all notes of a chord simultaneously.
@@ -192,9 +208,9 @@ blockChord(any, randomChord({microtonal:true})).play()
 
 ### Arpeggiator
 ```javascript
-arpeggio([event], [chord], repetitions, direction = "backAndForth")
+arpeggio([event], [noteList], repetitions, direction = "backAndForth")
 ```
-By default, the `arpeggio` function plays an "backAndForth" arpeggio of a
+By default, the `arpeggio` function plays a "backAndForth" arpeggio of a
 _random chord_, one time:
 ```JavaScript
 arpeggio().play()
@@ -225,7 +241,13 @@ Change the direction ("forward", "backward", or "backAndForth"):
 ```javascript
 let e = [C3, .5, 0, .1, xylophone]
 let cmaj7 = [C4, E4, G4, B4]
-arpeggio(e, cmaj7, 10, "up").play()
+arpeggio(e, cmaj7, 10, "forward").play()
+```
+
+The options-object form names the chord `noteList`:
+
+```javascript
+arpeggio(e, { noteList: cmaj7, repetitions: 10, direction: "forward" }).play()
 ```
 
 ### Interval sequence
@@ -235,8 +257,8 @@ intervalSequence([event], interval, repetitions, direction)
 
 A different type of arpeggio can be constructed using an interval sequence.
 
-By default, it starts on a random note and goes up or down four notes,
-following a random interval:
+By default, it starts on a random note and adds five transpositions, going up
+or down by a random interval:
 ```javascript
 intervalSequence().play()
 ```
@@ -271,6 +293,37 @@ let e = [E6, .8, 0, .1, piano]
 intervalSequence(e, 3, 10, "down").play()
 ```
 
+### Iterate
+```javascript
+iterate([event], whats, howLouds, howLongs, onSomethings)
+```
+
+Build an event list by cycling through lists of values. Each list can contain a
+single value; shorter lists repeat until the longest list is exhausted. The
+duration of each event is taken from `howLongs`, so it also sets the spacing
+between events.
+
+```javascript
+iterate(
+  [C4, .8, 0, .5, piano],
+  [C4, E4, G4, B4],
+  [.8, .6, .4],
+  [.5, .25],
+  [piano, guitar],
+).play()
+```
+
+The same function accepts an options object:
+
+```javascript
+iterate(any, {
+  what: [C4, E4, G4, B4],
+  howLoud: .7,
+  howLong: .25,
+  onSomething: piano,
+}).play()
+```
+
 ### Pitch inversion
 ```JavaScript
 invert([melody], axis)
@@ -279,9 +332,9 @@ invert([melody], axis)
 Invert an array of pitches around an axis:
 ```javascript
 let original = [C4, D4, E4, F4]
-arpeggio(any, {chord: original, direction:"forward"}).play()
+arpeggio(any, {noteList: original, direction: "forward"}).play()
 let inverted = invert(original, C4)
-arpeggio(any, {chord: inverted, direction:"forward"}).play()
+arpeggio(any, {noteList: inverted, direction: "forward"}).play()
 ```
 
 ## Clock & timing
@@ -338,6 +391,22 @@ Alternatively, repeat more complex rhythms by passing an array of durations to t
 ostinato([snare, loud, 0, 1, drums5], 10, [1, .5, .5, .25, .25, .25, .25]).play()
 ```
 
+### Random rhythm
+```javascript
+randomRhythm(size, range)
+```
+
+Returns an array of random durations in beats, four by default, drawn from
+`midDur` unless another range is passed. This is useful as the rhythm argument
+of `ostinato()`:
+
+```javascript
+let rhythm = randomRhythm(8, shortDur)
+ostinato([snare, .6, 0, .25, drums], 4, rhythm).play()
+```
+
+It also accepts `{size, range}` as an options object.
+
 ### Euclidean rhythms
 ```javascript
 euclidean([event], repetitions, steps, hits)
@@ -363,8 +432,8 @@ euclidean({what: snare, howLong: .2, onSomething: drums}, 4, 8, 3, 1).play()
 ```
 
 !!! warning
-    The number of hits (fourth parameter) has to be less than the number of pulses
-    (third parameter). If it isn't, it throws a `RangeError`.
+    The number of hits (fourth parameter) cannot be greater than the number of
+    pulses (third parameter). If it is, it throws a `RangeError`.
 
 ### Rotation sequence
 ```javascript

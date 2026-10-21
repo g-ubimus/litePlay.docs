@@ -48,7 +48,7 @@ function autechreMontreal() {
                  [A2, 1, 0, 2], sub(O, [A2, 1, 0, 2]), O, O];
   let kkPat = [kick, sub(O, kick), sub(O, kick), sub(O, [kick, 1, 0, 3], O, O)];
   
-  autoPan(drums1, .1);
+  drums1.autoPan(.1);
   synthBass1.reverb(.4);
 
   sequencer.add(drums1, hhPat, .4, grid16);
@@ -66,8 +66,8 @@ autechreMontreal()
 function clappingMusic() {
   setBpm(180);
   sequencer.clear()
-  drums1.pan(-.5)
-  drums2.pan(5)
+  drums1.pan(.2)
+  drums2.pan(.8)
   drums1.reverb(.15)
   drums2.reverb(.15)
   let grid = .5
@@ -92,8 +92,8 @@ clappingMusic()
 ```javascript
 setBpm(60)
 piano.reverb(.9)
-piano.pan(-.5)
-brightPiano.pan(.5)
+piano.pan(.2)
+brightPiano.pan(.8)
 brightPiano.reverb(.9)
 arpeggio({howLoud: loud, when: 0, howLong:.125, onSomething:piano}, [E4, Fs4, B4, Cs5, D5, Fs4, E4, Cs5, B4, Fs4, D5, Cs5], 300, "forward").play()
 arpeggio({howLoud: loud, when: 0, howLong:.1245, onSomething:brightPiano}, [E4, Fs4, B4, Cs5, D5, Fs4, E4, Cs5, B4, Fs4, D5, Cs5], 300, "forward").play()

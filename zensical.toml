@@ -9,6 +9,7 @@ site_dir = "site"
 extra_css = ["stylesheets/extra.css"]
 nav = [
   {"Getting started" = "index.md"},
+  {"Editor & recording" = "editor.md"},
   {"play()" = "play.md"},
   {"eventList" = "eventList.md"},
   {"Generators" = "generators.md"},

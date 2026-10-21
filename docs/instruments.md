@@ -6,9 +6,9 @@ these by using one of the names defined in the JS module, like `piano`,
 easy selection of sound generators (to fulfill the _onSomething_ attribute of
 an event).
 
-This is the complete set of instruments available in litePlay. There are 128
-different instruments plus six special drum kits that can be accessed via their 
-name or their individual numbers.
+This is the set of instrument constants available in litePlay. It covers the
+General MIDI programs, plus six special drum kits that can be accessed via
+their name or their individual numbers.
 
 ## Struck
 Pitched sounds create by striking something like a string, bar, etc:
@@ -96,6 +96,7 @@ Pitched sounds created by bowing strings:
  cello
  contrabass
  tremoloStrings
+ fiddle
 ```
 
 ## Ensemble
@@ -107,6 +108,7 @@ Ensemble-like pitched sounds:
  stringEnsemble2
  synthStrings1
  synthStrings2
+ orchestralHit
 ```
 
 ## Voice
@@ -154,6 +156,7 @@ blownBottle
 shakuhachi
 whistle
 ocarina
+bagPipe
 ```
 
 ## Lead 
@@ -205,6 +208,7 @@ agogo
 steelDrums
 woodblock
 taikoDrum
+timpani
 melodicTom
 synthDrum
 reverseCymbal
@@ -235,9 +239,11 @@ djScratch = 29
 acousticBassDrum = 35
 kick = acousticBassDrum
 bassDrum1 = 36
+bassDrum = bassDrum1
 sideStick = 37
 acousticSnare = 38
 handClap = 39
+clap = handClap
 electricSnare = 40
 snare = electricSnare
 lowFloorTom = 41
@@ -273,8 +279,8 @@ hiAgogo = 67
 lowAgogo = 68
 cabasa = 69
 maracas = 70
-shortWhistle = 71
-longWhistle = 72
+longWhistle = 71
+shortWhistle = 72
 shortGuiro = 73
 longGuiro = 74
 claves = 75

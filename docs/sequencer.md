@@ -70,7 +70,7 @@ subdivision.
 Nested divisions work just as expected:
 
 ```javascript
-lat nestedPat = [kick, snare, kick, sub(snare, sub(snare, snare))];
+let nestedPat = [kick, snare, kick, sub(snare, sub(snare, snare))];
 ```
 
 ## Tracks
@@ -84,10 +84,17 @@ The parameters for a new sequencer track is as follows:
 sequencer.add(instrument, pattern, amplitude, grid);
 ```
 
+`add()` returns a numeric track id, which can be used later with
+`remove()`, `toggleMute()` and `toggleSolo()`. Grid values are in beats; values
+above 1 are clamped to 1.
+
+The fifth element of a pattern event can override the instrument for that
+event, as in `[C4, 1, 0, 1, piano]`; a sample object also works.
+
 Thus, we can go on and add our instruments:
 
 ```javascript
-let backbeatTrack = sequencer.add(drums, kckPat, 0.8, grid16);
+let backbeatTrack = sequencer.add(drums, backbeatPat, 0.8, grid16);
 let hatTrack = sequencer.add(drums, hatPat, 0.3, grid16);
 let bassTrack = sequencer.add(synthBass1, bassPat, 0.6, grid8);
 let padTrack = sequencer.add(pad1, chordPat, 0.4, grid4);
@@ -128,6 +135,39 @@ synthWave();
 !!! note
     We use `sequencer.clear()` in the start of our function so we're able to
     modify its patterns and instantly call it again!
+
+## Track control
+
+Once tracks have been added, the sequencer can pause, mute, solo and remove
+them. Track ids are the values returned by `add()`.
+
+```javascript
+sequencer.togglePause();       // pause/resume playback
+sequencer.toggleMute(id);      // mute/unmute one track
+sequencer.toggleMute();        // mute/unmute all tracks
+sequencer.toggleSolo(id);      // flip the mute state of the other tracks
+sequencer.remove(id);          // remove a track
+sequencer.isRunning();         // true while the sequencer is running
+sequencer.clock();             // current sequencer time
+```
+
+`sequencer.stop()` stops playback and resets every track to its beginning;
+`sequencer.clear()` removes all tracks.
+
+## Callbacks
+
+`addCallback(fn)` schedules `fn` for the next sequencer step. The callback
+receives the current time in beats, so it can start an `eventList` in sync with
+the sequencer:
+
+```javascript
+sequencer.addCallback((t) => {
+  phrase.play(t);
+});
+```
+
+Callbacks are one-shot: they are removed after being called. Use
+`clearCallbacks()` to discard pending callbacks.
 
 ## Dynamic patterns
 One problem with the example above is that it will always repeat in the same

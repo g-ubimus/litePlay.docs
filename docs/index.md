@@ -17,10 +17,12 @@ There are several ways to use litePlay.js, choose what you want to try first:
 ### litePlay online editor
 [litePlay online editor](https://g-ubimus.github.io/litePlay.js/): a simple
 editor designed to test experimental features with REPL, where litePlay's
-functions can be called without the prefix. It is able to save code and 
+functions can be called without the prefix. It is able to save code and
 record audio. Uploading audio files is also supported.
 
-If you're choosing this, go ahead and [play()](./play.md).
+See [Editor & recording](./editor.md) for the toolbar, snippets, sample
+uploads, and WAV/MIDI recording. If you're choosing this, go ahead and
+[play()](./play.md).
 
 ### Other online environments
 There are various online coding environments available for JS development with
@@ -77,4 +79,22 @@ lpRun(f);
 ```
 
 Once the litePlay.js engine is running, we can use its functionality anywhere
-by prefixing its functions etc with `lp.`.
+by prefixing its functions etc with `lp.`:
+
+```javascript
+lp.play(C4);
+```
+
+`lpLoad()` loads the modules and starts the audio engine, returning them
+without creating the `lp` global:
+
+```javascript
+lpLoad().then((lp) => lp.play(C4));
+```
+
+In the online editor the returned exports are already assigned globally, so
+functions can be called directly:
+
+```javascript
+play(C4);
+```

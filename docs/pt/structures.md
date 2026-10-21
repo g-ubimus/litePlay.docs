@@ -2,11 +2,17 @@
 Essa página apresenta algumas estruturas musicais recorrentes (além de funções
 úteis) já disponíveis no sistema.
 
+A maioria das funções desta página aceita parâmetros opcionais posicionalmente
+ou como um único objeto de opções. Por exemplo,
+`arpejo(any, [C4, E4, G4], 10)` e
+`arpejo(any, {noteList: [C4, E4, G4], repetitions: 10})` são equivalentes.
+Os exemplos abaixo usam as duas formas.
+
 ## Altura & harmonia
 ### Obter nomes das notas
 ```JavaScript
-console.log(midiParaNome(60)); // returns "C4"
-console.log(midiPataNome(31)); // returns "G1"
+console.log(midiParaNome(60)); // retorna "C4"
+console.log(midiParaNome(31)); // retorna "G1"
 ```
 
 ### Afinação
@@ -30,9 +36,17 @@ proveito de algumas constantes:
 ```JavaScript
 toque(C4+quartoTom); // equivalente a 60.5
 toque(C4+terçoTom); // equivalente a 60.33
-toque(C4+oitavoTOm); // equivalente a 60.25
-toque(C4+dezCents); // equivalente a 60.1
+toque(C4+oitavoTom); // equivalente a 60.25
+toque(C4+dezCent); // equivalente a 60.1
 toque(C4+umCent); // equivalente a 60.01
+```
+
+Use `midiToFrequency()` e `frequênciaParaMidi()` para converter entre números
+de nota MIDI e frequências em hertz:
+
+```javascript
+console.log(midiToFrequency(A4)) // 440
+console.log(frequênciaParaMidi(440)) // 69
 ```
 
 ### Monótono
@@ -64,19 +78,19 @@ Transpõe um array de notas por um intervalo:
 
 ```JavaScript
 let notas = [C4, D4, E4, F4, G4]
-let original = eventList.create()
+let original = listaEventos.criar()
 let quando = 0
 for (let i = 0; i < notas.length; i++) {
-  original.add([notas[i], midLevel, i])
+  original.adicionar([notas[i], midLevel, i])
   quando = i
 }
 original.toque()
 
 let semitons = 6
 let notasTranspostas = transpôr(notas, semitons)
-let transposto = eventList.create()
+let transposto = listaEventos.criar()
 for (let i = 0; i < notasTranspostas.length; i++) {
-  transposto.add([notasTranspostas[i], midLevel, i+quando+1])
+  transposto.adicionar([notasTranspostas[i], midLevel, i+quando+1])
 }
 transposto.toque()
 ```
@@ -95,9 +109,9 @@ a tessitura desejada:
 ```javascript
 let escala = edo(19)
 let escalaTransposta = transpôr(escala, A4)
-let lista = eventList.create()
+let lista = listaEventos.criar()
 for (let i = 0; i < escalaTransposta.length; i++) {
-  lista.add([escalaTransposta[i], loud, i*.2, .2, guitar])
+  lista.adicionar([escalaTransposta[i], loud, i*.2, .2, guitar])
 }
 lista.toque()
 ```
@@ -111,14 +125,14 @@ De forma semelhante, a função `justIntonation()` cria uma escala ajustando
 as classes de altura encontradas na série harmônica de uma altura dentro de
 uma oitava.
 
-Por padrão, retorna a escala construída a partir dos primeiros treze
+Por padrão, retorna a escala construída a partir dos primeiros quatorze
 harmônicos em C4, lembrando a [escala acústica](https://en.wikipedia.org/wiki/Acoustic_scale):
 
 ```javascript
-let afinado = justIntonation(C4, 13)
-let lista = eventList.create()
+let afinado = justIntonation(C4, 14)
+let lista = listaEventos.criar()
 for (let i = 0; i < afinado.length; i++) {
-  lista.add([afinado[i], loud, i*.3, .3, clarineta])
+  lista.adicionar([afinado[i], loud, i*.3, .3, clarineta])
 }
 lista.toque()
 ```
@@ -158,9 +172,9 @@ Tocando um acorde aleatório:
 
 ```javascript
 let r = acordeAleatório()
-let lista = eventList.create()
+let lista = listaEventos.criar()
 for (let i = 0; i < r.length; i++) {
-  lista.add([r[i], loud, i*.1, .1, piano])
+  lista.adicionar([r[i], loud, i*.1, .1, piano])
 }
 lista.toque()
 ```
@@ -169,9 +183,9 @@ Altere o tamanho do acorde e toque:
 
 ```javascript
 let cincoNotas = acordeAleatório(5)
-let lista = eventList.create()
+let lista = listaEventos.criar()
 for (let i = 0; i < cincoNotas.length; i++) {
-  lista.add([cincoNotas[i], loud, i*.1, .1, piano])
+  lista.adicionar([cincoNotas[i], loud, i*.1, .1, piano])
 }
 lista.toque()
 ```
@@ -180,16 +194,16 @@ Crie acordes microtonais e toque:
 
 ```javascript
 let acordeMicrotonal = acordeAleatório(4, médio, true)
-let lista = eventList.create()
+let lista = listaEventos.criar()
 for (let i = 0; i < acordeMicrotonal.length; i++) {
-  lista.add([acordeMicrotonal[i], loud, i*.1, .1, piano])
+  lista.adicionar([acordeMicrotonal[i], loud, i*.1, .1, piano])
 }
 lista.toque()
 ```
 
 ### Acorde em bloco
 ```javascript
-blockChord([evento], [acorde])
+acordeEmBloco([evento], [acorde])
 ```
 
 Gera uma lista de eventos tocando todas as notas de um acorde simultaneamente.
@@ -197,19 +211,19 @@ Gera uma lista de eventos tocando todas as notas de um acorde simultaneamente.
 ```javascript
 let e = [C4, forte, 0, 1, piano]
 let cmaj7 = [C4, E4, G4, B4]
-blockChord(e, cmaj7).toque()
+acordeEmBloco(e, cmaj7).toque()
 ```
 
 Se nenhum acorde for passado, ele gera um _acorde aleatório_ com quatro notas:
 
 ```javascript
-blockChord().toque()
+acordeEmBloco().toque()
 ```
 
 Você pode torná-lo microtonal com:
 
 ```javascript
-blockChord(qualquer, acordeAleatório({microtonal:true})).toque()
+acordeEmBloco(any, acordeAleatório({microtonal:true})).toque()
 ```
 
 ### Arpejador
@@ -251,14 +265,14 @@ arpejo(e, cmaj7, 10, "normal").toque();
 
 ### Sequência intervalar
 ```JavaScript
-sequênciaIntervalar([evento], intervalo, repetições, para cima?)
+sequênciaIntervalar([evento], intervalo, repetições, direção)
 ```
 
 Um tipo diferente de arpejo pode ser construído usando uma sequência de
 intervalos.
 
-Por padrão, começa em uma nota aleatória e sobe ou desce quatro notas, seguindo
-um intervalo aleatório:
+Por padrão, começa em uma nota aleatória e adiciona cinco transposições,
+subindo ou descendo por um intervalo aleatório:
 ```javascript
 sequênciaIntervalar().toque();
 ```
@@ -284,13 +298,43 @@ sequênciaIntervalar(e, 3, 10).toque();
 Faça com que apenas suba:
 ```javascript
 let e = [E4, .8, 0, .1, piano];
-sequênciaIntervalar(e, 3, 10, true).toque();
+sequênciaIntervalar(e, 3, 10, "up").toque();
 ```
 
-Force-o a descer alterando o último parâmetro para `false`:
+Force-o a descer alterando o último parâmetro para `"down"`:
 ```javascript
 let e = [E6, .8, 0, .1, piano];
-sequênciaIntervalar(e, 3, 10, false).toque();
+sequênciaIntervalar(e, 3, 10, "down").toque();
+```
+
+### Iterar
+```javascript
+iterar([evento], oQue, quãoForte, quãoLongo, noQue)
+```
+
+Constrói uma lista de eventos alternando listas de valores. Cada lista pode
+conter um único valor; listas menores se repetem até a maior terminar. A duração
+de cada evento vem de `quãoLongo`, que também define o espaçamento:
+
+```javascript
+iterar(
+  [C4, .8, 0, .5, piano],
+  [C4, E4, G4, B4],
+  [.8, .6, .4],
+  [.5, .25],
+  [piano, guitarra],
+).toque()
+```
+
+A mesma função aceita um objeto de opções:
+
+```javascript
+iterar(any, {
+  what: [C4, E4, G4, B4],
+  howLoud: .7,
+  howLong: .25,
+  onSomething: piano,
+}).toque()
 ```
 
 ### Inversão
@@ -301,9 +345,9 @@ inverter([melodia], eixo)
 Inverte um array de alturas em torno de um eixo:
 ```javascript
 let original = [C4, D4, E4, F4]
-arpejo(qualquer, {acorde: original, direcao:"normal"}).toque()
+arpejo(any, {noteList: original, direction: "normal"}).toque()
 let invertida = inverter(original, C4)
-arpejo(qualquer, {acorde: invertida, direcao:"normal"}).toque()
+arpejo(any, {noteList: invertida, direction: "normal"}).toque()
 ```
 
 ### Glissando
@@ -370,9 +414,25 @@ Alternativamente, repita ritmos mais complexos passando um array de durações a
 ostinato([snare, forte, 0, 1, bateria5], 10, [1, .5, .5, .25, .25, .25, .25]).toque()
 ```
 
+### Ritmo aleatório
+```javascript
+randomRhythm(tamanho, tessitura)
+```
+
+Retorna um array de durações aleatórias em batidas, quatro por padrão, sorteadas
+de `média` (`midDur`) a menos que outra tessitura seja passada. É útil como
+argumento de ritmo do `ostinato()`:
+
+```javascript
+let ritmo = randomRhythm(8, curta)
+ostinato([caixa, .6, 0, .25, bateria], 4, ritmo).toque()
+```
+
+Também aceita `{size, range}` como objeto de opções.
+
 ### Ritmos euclidianos
 ```javascript
-euclidiano([evento], repetições, pulsações, golpes)
+euclideano([evento], repetições, pulsações, golpes)
 ```
 
 É possível gerar _ritmos euclidianos_ com esta função dedicada,
@@ -384,19 +444,19 @@ informações](https://archive.bridgesmathart.org/2005/bridges2005-47.pdf)).
 Por exemplo, para gerar um ritmo Tresillo (3 golpes em 8 pulsações), que se
 repete 4 vezes:
 ```javascript
-euclidiano({oQue: caixa, porQuantoTempo: .2, emAlgo: bateria}, 4, 8, 3).toque()
+euclideano({oQue: caixa, quãoLongo: .2, noQue: bateria}, 4, 8, 3).toque()
 // a saída é [1, 0, 0, 1, 0, 0, 1, 0], ou 3+3+2
 ```
 
 Este ritmo pode ser rotacionado com o (opcional) último parâmetro:
 ```javascript
-euclidiano({oQue: caixa, porQuantoTempo: .2, emAlgo: bateria}, 4, 8, 3, 1).toque()
+euclideano({oQue: caixa, quãoLongo: .2, noQue: bateria}, 4, 8, 3, 1).toque()
 // a saída é [0, 1, 0, 0, 1, 0, 0, 1]
 ```
 
 !!! warning
-    O número de golpes (quarto parâmetro) tem de ser menor que o número de pulsações
-    (terceiro parâmetro). Caso contrário, é lançado um `RangeError`.
+    O número de golpes (quarto parâmetro) não pode ser maior que o número de
+    pulsações (terceiro parâmetro). Caso contrário, é lançado um `RangeError`.
 
 ### Sequência de rotação
 ```javascript
@@ -408,7 +468,7 @@ Gera uma lista de eventos repetindo um padrão rítmico enquanto rotaciona seus 
 ```javascript
 let e = [C4, forte, 0, 1, piano]
 let ritmo = [0.5, 0.25, 0.25]
-sequenciaRotacao(e, ritmo).play()
+sequenciaRotacao(e, ritmo).toque()
 ```
 
 
@@ -436,7 +496,14 @@ maisSuave(a, .1, 10).toque();
 ## Manipulando efeitos de áudio
 ### Espacialização automática
 ```javascript
-espacializador(instrumento, hertz)
+instrumento.panAutomático(hertz)
+```
+
+Move o som de um instrumento pelo campo estéreo. Use `0` para parar:
+
+```javascript
+flauta.panAutomático(.5)
+flauta.toque()
 ```
 
 ## Manipulação de listas
@@ -458,9 +525,9 @@ Um exemplo musical tocando uma melodia ao contrário:
 ```javascript
 let melodia = [C4, D4, E4, F4, G4]
 let retro = retrogradar(melodia)
-let lista = eventList.create()
+let lista = listaEventos.criar()
 for (let i = 0; i < retro.length; i++) {
-  lista.add([retro[i], loud, i * 0.5, 0.5, piano])
+  lista.adicionar([retro[i], loud, i * 0.5, 0.5, piano])
 }
 lista.toque()
 ```
@@ -483,9 +550,9 @@ Um exemplo musical tocando uma melodia rotacionada:
 ```javascript
 let melodia = [C4, D4, E4, F4, G4]
 let rotacionada = rotacionar(melodia, 2)
-let lista = eventList.create()
+let lista = listaEventos.criar()
 for (let i = 0; i < rotacionada.length; i++) {
-  lista.add([rotacionada[i], loud, i * 0.5, 0.5, piano])
+  lista.adicionar([rotacionada[i], loud, i * 0.5, 0.5, piano])
 }
 lista.toque()
 ```
@@ -510,9 +577,9 @@ Um exemplo musical intercalando notas graves com uma melodia:
 let notasGraves = [C2, G2, D2]
 let notasMelodia = [C4, E4, G4, B4, D5]
 let misturada = misturar(notasGraves, notasMelodia)
-let lista = eventList.create()
+let lista = listaEventos.criar()
 for (let i = 0; i < misturada.length; i++) {
-  lista.add([misturada[i], loud, i * 0.5, 0.5, piano])
+  lista.adicionar([misturada[i], loud, i * 0.5, 0.5, piano])
 }
 lista.toque()
 ```
@@ -535,9 +602,9 @@ Um exemplo musical tocando uma escala embaralhada:
 ```javascript
 let melodia = [C4, D4, E4, F4, G4, A4, B4]
 let embaralhada = embaralhar(melodia)
-let lista = eventList.create()
+let lista = listaEventos.criar()
 for (let i = 0; i < embaralhada.length; i++) {
-  lista.add([embaralhada[i], loud, i * 0.5, 0.5, piano])
+  lista.adicionar([embaralhada[i], loud, i * 0.5, 0.5, piano])
 }
 lista.toque()
 ```

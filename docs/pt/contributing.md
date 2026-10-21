@@ -13,7 +13,7 @@ para discuti-la. Isso ajuda a manter o litePlay.js simples e acessível para
 iniciantes. É desejável que novos recursos se adaptem ao modelo de eventos já
 estabelecido (`[o que, quão forte, quando, quanto tempo, em algo]`), sigam os
 padrões de design já existentes e, se possível, façam uso de classes, objetos
-e funções já existentes (como Instrument, Sample, eventList e play).
+e funções já existentes (como Instrument, Sampler, listaEventos e play).
 
 ## Preparando o ambiente de desenvolvimento
 Clone o repositório e instale as dependências:
@@ -45,11 +45,9 @@ A maior parte do módulo está em `src/core/`:
 * `litePlay.csd`: as definições de instrumentos do Csound, acionadas pela
   fonte sonora General MIDI, e efeitos sonoros (reverb, envelopes, delay
   etc.).
-* `editor.js`: a interface do editor online.
-
-Utilitários de escuta computacional (machine listening) ficam em
-`src/listener/`. Eles estão em fase de desenvolvimento (WIP) e podem mudar a
-qualquer momento.
+* `editor.js`: a interface do editor online e os controles de gravação em
+  WAV/MIDI.
+* `snippets.js`: os exemplos mostrados na paleta do editor.
 
 ## Convenções
 Ao implementar novas funcionalidades:

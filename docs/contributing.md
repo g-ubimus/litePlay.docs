@@ -12,7 +12,7 @@ If you want to add new functionality, please open an issue first so it can be
 discussed. It is desirable that new features adapt to already established event
 model (`[what, howLoud, when, howLong, onSomething]`), follow design patterns
 already in place, and if possible, rely on already existing classes, objects
-and functions (like Instrument, Sample, eventList, sequencer and play).
+and functions (like Instrument, Sampler, eventList, sequencer and play).
 
 ## Setting up a development environment
 Clone the repository and install its dependencies:
@@ -36,17 +36,15 @@ called without any prefix.
 Most of the module is found in `src/core/`:
 
 * `litePlay.js`: the audio engine, `play()`, `stop()`, `Instrument` and
-  `Sampler` class, eventList and sequencer.
+  `Sampler` class, eventList, sequencer, and the MIDI recorder.
 * `extra.js`: generators and musical structures (ostinato, arpeggio, euclidean
   rhythm, etc.).
 * `litePlay.constants.js`: note constants, drum sounds and the loader that
   makes everything global.
 * `litePlay.csd`: the Csound engine, driven by the General MIDI SoundFont, a
   sampler and sound effects (reverb, envelopes, delay, etc.).
-* `editor.js`: the online editor interface.
-
-Machine listening utilities live in `src/listener/`. These are a WIP and can  
-change at any time.
+* `editor.js`: the online editor interface and WAV/MIDI recording controls.
+* `snippets.js`: the example snippets shown in the editor palette.
 
 ## Submitting your work
 1. Create a feature branch with a short descriptive name .
@@ -92,11 +90,11 @@ was implemented.
 Tables are declared in the `<CsScore>` section of `litePlay.csd`. Parameter
 tables hold 1024 points, one per possible channel, and are initialised with a
 [GEN routine](https://csound.com/manual/score/genroutines/) (usually `7`, a
-straight line). Pick the next free number (at the time of writing, tables up to
-f33 are in use):
+straight line). Check the `<CsScore>` section for the next free number; the
+signal modifiers currently use tables f34–f40, f49–f50, and f60, for example:
 
 ```
-f34 0 1024 7 0 1024 0  /* my parameter table */
+f200 0 1024 7 0 1024 0  /* my parameter table */
 ```
 
 ### Step 2: add the class method
@@ -154,14 +152,15 @@ The opcode is then called identically in instrs 10 and 12.
   `iatt table p7,23`. Continuous controls are read every control cycle at
   k-rate, like `kbend table p7,14`.
 * **Persistent processes.** Some functionalities need a running instrument
-  rather than a table value. The delay works this way: `delay()` schedules a
-  per-channel instance of `instr 105` on demand
-  (`csound.inputMessage("i105." + this.chn + " 0 -1 " + this.chn)`), keeps
-  track of active channels in a JS `Set`, and `noDelay()` turns the instance
-  off by scheduling it with a negative p1 (`csound.inputMessage("i-105." +
-  this.chn + " 0 0.1 " + this.chn)`). If you add something similar, remember to
-  register your instrument numbers in `instr 200` and `instr 300`, so that
-  `reset()` stops and restarts everything correctly.
+  rather than a table value. `delay()` and `chorus()` work this way: they
+  schedule a per-channel instance on demand (for example,
+  `csound.inputMessage("i105." + this.chn + " 0 -1 " + this.chn)`), keep track
+  of active channels in a JS `Set`, and are disabled by scheduling the instance
+  with a negative p1 (`csound.inputMessage("i-105." + this.chn + " 0 0.1 " +
+  this.chn)`). `delay(0, 0)` and `chorus(0, 0)` are the public ways to turn
+  them off. If you add something similar, remember to register your instrument
+  numbers in `instr 200` and `instr 300`, so that `reset()` stops and restarts
+  everything correctly.
 * **Clamping conventions.** Amounts from 0 to 1 are clamped with the idiom
   `amount < 1 ? (amount > 0 ? amount : 0) : 1`; pans and volumes are
   multiplied by 127 to match MIDI controller ranges.

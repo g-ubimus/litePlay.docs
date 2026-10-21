@@ -21,7 +21,9 @@ simples projetado para testar recursos experimentais com REPL, onde as funções
 do litePlay podem ser chamadas sem o prefixo. Ele é capaz de salvar código e
 gravar áudio. O upload de arquivos de áudio também é suportado.
 
-Caso escolha esta opção, vá em frente e [toque()](./play.md).
+Veja [Editor e gravação](./editor.md) para a barra de ferramentas, snippets,
+upload de amostras e gravação em WAV/MIDI. Caso escolha esta opção, vá em frente
+e [toque()](./play.md).
 
 ### Outros ambientes online
 Há vários ambientes de codificação online disponíveis para o desenvolvimento em
@@ -79,5 +81,19 @@ Uma vez que o motor litePlay.js esteja rodando, podemos usar sua funcionalidade
 em qualquer lugar prefixando suas funções etc com `lp.`, por exemplo:
 
 ```javascript
-lp.play();
+lp.play(C4);
+```
+
+`lpLoad()` carrega os módulos e inicia o motor de áudio, retornando-os sem
+criar o global `lp`:
+
+```javascript
+lpLoad().then((lp) => lp.play(C4));
+```
+
+No editor online as exportações retornadas já são atribuídas globalmente, então
+as funções podem ser chamadas diretamente:
+
+```javascript
+play(C4);
 ```

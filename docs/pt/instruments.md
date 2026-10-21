@@ -6,9 +6,9 @@ acessá-los usando um dos nomes definidos no módulo JS, como `piano`, `órgão`
 seleção fácil de geradores de som (para preencher o atributo _onSomething_ de
 um evento).
 
-Este é o conjunto completo de instrumentos disponíveis no litePlay. Existem 128
-instrumentos diferentes, além de seis kits de bateria especiais que podem ser
-acessados por seus nomes ou por seus números individuais.
+Este é o conjunto de constantes de instrumentos disponíveis no litePlay. Ele
+cobre os programas General MIDI, além de seis kits de bateria especiais que
+podem ser acessados por seus nomes ou por seus números individuais.
 
 ## Teclas
 Sons afinados criados ao percutir algo como uma corda, barra, etc:
@@ -90,6 +90,7 @@ violoncelo
 celo
 contrabaixo
 cordasTremolo
+fiddle
 ```
 
 ## Conjunto
@@ -224,11 +225,12 @@ tímpano
 ## Bateria
 Kits de bateria/percussão sem altura definida, com sons específicos que podem
 ser selecionados individualmente. Para estes, os nomes dos instrumentos são
-`bateria`, `bateria2`,`bateria3`, `bateria4`, `bateria5` e `bateria6`. Os sons
+`bateria`, `bateria1`, `bateria2`, `bateria3`, `bateria4`, `bateria5` e
+`bateria6`. Os sons
 podem ser selecionados através de um atributo _what_ (o que), por exemplo:
 
 ```javascript
-drums.play(kick)
+bateria.toque(kick)
 ```
 
 A lista completa de sons de bateria é a seguinte:
@@ -238,9 +240,11 @@ djScratch = 29
 acousticBassDrum = 35
 kick = acousticBassDrum
 bassDrum1 = 36
+bassDrum = bassDrum1
 sideStick = 37
 acousticSnare = 38
 handClap = 39
+clap = handClap
 electricSnare = 40
 snare = electricSnare
 lowFloorTom = 41
@@ -276,8 +280,8 @@ hiAgogo = 67
 lowAgogo = 68
 cabasa = 69
 maracas = 70
-shortWhistle = 71
-longWhistle = 72
+longWhistle = 71
+shortWhistle = 72
 shortGuiro = 73
 longGuiro = 74
 claves = 75
