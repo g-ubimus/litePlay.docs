@@ -63,7 +63,7 @@ autechreMontreal()
 
 ## Clapping music
 ```javascript
-setBpm(360);
+setBpm(360)
 drums1.pan(.2)
 drums2.pan(.8)
 let pattern = [clap, clap, clap, O, clap, clap, O, clap, O, clap, clap, O]
@@ -72,8 +72,8 @@ let pattern2 = pattern
 for (let i = 1; i < 12; i++) {
   pattern2 = pattern2.concat(rotate(pattern,i))
 }
-sequencer.add(drums, pattern, .5)
-sequencer.add(drums2, pattern2, .5)
+sequencer.add(drums, pattern, loud)
+sequencer.add(drums2, pattern2, loud)
 sequencer.play()
 ```
 
