@@ -63,29 +63,18 @@ montreal()
 
 ## Clapping music
 ```javascript
-function clappingMusic() {
-  setBpm(180);
-  sequencer.clear()
-  drums1.pan(.2)
-  drums2.pan(.8)
-  drums1.reverb(.15)
-  drums2.reverb(.15)
-  let grid = .5
-  let pattern = [[clap, loud, 0, .25], [clap, loud, 0, .25], [clap, loud, 0, .25], 
-                 O, [clap, loud, 0, .25], [clap, loud, 0, .25], 
-                 O, [clap, loud, 0, .25], O,
-                [clap, loud, 0, .25], [clap, loud, 0, .25], O];
-  pattern = pattern.concat(pattern)
-  let pattern2 = pattern
-  for (let i = 1; i < 12; i++) {
-    pattern2 = pattern2.concat(rotate(pattern,i))
-  }
-  sequencer.add(drums, pattern, .5, grid)
-  sequencer.add(drums2, pattern2, .5, grid)
-  sequencer.play()
+setBpm(360);
+drums1.pan(.2)
+drums2.pan(.8)
+let pattern = [clap, clap, clap, O, clap, clap, O, clap, O, clap, clap, O]
+pattern = pattern.concat(pattern)
+let pattern2 = pattern
+for (let i = 1; i < 12; i++) {
+  pattern2 = pattern2.concat(rotate(pattern,i))
 }
-
-clappingMusic()
+sequencer.add(drums, pattern, .5)
+sequencer.add(drums2, pattern2, .5)
+sequencer.play()
 ```
 
 ## Piano phase
