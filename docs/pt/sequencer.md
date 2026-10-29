@@ -154,19 +154,31 @@ sequencer.clock();               // tempo atual do sequenciador
 `sequenciador.pare()` para a reprodução e volta todas as faixas ao início;
 `sequenciador.limpar()` remove todas as faixas.
 
-## Callbacks
+## Chamados 
 
-`addCallback(fn)` agenda `fn` para o próximo passo do sequenciador. O callback
+`adicionarChamado(fn)` agenda `fn` para o próximo passo do sequenciador. O chamado
 recebe o tempo atual em batidas, para poder iniciar uma `listaEventos` em sincronia:
 
 ```javascript
-sequencer.addCallback((t) => {
+sequenciador.adicionarChamado((t) => {
   frase.toque(t);
 });
 ```
 
-Callbacks são de uso único: são removidos depois de chamados. Use
-`clearCallbacks()` para descartar callbacks pendentes.
+Também pode ser utilizado para chamar a mesma função recursivamente:
+
+```javascript
+sequenciador.toque()
+
+function pulso(){
+  piano.toque();
+  sequenciador.adicionarChamado(pulso)
+}
+sequenciador.adicionarChamado(pulso)
+```
+
+Chamados são de uso único: são removidos depois de chamados. Use
+`limparChamados()` para descartar chamados pendentes.
 
 ## Padrões dinâmicos
 Um problema com o exemplo acima é que ele sempre se repetirá da mesma

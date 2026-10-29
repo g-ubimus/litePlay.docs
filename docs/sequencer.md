@@ -166,6 +166,18 @@ sequencer.addCallback((t) => {
 });
 ```
 
+Também pode ser utilizado para chamar a mesma função recursivamente:
+
+```javascript
+sequencer.play()
+
+function pulse(){
+  piano.play();
+  sequencer.addCallback(pulse)
+}
+sequencer.addCallback(pulse)
+```
+
 Callbacks are one-shot: they are removed after being called. Use
 `clearCallbacks()` to discard pending callbacks.
 
