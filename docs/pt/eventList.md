@@ -113,8 +113,3 @@ sendo invocada, que no momento pode ser
 Com eventos e listas de eventos, podemos construir composições e performances
 com tempo relativo preciso entre os eventos, o que é algo desejável em
 atividades musicais.
-
-## Interface em inglês
-
-O objeto também é exportado como `eventList`. Os métodos equivalentes são
-`play`, `create`, `repeat`, `clear`, `insert`, `add` e `remove`.
