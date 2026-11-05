@@ -51,7 +51,8 @@ glissando(e, C5).play()
 We control the filter cutoff amount with a 0 to 1 argument.
 
 ```javascript
-synth.cutoff(0.5);
+synth.cutoff(.7);
+synth.play()
 ```
 
 ## Delay

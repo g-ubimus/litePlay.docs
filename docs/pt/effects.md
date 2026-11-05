@@ -23,7 +23,8 @@ sequencer.addCallback(time)
 Controlamos a quantidade do filtro de corte (cutoff) com um argumento de 0 a 1.
 
 ```javascript
-sintetizador.cutoff(0.5);
+sintetizador.cutoff(0.7);
+sintetizador.toque();
 ```
 
 ## Envelope de amplitude 
