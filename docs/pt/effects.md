@@ -53,7 +53,9 @@ filterEnvelope(quantidade, ataque, decaimento, sustentação, repouso)
 Por exemplo:
 
 ```javascript
-sintetizador.filterEnvelope(0.8, 1, 1, 1, 4);
+sintetizador.filterEnvelope(.7, 1, 1, 1, 1);
+sintetizador.cutoff(.5);
+sintetizador.toque([agudo,forte,0,1]);
 ```
 
 ## Deslocamento de frequência

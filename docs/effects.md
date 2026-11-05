@@ -81,7 +81,9 @@ filterEnvelope(amount, attack, decay, sustain, release)
 For example:
 
 ```javascript
-synth.filterEnvelope(0.8, 1, 2, 3, 4);
+synth.filterEnvelope(.7, 1, 1, 1, 1);
+synth.cutoff(.5);
+synth.play([hiPitch,loud,0,1]);
 ```
 
 ## Frequency shift
