@@ -20,7 +20,18 @@ strings.play([C2, 1, 0], [Bb2, .9, .5], [Ab3, .8, 1], [Gb4, .7, 1.5], [E5, .6, 2
 We can bend the pitch of an instrument using the `bend` method. The amount is given in semitones.
 
 ```javascript
-synth.bend(1); // Bends up by a semitone
+setBpm(120)
+sequencer.clear()
+sequencer.clearCallbacks()
+sequencer.play()
+
+function time() {
+  piano.bend(rnd(0,1))
+  piano.play([hiPitch,loud,choose(now,soon,later),longDur])
+  sequencer.addCallback(time)
+}
+
+sequencer.addCallback(time)
 ```
 
 ### Glissando
@@ -130,11 +141,6 @@ The overall volume of an instrument is set with a value from 0 to 1:
 piano.volume(.5);
 piano.play(C4);
 ```
-
-## Signal modifiers
-In addition to the effects above, every instrument has four Csound signal
-modifiers. Amounts are clamped to the ranges shown here; a value of `0` is a
-bypass.
 
 ### Distortion
 ```javascript

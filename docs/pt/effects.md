@@ -5,7 +5,18 @@ Alguns efeitos de áudio úteis para manipular cada instrumento estão disponív
 Podemos alterar a altura de um instrumento usando o método `bend`. A quantidade é dada em semitons.
 
 ```javascript
-sintetizador.bend(1); // Sobe a altura em um semitom
+setBpm(120)
+sequenciador.limpar()
+sequenciador.clearCallbacks()
+sequenciador.play()
+
+function time() {
+  piano.bend(rnd(0,1))
+  piano.play([hiPitch,loud,choose(now,soon,later),longDur])
+  sequencer.addCallback(time)
+}
+
+sequencer.addCallback(time)
 ```
 
 ## Cutoff
@@ -116,10 +127,6 @@ O volume geral de um instrumento é definido com um valor de 0 a 1:
 piano.volume(.5);
 piano.toque(C4);
 ```
-
-## Modificadores de sinal
-Além dos efeitos acima, todo instrumento tem quatro modificadores de sinal do
-Csound. Os valores são limitados às faixas indicadas; `0` desativa o efeito.
 
 ### Distortion
 ```javascript
