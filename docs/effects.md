@@ -126,7 +126,9 @@ flute.play()
 We control the filter resonance with a 0 to 1 argument.
 
 ```javascript
-synth.resonance(0.8);
+synth.resonance(.95)
+synth.cutoff(.8)
+synth.play()
 ```
 
 ## Reverb

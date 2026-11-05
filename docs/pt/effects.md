@@ -100,7 +100,9 @@ flauta.toque()
 Controlamos a ressonância do filtro com um argumento de 0 a 1.
 
 ```javascript
-sintetizador.resonance(0.8);
+sintetizador.resonance(.95)
+sintetizador.cutoff(.8)
+sintetizador.play()
 ```
 
 ## Delay
