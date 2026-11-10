@@ -26,30 +26,18 @@ globals, so you can write `play(C4)` instead of `lp.play(C4)`.
 | **ADD SAMPLE** | Loads an audio file into the Csound filesystem | |
 | **SNIPPETS** | Shows or hides the snippet palette | |
 
-Run evaluates the whole buffer each time. Keep repeated setup in a function and
-call it at the end, so the take can be re-run as a unit:
-
-```javascript
-function take() {
-  setBpm(120);
-  sequencer.clear();
-  sequencer.add(drums, [kick, snare, kick, snare], .8, 1);
-  sequencer.play();
-}
-take();
-```
-
 ## Snippets
 
 The snippet palette contains ready-to-run examples grouped by topic (basics,
-pitch and harmony, rhythm, sampling, effects, and so on). You can:
+pitch and harmony, rhythm, sampling, effects, and utility functions). You can:
 
-* search the palette by name or description;
+* search the palette by function name;
 * click a card to insert its code at the cursor;
 * press the play button on a card to run it immediately.
 
-The snippets are defined in `src/core/snippets.js` in the litePlay.js
-repository.
+## Autocompletion 
+Default values are provided to some of litePlay's functionalities. When typing,
+you can use a suggestion of autocompletion by pressing TAB.
 
 ## Uploading samples
 
@@ -64,6 +52,10 @@ my_drums.play();
 
 The engine must be running before uploading. See [Sampling](./sampling.md) for
 the sample API.
+
+!!! warning
+    Be careful not to collide namespaces with litePlay's [instruments](./instruments.md).
+    
 
 ## Recording
 
@@ -88,21 +80,3 @@ midiRecorder.buildAndDownload("take.mid");
 
 The MIDI file uses one track per litePlay instrument channel, with drums on the
 General MIDI drum channel (channel 10).
-
-## Sending MIDI messages
-
-Two low-level helpers send MIDI directly to Csound:
-
-```javascript
-midi(status, data1, data2)
-midiProgram(program, channel = 1)
-```
-
-For example, to play and stop middle C on channel 1:
-
-```javascript
-midi(144, 60, 100); // note on, status 0x90
-midi(128, 60, 0);   // note off, status 0x80
-```
-
-`midiProgram(0, 1)` selects the first General MIDI program on channel 1.

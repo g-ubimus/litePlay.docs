@@ -27,31 +27,14 @@ Depois que o motor estiver pronto, todas as exportações do litePlay e do
 | **ADD SAMPLE** | Carrega um arquivo de áudio no sistema de arquivos do Csound | |
 | **SNIPPETS** | Mostra ou esconde a paleta de snippets | |
 
-Run avalia todo o buffer a cada execução. Mantenha a preparação repetida dentro
-de uma função e chame-a no final, para poder executar o take como uma unidade
-de novo:
-
-```javascript
-function take() {
-  setBpm(120);
-  sequenciador.limpar();
-  sequenciador.adicionar(bateria, [kick, snare, kick, snare], .8, 1);
-  sequenciador.toque();
-}
-take();
-```
-
 ## Snippets
 
 A paleta de snippets contém exemplos prontos, agrupados por tema (básico,
 altura e harmonia, ritmo, sampling, efeitos etc.). Você pode:
 
-* pesquisar a paleta por nome ou descrição;
+* pesquisar a paleta pelo nome da funcionalidade;
 * clicar em um cartão para inserir o código no cursor;
 * pressionar o botão de reprodução do cartão para executá-lo imediatamente.
-
-Os snippets são definidos em `src/core/snippets.js` no repositório do
-litePlay.js.
 
 ## Enviando amostras
 
@@ -67,6 +50,9 @@ my_drums.toque();
 
 O motor precisa estar rodando antes do upload. Veja [Sampling](./sampling.md)
 para a API de amostras.
+
+!!! warning
+    Cuidado para não colidir o nome da sample com os [instrumentos](./instruments) do litePlay.
 
 ## Gravação
 
@@ -91,21 +77,3 @@ midiRecorder.buildAndDownload("take.mid");
 
 O arquivo MIDI usa uma faixa por canal de instrumento do litePlay, com a bateria
 no canal de percussão General MIDI (canal 10).
-
-## Enviando mensagens MIDI
-
-Dois auxiliares de baixo nível enviam MIDI diretamente ao Csound:
-
-```javascript
-midi(status, data1, data2)
-midiProgram(program, channel = 1)
-```
-
-Por exemplo, para tocar e parar o Dó central no canal 1:
-
-```javascript
-midi(144, 60, 100); // note on, status 0x90
-midi(128, 60, 0);   // note off, status 0x80
-```
-
-`midiProgram(0, 1)` seleciona o primeiro programa General MIDI no canal 1.
