@@ -404,12 +404,12 @@ maisLento(e, 2, 20).toque();
 ostinato([evento], repetições, [ritmo])
 ```
 
-Para criar rapidamente um ostinato a partir de um evento, passe-o ao método `ostinato`:
+Repete um evento uma quantidade definida de vezes. Por exemplo, 10 vezes:
 ```javascript
 ostinato([snare, forte, 0, 1, bateria5], 10).toque()
 ```
 
-Alternativamente, repita ritmos mais complexos passando um array de durações ao terceiro parâmetro:
+Alternativamente, repete ritmos mais complexos passando um array de durações ao terceiro parâmetro:
 ```javascript
 ostinato([snare, forte, 0, 1, bateria5], 10, [1, .5, .5, .25, .25, .25, .25]).toque()
 ```

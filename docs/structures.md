@@ -380,12 +380,12 @@ slower(e, 2, 20).play()
 ostinato([event], repetitions, [rhythm])
 ```
 
-To quickly create an ostinato from an event, pass it to the `ostinato` method:
+Repeat an event. For example, 10 times:
 ```javascript
 ostinato([snare, loud, 0, 1, drums4], 10).play()
 ```
 
-Alternatively, repeat more complex rhythms by passing an array of durations to the third parameter:
+Alternatively, repeat more complex rhythms with an array of durations in the third parameter:
 ```javascript
 ostinato([snare, loud, 0, 1, drums5], 10, [1, .5, .5, .25, .25, .25, .25]).play()
 ```
