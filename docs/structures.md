@@ -210,8 +210,7 @@ blockChord(any, randomChord({microtonal:true})).play()
 ```javascript
 arpeggio([event], [noteList], repetitions, direction = "backAndForth")
 ```
-By default, the `arpeggio` function plays a "backAndForth" arpeggio of a
-_random chord_, one time:
+By default, it arpeggiates a _random chord_, in a random direction, one time:
 ```JavaScript
 arpeggio().play()
 ```
@@ -247,7 +246,7 @@ arpeggio(e, cmaj7, 10, "forward").play()
 The options-object form names the chord `noteList`:
 
 ```javascript
-arpeggio(e, { noteList: cmaj7, repetitions: 10, direction: "forward" }).play()
+arpeggio(e, {noteList: cmaj7, repetitions: 10, direction: "forward"}).play()
 ```
 
 ### Interval sequence

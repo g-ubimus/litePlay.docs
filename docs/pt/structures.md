@@ -231,7 +231,7 @@ acordeEmBloco(any, acordeAleatório({microtonal:true})).toque()
 arpejo([evento], [acorde], repetições, direção = "vaiVolta")
 ```
 
-Por padrão, a função `arpejo` toca um arpejo "vaiVolta" de um *acorde aleatório*, uma única vez:
+Por padrão, a função `arpeja` um *acorde aleatório*, em uma direção qualquer, uma única vez:
 ```JavaScript
 arpejo().toque();
 ```
@@ -256,7 +256,7 @@ let cmaj7 = [C4, E4, G4, B4];
 arpejo(e, cmaj7, 10).toque();
 ```
 
-Altere a direção de leitura da lista ("normal" ->, "inversa" <- ou "vaiVolta" -><-):
+Altere a direção de leitura da lista ("vai" ->, "volta" <- ou "vaiVolta" -><-):
 ```javascript
 let e = [C3, .5, 0, .1, xilofone];
 let cmaj7 = [C4, E4, G4, B4];
