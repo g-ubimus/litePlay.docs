@@ -136,6 +136,25 @@ synthWave();
     We use `sequencer.clear()` in the start of our function so we're able to
     modify its patterns and instantly call it again!
 
+## Dynamic patterns
+One problem with the example above is that it will always repeat in the same
+way, without variations, which doesn't sound very musical...
+To fix this, we can wrap a `choose()` function inside a pattern, making it 
+choose between some options each time.
+Replace the previous code for `chordPat` with the following:
+
+```javascript
+  let Cm7 = [[C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]];
+  let Abmaj7 = [[Ab3, 1, 0, 4], [C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4]];
+  let Ebmaj7 = [[Eb3, 1, 0, 4], [D4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]];
+  let Fm7 = [[F3, 1, 0, 4], [Eb3, 1, 0, 4], [C4, 1, 0, 4], [Ab4, 1, 0, 4]];
+  
+  let chordPat = [
+    () => choose(Cm7, Ebmaj7), O, O, O, 
+    () => choose(Abmaj7, Fm7), O, O, O
+  ];
+```
+
 ## Track control
 
 Once tracks have been added, the sequencer can pause, mute, solo and remove
@@ -180,25 +199,6 @@ sequencer.addCallback(pulse)
 
 Callbacks are one-shot: they are removed after being called. Use
 `clearCallbacks()` to discard pending callbacks.
-
-## Dynamic patterns
-One problem with the example above is that it will always repeat in the same
-way, without variations, which doesn't sound very musical...
-To fix this, we can wrap a `choose()` function inside a pattern, making it 
-choose between some options each time.
-Replace the previous code for `chordPat` with the following:
-
-```javascript
-  let Cm7 = [[C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]];
-  let Abmaj7 = [[Ab3, 1, 0, 4], [C4, 1, 0, 4], [Eb4, 1, 0, 4], [G4, 1, 0, 4]];
-  let Ebmaj7 = [[Eb3, 1, 0, 4], [D4, 1, 0, 4], [G4, 1, 0, 4], [Bb4, 1, 0, 4]];
-  let Fm7 = [[F3, 1, 0, 4], [Eb3, 1, 0, 4], [C4, 1, 0, 4], [Ab4, 1, 0, 4]];
-  
-  let chordPat = [
-    () => choose(Cm7, Ebmaj7), O, O, O, 
-    () => choose(Abmaj7, Fm7), O, O, O
-  ];
-```
 
 ## Another sequencer example
 ```javascript

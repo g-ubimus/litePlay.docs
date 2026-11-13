@@ -1,6 +1,6 @@
-# litePlay.js editor
+# litePlay.js Web IDE 
 
-The [litePlay.js online editor](https://g-ubimus.github.io/litePlay.js/) is a
+The [litePlay.js web IDE](https://g-ubimus.github.io/litePlay.js/) is a
 small REPL-style environment for running litePlay code. It loads the library,
 provides autocompletion and a snippet palette, and can record the result as WAV
 and MIDI.
@@ -11,8 +11,8 @@ The audio engine starts on the first click anywhere in the page. The Run button
 turns green and the console prints `litePlay is ready!` when it is available.
 If you try to play before that, nothing will be heard.
 
-After the engine is ready, all litePlay and `extra.js` exports are available as
-globals, so you can write `play(C4)` instead of `lp.play(C4)`.
+After the engine is ready, all litePlay exports are available as globals, so
+you can write `play(C4)` instead of `lp.play(C4)`.
 
 ## Toolbar
 
@@ -44,7 +44,9 @@ you can use a suggestion of autocompletion by pressing TAB.
 Click **ADD SAMPLE** and choose an audio file. The editor writes it into the
 Csound filesystem and creates a global variable from the filename: everything
 before the first dot, with non-alphanumeric characters replaced by `_`. For
-example, `my-drums.wav` becomes `my_drums`, and the console prints the name:
+example, `my-drums.wav` becomes `my_drums`.
+
+You can play it with:
 
 ```javascript
 my_drums.play();

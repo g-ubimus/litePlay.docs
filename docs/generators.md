@@ -18,7 +18,8 @@ For example:
 piano.play([highPitch, 1, 0, 1])
 ```
 
-The aliases `hiPitch`, `grave`, `médio` and `agudo` are also available.
+!!! note
+    The alias `hiPitch` is also available.
 
 ## Loudness
 Generators for loudness can be accessed from three tokens:
@@ -29,12 +30,8 @@ midlevel = amplitude between 0.5 and 0.8
 loud = amplitude between 0.8 and 0.9
 ```
 
-The longer aliases `softLevel`, `midLevel` and `loudLevel` work too. An example,
-in context:
-
-```javascript
-drums2.play([vibraslap, loud, 0, 1])
-```
+!!! note
+    The longer aliases `softLevel` and `loudLevel` work too.
 
 ## Start time 
 Generators for scheduling the start time in the future can be accessed from
@@ -80,7 +77,7 @@ Two generators can be used to get different types of drums for the _what_ attrib
 
 ```javascript
 membranophone = instruments that have a vibrating membrane 
-idiophone = everything else
+idiophone = otherwise 
 ```
 
 For example:
@@ -131,7 +128,7 @@ onSomething
 ```
 
 ## Utility generators
-These helpers return random values or options for use inside events:
+These functions return random values or options for use inside events:
 
 ```javascript
 rnd(min, max)              // random float, max exclusive

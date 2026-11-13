@@ -9,7 +9,7 @@ site_dir = "site"
 extra_css = ["stylesheets/extra.css"]
 nav = [
   {"Getting started" = "index.md"},
-  {"Editor & recording" = "editor.md"},
+  {"Web IDE tutorial" = "ide.md"},
   {"play()" = "play.md"},
   {"eventList" = "eventList.md"},
   {"Generators" = "generators.md"},
@@ -20,7 +20,7 @@ nav = [
   {"Musical structures" = "structures.md"},
   {"Examples" = "examples.md"},
   {"Contributing" = "contributing.md"},
-  {"litePlay.js editor" = "https://g-ubimus.github.io/litePlay.js"}
+  {"litePlay.js ide" = "https://g-ubimus.github.io/litePlay.js"}
 ]
 
 [project.theme]

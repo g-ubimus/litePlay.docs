@@ -1,28 +1,28 @@
 # Getting started 
 ## What is litePlay.js?
-litePlay.js is a JavaScript (JS) module for music lite coding. It can be used
-in any web applications, but typically we anticipate it to be helpful for
-interactive music programming. This may be oriented to performance or
-composition (or both). This tutorial is focused on such use cases.
+litePlay.js is a JavaScript (JS) module for musical "lite coding". It can be used
+in any web applications, but we anticipate it to be helpful for interactive
+music programming. This may be oriented to performance or composition (or
+both). This tutorial is focused on such use cases.
 
 ## How to use it?
-There are several ways to use litePlay.js, choose what you want to try first:
+There are several ways to use litePlay.js. We recommend you to try our web IDE first choose what you want to try first:
 
-* [litePlay.js online editor](#liteplay-online-editor)
+* [litePlay.js web IDE](#liteplay-web-ide)
 
 * [Other online environments](#other-online-environments)
 
 * [Load it to your website](#load-it-to-your-website)
 
-### litePlay online editor
-[litePlay online editor](https://g-ubimus.github.io/litePlay.js/): a simple
-editor designed to test experimental features with REPL, where litePlay's
-functions can be called without the prefix. It is able to save code and
-record audio. Uploading audio files is also supported.
+### litePlay web IDE 
+[g-ubimus.github.io/litePlay.js/](https://g-ubimus.github.io/litePlay.js/): a simple
+editor designed to experiment in REPL style, where you can easily write
+code with an autocomplete functionality and save it to your computer. You can
+record both audio and MIDI. And Upload audio files to use them within the
+system. There's also are a selection of snippets you can choose from to see 
+how things work. See [Web IDE](./ide.md) for a tutorial on it.
 
-See [Editor & recording](./editor.md) for the toolbar, snippets, sample
-uploads, and WAV/MIDI recording. If you're choosing this, go ahead and
-[play()](./play.md).
+If you're choosing this, go ahead and [play()](./play.md)!
 
 ### Other online environments
 There are various online coding environments available for JS development with

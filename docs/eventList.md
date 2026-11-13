@@ -2,37 +2,16 @@
 Lists of events can be made into an object that can be manipulated. 
 
 ## eventList.create()
-Is used to create an event, usually assigned to a variable:
+Creates an eventList, usually assigned to a variable:
 
 ```javascript
-let sequence = eventList.create([C3, 0.1, 0], [C4, 0.2, 1], [C5, 0.4, 2]);
+let e = eventList.create([C3, 1, 0], [C4, 1, 1], [C5, 1, 2]);
 ```
 
-then we can play it repeatedly (by calling `play()` on it):
+We can play it by calling `play()` on it:
 
 ```javascript
-sequence.play();
-```
-
-`create()`, `add()` and `insert()` also accept object events, with the same
-keys used by `play()`:
-
-```javascript
-let sequence = eventList.create(
-  { what: C3, howLoud: 0.1, when: 0, howLong: 1 },
-  { what: E4, howLoud: 0.2, when: 1, howLong: 1 },
-);
-```
-
-Portuguese keys (`oQue`, `quãoForte`, `quando`, `quãoLongo`, `noQue`) work too.
-
-The stored events are available in the `events` array. For lower-level use,
-`score(when, events)` returns an object with the Csound score text and a
-`play()` method, without changing the stored events.
-
-```javascript
-console.log(sequence.events.length);
-sequence.score(0).play();
+e.play();
 ```
 
 The `play()` can take two optional parameters,
@@ -60,7 +39,7 @@ object.
 eventList.add(event, ...)
 ```
 
-events to the end of the list. This can take any number of events (as
+Add events to the end of the list. This can take any number of events (as
 `create()` did).
 
 ## eventList.remove()
@@ -69,7 +48,7 @@ events to the end of the list. This can take any number of events (as
 eventList.remove(index)
 ```
 
-remove an event with a given `index` from the list, or the last event (if no
+Remove an event with a given `index` from the list, or the last event (if no
 `index` is given).
 
 ## eventList.insert()
@@ -81,9 +60,10 @@ eventList.insert(pos, event, ...)
 insert one or more events into the object at position `pos`.
 
 ```javascript
-sequence.add(event, [C4,0.9,3]);    
-sequence.remove(0);    
-sequence.insert(1, [D4, 0.8, 0.5]);
+let e = eventList.create([C3, 1, 0], [C4, 1, 1], [C5, 1, 2]);
+e.remove(0);    
+e.insert(1, [D4, 0.8, 0.5]);
+//Now the list is [C3, 1, 1], [D4, 0.8, 0.5], [C5, 1, 2])... note the D4 sound comes first!
 ```
 
 ## eventList.repeat()
@@ -92,7 +72,7 @@ We can also repeat an `eventList` any number of `times`, `when` beats later
 from the action,
 
 ```javascript
-sequence.repeat(times, when);
+e.repeat(times, when);
 ```
 
 Both `eventList.play()` and `eventList.repeat()` return the end time of the
@@ -116,10 +96,21 @@ being invoked, which at the moment can be
 
 - The global litePlay.js context: `play()`
 
-- An instrument object : `organ.play()`
+- An instrument object : `organ.play()` or `play(organ)`
 
 - An _eventList_: `eventList.play()`
 
 With events and eventLists we can construct compositions and performances with
-precise relative timing between events, which is something desirable in musical
-activities.
+precise relative timing between events.
+
+`create()`, `add()` and `insert()` also accept object events, with the same
+keys used by `play()`:
+
+```javascript
+let e = eventList.create(
+  { what: C3, howLoud: 0.4, when: 0, howLong: 1 },
+  { what: E4, howLoud: 0.5, when: 1, howLong: 1 },
+);
+```
+
+

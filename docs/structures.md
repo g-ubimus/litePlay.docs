@@ -6,6 +6,9 @@ positionally or as a single options object. For example,
 `arpeggio(any, {noteList: [C4, E4, G4], repetitions: 10})` are equivalent.
 The examples below use both forms.
 
+The term `any` is simply undefined, and returns the default value for that
+function.
+
 ## Pitch & harmony
 ### Get note names
 ```JavaScript
